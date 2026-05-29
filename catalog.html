@@ -150,6 +150,77 @@
   .cat-trade p{ max-width:52ch; margin:0 0 2.2rem; color:#ecdcc6; font-size:1.04rem; line-height:1.6; text-wrap:pretty; }
   .cat-trade .btn-row{ display:flex; flex-wrap:wrap; gap:.9rem; }
   .cat-trade .btn-row .btn{ margin:0; }
+
+  /* ---------- shop: cart button ---------- */
+  .cart-btn{ position:relative; display:inline-flex; align-items:center; justify-content:center;
+    width:40px; height:40px; margin-left:.5rem; color:var(--cream); background:none; border:none;
+    cursor:pointer; border-radius:50%; transition:color .3s var(--ease), background .3s var(--ease); }
+  .cart-btn:hover{ color:var(--gold-soft); background:rgba(191,167,115,.1); }
+  .cart-count{ position:absolute; top:-1px; right:-1px; min-width:18px; height:18px; padding:0 4px;
+    display:none; align-items:center; justify-content:center; border-radius:9px; background:var(--oxblood);
+    color:var(--cream); font-family:var(--sans); font-size:.62rem; font-weight:600; line-height:1; }
+  .cart-count.on{ display:inline-flex; }
+
+  /* ---------- shop: mode toggle ---------- */
+  .cat-nav .wrap{ justify-content:space-between; }
+  .cat-tabs{ display:flex; gap:.2rem 1.7rem; flex-wrap:wrap; align-items:center; }
+  .mode-toggle{ display:inline-flex; border:1px solid rgba(191,167,115,.34); border-radius:2px; overflow:hidden; flex:none; }
+  .mode-toggle button{ font-family:var(--sans); font-weight:500; font-size:.66rem; letter-spacing:.13em;
+    text-transform:uppercase; color:var(--muted); background:none; border:none; cursor:pointer;
+    padding:.5rem .9rem; transition:background .3s var(--ease), color .3s var(--ease); }
+  .mode-toggle button + button{ border-left:1px solid rgba(191,167,115,.22); }
+  .mode-toggle button.active{ background:var(--gold); color:var(--ink); }
+
+  /* ---------- shop: qty stepper + add ---------- */
+  .qty{ display:inline-flex; align-items:center; border:1px solid rgba(191,167,115,.34); border-radius:2px; flex:none; }
+  .qty button{ width:40px; height:44px; background:none; border:none; color:var(--cream); cursor:pointer;
+    font-size:1.1rem; line-height:1; transition:color .25s var(--ease); }
+  .qty button:hover{ color:var(--gold); }
+  .qty .qty-val{ min-width:32px; text-align:center; font-family:var(--sans); font-weight:600; font-size:.9rem;
+    color:var(--bone); font-variant-numeric:tabular-nums; }
+  .qty.mini button{ width:30px; height:30px; font-size:1rem; }
+  .qty.mini .qty-val{ min-width:24px; font-size:.82rem; }
+  .add-btn{ cursor:pointer; border:none; }
+
+  /* ---------- shop: overlay + drawer ---------- */
+  .cart-overlay{ position:fixed; inset:0; z-index:90; background:rgba(8,6,5,.6);
+    -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
+  .cart-drawer{ position:fixed; top:0; right:0; z-index:100; height:100%; width:min(92vw,420px);
+    display:flex; flex-direction:column; background:var(--ink-soft);
+    border-left:1px solid rgba(191,167,115,.18); box-shadow:-30px 0 60px rgba(0,0,0,.5);
+    transform:translateX(100%); transition:transform .45s var(--ease-out); }
+  .cart-drawer.open{ transform:none; }
+  .cart-head{ display:flex; align-items:center; justify-content:space-between;
+    padding:1.6rem 1.6rem 1.1rem; border-bottom:1px solid rgba(191,167,115,.14); }
+  .cart-head h2{ font-size:1.5rem; color:var(--cream); }
+  .cart-close{ background:none; border:none; color:var(--muted); font-size:1.8rem; line-height:1;
+    cursor:pointer; transition:color .25s var(--ease); }
+  .cart-close:hover{ color:var(--cream); }
+  .cart-mode-row{ padding:1.1rem 1.6rem 0; }
+  .cart-mode-pill{ display:inline-block; font-family:var(--sans); font-size:.64rem; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--gold-soft); border:1px solid rgba(191,167,115,.3);
+    border-radius:2px; padding:.42rem .7rem; }
+  .cart-items{ flex:1; overflow-y:auto; padding:1.2rem 1.6rem; display:flex; flex-direction:column; gap:1.1rem; }
+  .cart-empty{ color:var(--muted-dim); font-size:.95rem; margin-top:.5rem; }
+  .cart-line{ display:grid; grid-template-columns:40px 1fr auto; gap:1rem; align-items:center; }
+  .cart-line img{ width:40px; height:62px; object-fit:contain; }
+  .cart-line-name{ color:var(--bone); font-size:.94rem; margin-bottom:.45rem; line-height:1.2; }
+  .cart-rm{ background:none; border:none; color:var(--muted-dim); font-size:1.3rem; line-height:1;
+    cursor:pointer; align-self:flex-start; transition:color .25s var(--ease); }
+  .cart-rm:hover{ color:var(--gold); }
+  .cart-foot{ padding:1.3rem 1.6rem 1.7rem; border-top:1px solid rgba(191,167,115,.14);
+    display:flex; flex-direction:column; gap:.7rem; }
+  .cart-confirm{ color:var(--muted-dim); font-family:var(--sans); font-size:.72rem; letter-spacing:.03em;
+    margin-bottom:.2rem; text-wrap:pretty; }
+  .cart-cta{ display:block; width:100%; margin:0; text-align:center; }
+  .cart-clear{ background:none; border:none; color:var(--muted-dim); font-family:var(--sans); font-size:.7rem;
+    letter-spacing:.1em; text-transform:uppercase; cursor:pointer; margin-top:.2rem; transition:color .25s var(--ease); }
+  .cart-clear:hover{ color:var(--cream); }
+
+  @media(max-width:560px){
+    .cat-nav .wrap{ gap:.7rem; }
+    .mode-toggle{ order:-1; }
+  }
 </style>
 </head>
 <body>
@@ -168,6 +239,12 @@
     <a class="lang" href="#" role="button" aria-label="Language">
       <span data-lang="gr">EL</span><span>·</span><span data-lang="en">EN</span>
     </a>
+    <button class="cart-btn" id="cartBtn" type="button" aria-label="Καλάθι">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/>
+      </svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
   </div>
 </nav>
 
@@ -184,7 +261,13 @@
 
 <!-- ============ STICKY CATEGORY NAV ============ -->
 <nav class="cat-nav" aria-label="Κατηγορίες">
-  <div class="wrap" id="catNav"></div>
+  <div class="wrap">
+    <div class="cat-tabs" id="catNav"></div>
+    <div class="mode-toggle" id="modeToggle" role="group" aria-label="Τιμοκατάλογος">
+      <button type="button" data-mode="retail" data-gr="Λιανική" data-en="Retail">Λιανική</button>
+      <button type="button" data-mode="wholesale" data-gr="Χονδρική" data-en="Wholesale">Χονδρική</button>
+    </div>
+  </div>
 </nav>
 
 <!-- ============ CATALOG BODY ============ -->
@@ -204,6 +287,25 @@
     </div>
   </section>
 </main>
+
+<!-- ============ BASKET DRAWER ============ -->
+<div class="cart-overlay" id="cartOverlay" hidden></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Καλάθι" aria-hidden="true">
+  <div class="cart-head">
+    <h2 id="cartTitle">Το καλάθι σου</h2>
+    <button class="cart-close" id="cartClose" type="button" aria-label="Κλείσιμο">×</button>
+  </div>
+  <div class="cart-mode-row">
+    <span class="cart-mode-pill" data-mode-current>—</span>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot" id="cartFoot" hidden>
+    <p class="cart-confirm" id="cartConfirm"></p>
+    <a class="btn solid cart-cta" id="cartEmail" href="#">Παραγγελία με Email</a>
+    <a class="btn cart-cta wa" id="cartWhatsapp" href="#" target="_blank" rel="noopener">Παραγγελία στο WhatsApp</a>
+    <button class="cart-clear" id="cartClear" type="button">Άδειασμα</button>
+  </div>
+</aside>
 
 <!-- ============ FOOTER ============ -->
 <footer>
@@ -231,6 +333,7 @@
   import { initMotion } from './assets/motion.js';
   import { initI18n } from './assets/i18n.js';
   import { initAgeGate } from './assets/age-gate.js';
+  import { initCart } from './assets/cart.js';
   import { WINES } from './assets/wines.js';
 
   /* category order + bilingual labels */
@@ -248,26 +351,6 @@
   const EMAIL = 'cellarkinfo@gmail.com';
   const mailto = (subject, body) =>
     `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  /* Retail (λιανική) — ιδιώτες, τιμές με ΦΠΑ */
-  const retailHref = (name) => mailto(`Λιανική παραγγελία — ${name}`, [
-    'Καλησπέρα Cellar·K,', '',
-    'Λιανική παραγγελία (ιδιώτης):',
-    `• ${name} — ποσότητα (φιάλες): ___`, '',
-    'Όνομα:',
-    'Τηλέφωνο:',
-    'Διεύθυνση παράδοσης:',
-  ].join('\n'));
-  /* Wholesale (χονδρική) — επιχειρήσεις, τιμές χωρίς ΦΠΑ */
-  const wholesaleHref = (name) => mailto(`Χονδρική παραγγελία — ${name}`, [
-    'Καλησπέρα Cellar·K,', '',
-    'Χονδρική παραγγελία (επιχείρηση) — τιμές χωρίς ΦΠΑ:',
-    `• ${name} — ποσότητα (κιβώτια): ___`, '',
-    'Επιχείρηση:',
-    'ΑΦΜ / ΔΟΥ:',
-    'Υπεύθυνος:',
-    'Τηλέφωνο:',
-    'Περιοχή:',
-  ].join('\n'));
   const TRADE_HREF = mailto('Άνοιγμα λογαριασμού χονδρικής — Cellar·K', [
     'Καλησπέρα Cellar·K,', '',
     'Θα ήθελα να ανοίξω λογαριασμό χονδρικής.', '',
@@ -313,9 +396,15 @@
         <p data-gr="${w.note_gr}" data-en="${w.note_en}">${w.note_gr}</p>
         ${specRow(w)}
         <div class="wine-actions">
-          <a class="btn solid" href="${retailHref(w.name)}" data-gr="Λιανική παραγγελία" data-en="Retail order">Λιανική παραγγελία</a>
-          <a class="btn" href="${wholesaleHref(w.name)}" data-gr="Χονδρική παραγγελία" data-en="Wholesale order">Χονδρική παραγγελία</a>
-          <span class="note" data-gr="Λιανική: τιμές με ΦΠΑ. Χονδρική: για επιχειρήσεις, τιμές χωρίς ΦΠΑ & ανά κιβώτιο." data-en="Retail: prices incl. VAT. Wholesale: for businesses, prices excl. VAT & by the case.">Λιανική: τιμές με ΦΠΑ. Χονδρική: για επιχειρήσεις, τιμές χωρίς ΦΠΑ &amp; ανά κιβώτιο.</span>
+          <div class="qty" data-slug="${w.slug}">
+            <button class="qty-dec" type="button" aria-label="−">−</button>
+            <span class="qty-val">1</span>
+            <button class="qty-inc" type="button" aria-label="+">+</button>
+          </div>
+          <button class="btn solid add-btn" type="button" data-slug="${w.slug}">
+            <span class="add-label" data-gr="Προσθήκη στο καλάθι" data-en="Add to basket">Προσθήκη στο καλάθι</span>
+          </button>
+          <span class="note" data-gr="Λιανική: τιμές με ΦΠΑ. Χονδρική: για επιχειρήσεις, χωρίς ΦΠΑ & ανά κιβώτιο." data-en="Retail: incl. VAT. Wholesale: businesses, excl. VAT & by the case.">Λιανική: τιμές με ΦΠΑ. Χονδρική: για επιχειρήσεις, χωρίς ΦΠΑ &amp; ανά κιβώτιο.</span>
         </div>
       </div>
     </article>`;
@@ -368,6 +457,7 @@
   initMotion();
   initI18n();
   initAgeGate();
+  initCart(WINES);
 </script>
 </body>
 </html>
