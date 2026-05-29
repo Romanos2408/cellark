@@ -151,7 +151,8 @@
   .cat-trade .btn-row{ display:flex; flex-wrap:wrap; gap:.9rem; }
   .cat-trade .btn-row .btn{ margin:0; }
 
-  /* ---------- shop: cart button ---------- */
+  /* ---------- shop ---------- */
+  [hidden]{ display:none !important; }   /* ensure hidden attr beats display rules below */
   .cart-btn{ position:relative; display:inline-flex; align-items:center; justify-content:center;
     width:40px; height:40px; margin-left:.5rem; color:var(--cream); background:none; border:none;
     cursor:pointer; border-radius:50%; transition:color .3s var(--ease), background .3s var(--ease); }
@@ -161,15 +162,7 @@
     color:var(--cream); font-family:var(--sans); font-size:.62rem; font-weight:600; line-height:1; }
   .cart-count.on{ display:inline-flex; }
 
-  /* ---------- shop: mode toggle ---------- */
-  .cat-nav .wrap{ justify-content:space-between; }
   .cat-tabs{ display:flex; gap:.2rem 1.7rem; flex-wrap:wrap; align-items:center; }
-  .mode-toggle{ display:inline-flex; border:1px solid rgba(191,167,115,.34); border-radius:2px; overflow:hidden; flex:none; }
-  .mode-toggle button{ font-family:var(--sans); font-weight:500; font-size:.66rem; letter-spacing:.13em;
-    text-transform:uppercase; color:var(--muted); background:none; border:none; cursor:pointer;
-    padding:.5rem .9rem; transition:background .3s var(--ease), color .3s var(--ease); }
-  .mode-toggle button + button{ border-left:1px solid rgba(191,167,115,.22); }
-  .mode-toggle button.active{ background:var(--gold); color:var(--ink); }
 
   /* ---------- shop: qty stepper + add ---------- */
   .qty{ display:inline-flex; align-items:center; border:1px solid rgba(191,167,115,.34); border-radius:2px; flex:none; }
@@ -196,11 +189,13 @@
   .cart-close{ background:none; border:none; color:var(--muted); font-size:1.8rem; line-height:1;
     cursor:pointer; transition:color .25s var(--ease); }
   .cart-close:hover{ color:var(--cream); }
-  .cart-mode-row{ padding:1.1rem 1.6rem 0; }
-  .cart-mode-pill{ display:inline-block; font-family:var(--sans); font-size:.64rem; letter-spacing:.08em;
-    text-transform:uppercase; color:var(--gold-soft); border:1px solid rgba(191,167,115,.3);
-    border-radius:2px; padding:.42rem .7rem; }
-  .cart-items{ flex:1; overflow-y:auto; padding:1.2rem 1.6rem; display:flex; flex-direction:column; gap:1.1rem; }
+  .cart-back{ background:none; border:none; color:var(--muted); font-size:1.4rem; line-height:1;
+    cursor:pointer; margin-right:.2rem; transition:color .25s var(--ease); }
+  .cart-back:hover{ color:var(--cream); }
+  .cart-head{ position:relative; }
+  .cart-body{ flex:1; overflow-y:auto; }
+  .cart-step{ padding:1.2rem 1.6rem; }
+  .cart-items{ display:flex; flex-direction:column; gap:1.1rem; }
   .cart-empty{ color:var(--muted-dim); font-size:.95rem; margin-top:.5rem; }
   .cart-line{ display:grid; grid-template-columns:40px 1fr auto; gap:1rem; align-items:center; }
   .cart-line img{ width:40px; height:62px; object-fit:contain; }
@@ -212,14 +207,39 @@
     display:flex; flex-direction:column; gap:.7rem; }
   .cart-confirm{ color:var(--muted-dim); font-family:var(--sans); font-size:.72rem; letter-spacing:.03em;
     margin-bottom:.2rem; text-wrap:pretty; }
+  .cart-next{ display:block; width:100%; margin:0; text-align:center; }
+  .cart-next:disabled{ opacity:.4; pointer-events:none; }
+  .cart-ctas{ display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
   .cart-cta{ display:block; width:100%; margin:0; text-align:center; }
+  .cart-cta.disabled{ opacity:.4; pointer-events:none; }
   .cart-clear{ background:none; border:none; color:var(--muted-dim); font-family:var(--sans); font-size:.7rem;
     letter-spacing:.1em; text-transform:uppercase; cursor:pointer; margin-top:.2rem; transition:color .25s var(--ease); }
   .cart-clear:hover{ color:var(--cream); }
 
+  /* ---------- shop: checkout choose-mode step ---------- */
+  .cart-q{ color:var(--cream); font-size:1.15rem; margin-bottom:1.2rem; }
+  .mode-choice{ display:block; width:100%; text-align:left; cursor:pointer; margin-bottom:.9rem;
+    background:none; border:1px solid rgba(191,167,115,.3); border-radius:3px; padding:1.1rem 1.2rem;
+    transition:border-color .3s var(--ease), background .3s var(--ease); }
+  .mode-choice:hover{ border-color:var(--gold); background:rgba(191,167,115,.07); }
+  .mode-choice .mc-title{ display:block; font-family:var(--serif,"Fraunces",serif); font-size:1.3rem; color:var(--cream); }
+  .mode-choice .mc-desc{ display:block; font-family:var(--sans); font-size:.78rem; letter-spacing:.03em;
+    color:var(--muted-dim); margin-top:.25rem; }
+
+  /* ---------- shop: checkout form ---------- */
+  #cartForm{ display:flex; flex-direction:column; gap:1rem; }
+  .cart-field{ display:flex; flex-direction:column; gap:.35rem; }
+  .cf-label{ font-family:var(--sans); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .cf-input{ font-family:var(--sans); font-size:.95rem; color:var(--bone); background:rgba(255,255,255,.03);
+    border:1px solid rgba(191,167,115,.26); border-radius:2px; padding:.7rem .8rem; outline:none;
+    transition:border-color .25s var(--ease); }
+  .cf-input:focus{ border-color:var(--gold); }
+  .cf-hint{ font-family:var(--sans); font-size:.68rem; color:var(--muted-dim); }
+  .cf-error{ font-family:var(--sans); font-size:.7rem; color:#e08a7a; }
+  .cart-field.invalid .cf-input{ border-color:#a8412f; }
+
   @media(max-width:560px){
     .cat-nav .wrap{ gap:.7rem; }
-    .mode-toggle{ order:-1; }
   }
 </style>
 </head>
@@ -263,10 +283,6 @@
 <nav class="cat-nav" aria-label="Κατηγορίες">
   <div class="wrap">
     <div class="cat-tabs" id="catNav"></div>
-    <div class="mode-toggle" id="modeToggle" role="group" aria-label="Τιμοκατάλογος">
-      <button type="button" data-mode="retail" data-gr="Λιανική" data-en="Retail">Λιανική</button>
-      <button type="button" data-mode="wholesale" data-gr="Χονδρική" data-en="Wholesale">Χονδρική</button>
-    </div>
   </div>
 </nav>
 
@@ -292,17 +308,43 @@
 <div class="cart-overlay" id="cartOverlay" hidden></div>
 <aside class="cart-drawer" id="cartDrawer" aria-label="Καλάθι" aria-hidden="true">
   <div class="cart-head">
+    <button class="cart-back" id="cartBack" type="button" aria-label="Πίσω" hidden>←</button>
     <h2 id="cartTitle">Το καλάθι σου</h2>
     <button class="cart-close" id="cartClose" type="button" aria-label="Κλείσιμο">×</button>
   </div>
-  <div class="cart-mode-row">
-    <span class="cart-mode-pill" data-mode-current>—</span>
+
+  <div class="cart-body" id="cartBody">
+    <!-- step 1: items -->
+    <section class="cart-step" data-step="items">
+      <div class="cart-items" id="cartItems"></div>
+    </section>
+
+    <!-- step 2: choose mode -->
+    <section class="cart-step" data-step="mode" hidden>
+      <p class="cart-q" data-gr="Πώς θα παραγγείλετε;" data-en="How are you ordering?">Πώς θα παραγγείλετε;</p>
+      <button class="mode-choice" type="button" data-mode="retail">
+        <span class="mc-title" data-gr="Λιανική" data-en="Retail">Λιανική</span>
+        <span class="mc-desc" data-gr="Ιδιώτης · τιμές με ΦΠΑ" data-en="Individual · prices incl. VAT">Ιδιώτης · τιμές με ΦΠΑ</span>
+      </button>
+      <button class="mode-choice" type="button" data-mode="wholesale">
+        <span class="mc-title" data-gr="Χονδρική" data-en="Wholesale">Χονδρική</span>
+        <span class="mc-desc" data-gr="Επιχείρηση · απαιτείται ΑΦΜ" data-en="Business · VAT number required">Επιχείρηση · απαιτείται ΑΦΜ</span>
+      </button>
+    </section>
+
+    <!-- step 3: details form -->
+    <section class="cart-step" data-step="form" hidden>
+      <form id="cartForm" novalidate></form>
+    </section>
   </div>
-  <div class="cart-items" id="cartItems"></div>
-  <div class="cart-foot" id="cartFoot" hidden>
+
+  <div class="cart-foot" id="cartFoot">
     <p class="cart-confirm" id="cartConfirm"></p>
-    <a class="btn solid cart-cta" id="cartEmail" href="#">Παραγγελία με Email</a>
-    <a class="btn cart-cta wa" id="cartWhatsapp" href="#" target="_blank" rel="noopener">Παραγγελία στο WhatsApp</a>
+    <button class="btn solid cart-next" id="cartNext" type="button">Συνέχεια</button>
+    <div class="cart-ctas" id="cartCtas" hidden>
+      <a class="btn solid cart-cta" id="cartEmail" href="#">Email</a>
+      <a class="btn cart-cta" id="cartWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
     <button class="cart-clear" id="cartClear" type="button">Άδειασμα</button>
   </div>
 </aside>
@@ -404,7 +446,7 @@
           <button class="btn solid add-btn" type="button" data-slug="${w.slug}">
             <span class="add-label" data-gr="Προσθήκη στο καλάθι" data-en="Add to basket">Προσθήκη στο καλάθι</span>
           </button>
-          <span class="note" data-gr="Λιανική: τιμές με ΦΠΑ. Χονδρική: για επιχειρήσεις, χωρίς ΦΠΑ & ανά κιβώτιο." data-en="Retail: incl. VAT. Wholesale: businesses, excl. VAT & by the case.">Λιανική: τιμές με ΦΠΑ. Χονδρική: για επιχειρήσεις, χωρίς ΦΠΑ &amp; ανά κιβώτιο.</span>
+          <span class="note" data-gr="Επιλέγετε λιανική ή χονδρική στο καλάθι." data-en="Choose retail or wholesale in the basket.">Επιλέγετε λιανική ή χονδρική στο καλάθι.</span>
         </div>
       </div>
     </article>`;
