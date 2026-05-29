@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Local preview / editor config (not part of the site)
+.claude/
+
+# Heavy source material not used by the site
+assets/PREVIEW.pdf
+assets/*.docx
+assets/PNG/
