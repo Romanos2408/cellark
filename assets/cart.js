@@ -28,6 +28,7 @@ const T = {
     q: 'Πώς θα παραγγείλετε;', next: 'Συνέχεια', clear: 'Άδειασμα',
     confirm: 'Τιμές & διαθεσιμότητα επιβεβαιώνονται με την παραγγελία.',
     email: 'Email', whatsapp: 'WhatsApp', add: 'Προσθήκη στο καλάθι', added: 'Προστέθηκε ✓',
+    send: 'Στείλτε την παραγγελία:',
     retail: 'Λιανική', wholesale: 'Χονδρική',
     eRequired: 'Υποχρεωτικό πεδίο', eEmail: 'Μη έγκυρο email',
     ePhone: 'Μη έγκυρο τηλέφωνο', eAfm: 'Μη έγκυρο ΑΦΜ (9 ψηφία)',
@@ -37,6 +38,7 @@ const T = {
     q: 'How are you ordering?', next: 'Continue', clear: 'Empty',
     confirm: 'Prices & availability confirmed on order.',
     email: 'Email', whatsapp: 'WhatsApp', add: 'Add to basket', added: 'Added ✓',
+    send: 'Send your order:',
     retail: 'Retail', wholesale: 'Wholesale',
     eRequired: 'Required field', eEmail: 'Invalid email',
     ePhone: 'Invalid phone', eAfm: 'Invalid VAT no. (9 digits)',
@@ -181,10 +183,10 @@ function validateForm(showAll) {
     if (msg) { errEl.textContent = msg; errEl.hidden = false; } else { errEl.hidden = true; }
   });
   const ok = formValid();
-  els.email.classList.toggle('disabled', !ok);
-  els.whatsapp.classList.toggle('disabled', !ok);
-  if (ok) { els.email.href = emailHref(); els.whatsapp.href = waHref(); }
-  else { els.email.removeAttribute('href'); els.whatsapp.removeAttribute('href'); }
+  // Buttons stay visible & clickable; an invalid click reveals the errors (handled on click).
+  // hrefs are always set so a valid form sends immediately.
+  els.email.href = emailHref();
+  els.whatsapp.href = waHref();
   return ok;
 }
 
@@ -208,6 +210,8 @@ function render() {
   els.next.textContent = t.next;
   els.next.disabled = (n === 0);
   els.ctas.hidden = !showCtas;
+  els.sendLabel.hidden = !showCtas;
+  els.sendLabel.textContent = t.send;
   els.email.textContent = t.email;
   els.whatsapp.textContent = t.whatsapp;
   els.clear.hidden = !(step === 'items' && n > 0);
@@ -240,6 +244,7 @@ export function initCart(wines) {
     close: document.getElementById('cartClose'),
     confirm: document.getElementById('cartConfirm'),
     next: document.getElementById('cartNext'),
+    sendLabel: document.getElementById('cartSendLabel'),
     ctas: document.getElementById('cartCtas'),
     email: document.getElementById('cartEmail'),
     whatsapp: document.getElementById('cartWhatsapp'),
@@ -271,9 +276,13 @@ export function initCart(wines) {
     inp.closest('.cart-field').dataset.touched = '1';
     validateForm();
   }, true);
-  // block send when invalid
+  // block send when invalid + reveal/scroll to the first problem
   [els.email, els.whatsapp].forEach((a) => a.addEventListener('click', (e) => {
-    if (!validateForm(true)) { e.preventDefault(); }
+    if (!validateForm(true)) {
+      e.preventDefault();
+      const bad = els.form.querySelector('.cart-field.invalid .cf-input');
+      if (bad) { bad.scrollIntoView({ block: 'center', behavior: 'smooth' }); bad.focus(); }
+    }
   }));
 
   // delegated: product steppers, add buttons, basket-line steppers, remove

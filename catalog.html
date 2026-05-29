@@ -207,6 +207,8 @@
     display:flex; flex-direction:column; gap:.7rem; }
   .cart-confirm{ color:var(--muted-dim); font-family:var(--sans); font-size:.72rem; letter-spacing:.03em;
     margin-bottom:.2rem; text-wrap:pretty; }
+  .cart-send-label{ font-family:var(--sans); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold-soft); margin:.1rem 0 -.2rem; }
   .cart-next{ display:block; width:100%; margin:0; text-align:center; }
   .cart-next:disabled{ opacity:.4; pointer-events:none; }
   .cart-ctas{ display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
@@ -341,6 +343,7 @@
   <div class="cart-foot" id="cartFoot">
     <p class="cart-confirm" id="cartConfirm"></p>
     <button class="btn solid cart-next" id="cartNext" type="button">Συνέχεια</button>
+    <p class="cart-send-label" id="cartSendLabel" hidden></p>
     <div class="cart-ctas" id="cartCtas" hidden>
       <a class="btn solid cart-cta" id="cartEmail" href="#">Email</a>
       <a class="btn cart-cta" id="cartWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
