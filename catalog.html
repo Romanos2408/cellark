@@ -198,7 +198,7 @@
       <h2 class="reveal" data-up data-gr="Χονδρική, ανά κιβώτιο" data-en="Trade pricing, by the case">Χονδρική, ανά κιβώτιο</h2>
       <p class="reveal" data-up data-gr="Ανοίξτε λογαριασμό χονδρικής για τιμές κιβωτίου και απευθείας παραγγελία. Για μεμονωμένες φιάλες ή ερωτήσεις, επικοινωνήστε μαζί μας." data-en="Open a wholesale account for case pricing and direct ordering. For single bottles or any question, get in touch.">Ανοίξτε λογαριασμό χονδρικής για τιμές κιβωτίου και απευθείας παραγγελία. Για μεμονωμένες φιάλες ή ερωτήσεις, επικοινωνήστε μαζί μας.</p>
       <div class="btn-row reveal" data-up>
-        <a class="btn solid" href="index.html#trade" data-gr="Λογαριασμός χονδρικής" data-en="Open a trade account">Λογαριασμός χονδρικής</a>
+        <a class="btn solid" id="tradeStripBtn" href="mailto:cellarkinfo@gmail.com" data-gr="Λογαριασμός χονδρικής" data-en="Open a trade account">Λογαριασμός χονδρικής</a>
         <a class="btn" href="index.html" data-gr="Επιστροφή στην αρχική" data-en="Back to home">Επιστροφή στην αρχική</a>
       </div>
     </div>
@@ -212,6 +212,15 @@
       <p class="eyebrow" style="margin-bottom:1rem">Cellar·K — Sicilia &amp; Ελλάδα</p>
       <p class="legal" data-gr="Επιλεγμένα σικελικά κρασιά, εισαγωγή και διάθεση με φροντίδα. Απολαμβάνετε υπεύθυνα. Πώληση μόνο σε ενήλικες." data-en="Selected Sicilian wines, imported and sold with care. Please enjoy responsibly. Sales to adults of legal drinking age only.">Επιλεγμένα σικελικά κρασιά, εισαγωγή και διάθεση με φροντίδα. Απολαμβάνετε υπεύθυνα. Πώληση μόνο σε ενήλικες.</p>
       <p class="agegate-note">© <span id="yr"></span> Cellar·K. All rights reserved.</p>
+    </div>
+    <div class="foot-contact">
+      <p class="eyebrow" data-gr="Επικοινωνία" data-en="Contact">Επικοινωνία</p>
+      <ul>
+        <li><a href="mailto:cellarkinfo@gmail.com">cellarkinfo@gmail.com</a></li>
+        <li><a href="tel:+306972845565">+30 697 284 5565</a></li>
+        <li><a href="https://www.instagram.com/cellar.k.selection" target="_blank" rel="noopener">@cellar.k.selection</a></li>
+        <li class="addr" data-gr="Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200" data-en="Megalou Alexandrou 27, Chrysoupoli 64200">Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200</li>
+      </ul>
     </div>
     <div class="mark">Cellar·K</div>
   </div>
@@ -234,6 +243,37 @@
   ];
 
   const stripServe = (s) => s.replace(/^Σερβ\.\s*/, '').replace(/^Serve\s*/, '');
+
+  /* --- enquiry email drafts (no backend; opens the customer's mail app) --- */
+  const EMAIL = 'cellarkinfo@gmail.com';
+  const mailto = (subject, body) =>
+    `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const orderHref = (name) => mailto(`Παραγγελία — ${name}`, [
+    'Καλησπέρα Cellar·K,', '',
+    `Θα ήθελα να παραγγείλω:`,
+    `• ${name} — ποσότητα (φιάλες/κιβώτια): ___`, '',
+    'Όνομα:',
+    'Τηλέφωνο:',
+    'Περιοχή παράδοσης:',
+  ].join('\n'));
+  const priceHref = (name) => mailto(`Ζητήστε τιμή — ${name}`, [
+    'Καλησπέρα Cellar·K,', '',
+    `Θα ήθελα τιμή & διαθεσιμότητα για:`,
+    `• ${name}`, '',
+    'Είμαι: ιδιώτης / επιχείρηση',
+    'Όνομα:',
+    'Τηλέφωνο:',
+  ].join('\n'));
+  const TRADE_HREF = mailto('Άνοιγμα λογαριασμού χονδρικής — Cellar·K', [
+    'Καλησπέρα Cellar·K,', '',
+    'Θα ήθελα να ανοίξω λογαριασμό χονδρικής.', '',
+    'Επιχείρηση:',
+    'ΑΦΜ / ΔΟΥ:',
+    'Περιοχή:',
+    'Υπεύθυνος επικοινωνίας:',
+    'Τηλέφωνο:', '',
+    'Ετικέτες που με ενδιαφέρουν:',
+  ].join('\n'));
 
   /* spec rows we can state honestly */
   const specRow = (w) => `
@@ -269,8 +309,8 @@
         <p data-gr="${w.note_gr}" data-en="${w.note_en}">${w.note_gr}</p>
         ${specRow(w)}
         <div class="wine-actions">
-          <a class="btn solid" href="index.html#trade" data-gr="Παραγγελία" data-en="Order">Παραγγελία</a>
-          <a class="btn" href="index.html#trade" data-gr="Ζητήστε τιμή" data-en="Request price">Ζητήστε τιμή</a>
+          <a class="btn solid" href="${orderHref(w.name)}" data-gr="Παραγγελία" data-en="Order">Παραγγελία</a>
+          <a class="btn" href="${priceHref(w.name)}" data-gr="Ζητήστε τιμή" data-en="Request price">Ζητήστε τιμή</a>
           <span class="note" data-gr="Τιμές & διαθεσιμότητα μέσω λογαριασμού χονδρικής." data-en="Pricing & availability via trade account.">Τιμές &amp; διαθεσιμότητα μέσω λογαριασμού χονδρικής.</span>
         </div>
       </div>
@@ -317,6 +357,10 @@
 
   /* engines — motion.js handles [data-hero] (hero stagger); catalog rows are
      always visible within the active tab, so they don't use scroll reveals. */
+  /* wire the closing trade-strip enquiry button */
+  const tradeStrip = document.getElementById('tradeStripBtn');
+  if (tradeStrip) tradeStrip.href = TRADE_HREF;
+
   initMotion();
   initI18n();
   initAgeGate();

@@ -294,7 +294,7 @@
     <h2 class="reveal" data-up data-gr="Χονδρική, ανά κιβώτιο" data-en="Trade pricing, by the case">Χονδρική, ανά κιβώτιο</h2>
     <p class="reveal" data-up data-gr="Προσθέστε τη Cellar·K στη λίστα ή στο ράφι σας. Ανοίξτε λογαριασμό χονδρικής για τιμές κιβωτίου και απευθείας παραγγελία — ή αγοράστε μεμονωμένη φιάλη ως πελάτης." data-en="Add Cellar·K to your list or shelf. Open a wholesale account for case pricing and direct ordering — or buy a single bottle as a guest.">Προσθέστε τη Cellar·K στη λίστα ή στο ράφι σας. Ανοίξτε λογαριασμό χονδρικής για τιμές κιβωτίου και απευθείας παραγγελία — ή αγοράστε μεμονωμένη φιάλη ως πελάτης.</p>
     <div class="btn-row reveal" data-up>
-      <a class="btn" href="#" data-gr="Λογαριασμός χονδρικής" data-en="Open a trade account">Λογαριασμός χονδρικής</a>
+      <a class="btn" id="tradeAccountBtn" href="mailto:cellarkinfo@gmail.com" data-gr="Λογαριασμός χονδρικής" data-en="Open a trade account">Λογαριασμός χονδρικής</a>
       <a class="btn solid" href="#collection" data-gr="Δες τα κρασιά" data-en="Shop the wines">Δες τα κρασιά</a>
     </div>
   </div>
@@ -307,6 +307,15 @@
       <p class="eyebrow" style="margin-bottom:1rem">Cellar·K — Sicilia & Ελλάδα</p>
       <p class="legal" data-gr="Επιλεγμένα σικελικά κρασιά, εισαγωγή και διάθεση με φροντίδα. Απολαμβάνετε υπεύθυνα. Πώληση μόνο σε ενήλικες." data-en="Selected Sicilian wines, imported and sold with care. Please enjoy responsibly. Sales to adults of legal drinking age only.">Επιλεγμένα σικελικά κρασιά, εισαγωγή και διάθεση με φροντίδα. Απολαμβάνετε υπεύθυνα. Πώληση μόνο σε ενήλικες.</p>
       <p class="agegate-note">© <span id="yr"></span> Cellar·K. All rights reserved.</p>
+    </div>
+    <div class="foot-contact">
+      <p class="eyebrow" data-gr="Επικοινωνία" data-en="Contact">Επικοινωνία</p>
+      <ul>
+        <li><a href="mailto:cellarkinfo@gmail.com">cellarkinfo@gmail.com</a></li>
+        <li><a href="tel:+306972845565">+30 697 284 5565</a></li>
+        <li><a href="https://www.instagram.com/cellar.k.selection" target="_blank" rel="noopener">@cellar.k.selection</a></li>
+        <li class="addr" data-gr="Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200" data-en="Megalou Alexandrou 27, Chrysoupoli 64200">Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200</li>
+      </ul>
     </div>
     <div class="mark">Cellar·K</div>
   </div>
@@ -341,6 +350,22 @@
   const { gsap, ScrollTrigger, reduce } = initMotion();
   initI18n();
   initAgeGate();
+
+  /* --- trade-account enquiry: pre-filled email draft --- */
+  const TRADE_BODY = [
+    'Καλησπέρα Cellar·K,', '',
+    'Θα ήθελα να ανοίξω λογαριασμό χονδρικής.', '',
+    'Επιχείρηση:',
+    'ΑΦΜ / ΔΟΥ:',
+    'Περιοχή:',
+    'Υπεύθυνος επικοινωνίας:',
+    'Τηλέφωνο:', '',
+    'Ετικέτες που με ενδιαφέρουν:',
+  ].join('\n');
+  const tradeBtn = document.getElementById('tradeAccountBtn');
+  if (tradeBtn) {
+    tradeBtn.href = `mailto:cellarkinfo@gmail.com?subject=${encodeURIComponent('Άνοιγμα λογαριασμού χονδρικής — Cellar·K')}&body=${encodeURIComponent(TRADE_BODY)}`;
+  }
 
   /* --- collection cards: row-by-row cascade as the grid scrolls in --- */
   if (!reduce) {
