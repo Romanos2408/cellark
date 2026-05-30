@@ -1,8 +1,13 @@
 # Cellar·K — Shopify + Shopify Payments setup plan
 
-Decision (2026-05-29): **Shopify Basic + Shopify Payments** (no Stripe → avoids the 2%
+Decision (updated 2026-05-30): **Shopify Basic + Shopify Payments** (no Stripe → avoids the 2%
 third-party surcharge). Retail (λιανική) = guest checkout; wholesale (χονδρική) = approved
-company accounts with net price list. VIES/ΑΦΜ verification + Greek myDATA invoicing via apps.
+company accounts with net price list.
+
+**Sells in Greece only → NO VIES.** VIES is for EU cross-border trade; domestic Greek wholesale
+buyers often aren't even listed there. Verify wholesale ΑΦΜ via the **ΑΑΔΕ registry** instead,
+and **skip the VIES app** (saves ~$29–49/mo). myDATA invoicing goes through the accountant's
+**πάροχος**, not a standalone app.
 
 ---
 
@@ -37,10 +42,20 @@ site, set up the B2B catalog structure, and walk you through every screen.
 - Create **company accounts**; only approved companies see/buy wholesale.
 - Retail customers keep normal guest checkout at retail prices.
 
-### 5. Verification + invoicing apps
-- **Euro B2B Smart Hub** (~$29–49/mo): validates VAT (ΑΦΜ) via **VIES**, dual pricing.
-- **myData Comply** (~$9.99/mo): submits receipts/invoices to **ΑΑΔΕ myDATA**.
-- Confirm with your **accountant** which myDATA/ΥΠΑΗΕΣ provider they prefer.
+### 5. Wholesale ΑΦΜ verification (Greece-only)
+- **Skip VIES / the VIES app** — not relevant for domestic-only sales.
+- **Start manual:** when a wholesale account applies, check the ΑΦΜ in the **ΑΑΔΕ registry**
+  (you or the accountant) before approving. The site already does a **checksum** pre-check.
+- **Automate later (optional):** a connector calling ΑΑΔΕ's `RgWsPublic` web service
+  (credentials are free to register on the ΑΑΔΕ site) to auto-fill the company name + confirm
+  it's active at signup.
+
+### 5b. myDATA invoicing — via the accountant's πάροχος
+- Legal invoice issuance + transmission to **myDATA** goes through an accredited **πάροχος**
+  (Epsilon Net / SoftOne / Elorus / Primer / etc.) or the accountant's software — **not** a
+  standalone Shopify app.
+- **Ask the accountant** which πάροχος they use; connect Shopify to **that** (or have them
+  issue invoices from order exports). May cost **€0** extra if they already handle it.
 
 ### 6. Domain + connect to this site
 - Point a domain (e.g. cellark.gr) per the integration choice below.
@@ -64,12 +79,18 @@ site, set up the B2B catalog structure, and walk you through every screen.
 ---
 
 ## Greek notes
-- **Domestic Greek B2B is NOT VAT-exempt** — invoices still carry ΦΠΑ; "wholesale" = a lower
-  net price list. VIES reverse-charge applies to **cross-border EU** B2B only.
+- **Greece-only seller** — no intra-EU VAT, no VIES, no OSS, no cross-border shipping.
+- **Domestic Greek B2B is NOT VAT-exempt** — invoices still carry **ΦΠΑ**; "wholesale" = a lower
+  **net price list**, not a VAT exemption.
 - **Αντικαταβολή** = a manual payment method + your courier (ACS/Speedex/ELTA).
 - Keep the **age-confirmation** step for alcohol.
 
-## Indicative monthly cost
-Shopify Basic (~$39) + Euro B2B Smart Hub ($29–49) + myData Comply ($9.99) ≈ **$78–98/mo**,
-plus Shopify Payments card fees (no third-party surcharge). Confirm exact EUR figures on the
-live Shopify Greece pricing page.
+## Indicative monthly cost (lean, Greece-only)
+- **Shopify Basic:** ~$29/mo (annual) – $39/mo (monthly) — *the only required cost*
+- **Shopify Payments** card fees: ~1.5–2% per sale (no third-party surcharge); confirm exact GR rate
+- **Domain:** ~€10–15/year
+- **VIES app:** ❌ not needed (Greece-only)
+- **myDATA app:** likely €0 — handled by the accountant's πάροχος
+
+➡️ **Realistic start: ~$30/mo + card fees + domain.** Confirm exact EUR figures on the live
+Shopify Greece pricing page. Pay annually for the lower rate; add automation later if wanted.
