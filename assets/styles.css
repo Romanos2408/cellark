@@ -145,8 +145,14 @@ nav .links a::after{
 }
 nav .links a:hover::after{ width:100%; }
 @media(max-width:680px){
-  nav .links a:not(.lang){ display:none; }
+  nav .links a:not(.lang):not(.nav-cta){ display:none; }
+  nav .links{ gap:1.1rem; }
 }
+
+/* visible keyboard focus on every interactive control (dark-friendly) */
+a:focus-visible, button:focus-visible, [role="tab"]:focus-visible,
+.lang:focus-visible, .qty button:focus-visible, .cart-btn:focus-visible,
+input:focus-visible{ outline:2px solid var(--gold-soft); outline-offset:2px; border-radius:2px; }
 
 /* ---------- language toggle ---------- */
 .lang{
@@ -192,7 +198,7 @@ nav.scrolled .lang:hover{ border-color:var(--gold); color:var(--gold-soft); }
 .btn.solid:hover{ background:var(--gold-soft); border-color:var(--gold-soft); color:var(--ink); }
 .btn:focus-visible{ outline:2px solid var(--gold-soft); outline-offset:2px; }
 @media(prefers-reduced-motion:reduce){ .btn::before{ transition:none; } }
-@media(max-width:520px){ .btn{ display:block; text-align:center; margin:.6rem 0 0; } }
+@media(max-width:520px){ .btn-row .btn{ display:block; text-align:center; margin:.6rem 0 0; } }
 
 /* ---------- footer ---------- */
 footer{ background:var(--ink-soft); border-top:1px solid rgba(191,167,115,.16); padding:clamp(4.5rem,9vh,7rem) 0 3.4rem; }
@@ -294,3 +300,28 @@ html.age-gating{ overflow:hidden; }
 .cart-clear{ background:none; border:none; color:var(--muted-dim); font-family:var(--sans); font-size:.7rem;
   letter-spacing:.1em; text-transform:uppercase; cursor:pointer; margin-top:.2rem; transition:color .25s var(--ease); }
 .cart-clear:hover{ color:var(--cream); }
+
+/* ============================================================
+   LEGAL PAGES (privacy / terms / returns)
+   ============================================================ */
+.legal-page{ max-width:60rem; margin:0 auto; padding:clamp(7rem,14vh,10rem) 1.4rem clamp(4rem,8vh,6rem); }
+.legal-page .eyebrow{ margin-bottom:.6rem; }
+.legal-page h1{ font-size:clamp(2.2rem,6vw,3.4rem); color:var(--cream); margin-bottom:.4rem; }
+.legal-page .updated{ font-family:var(--sans); font-size:.78rem; color:var(--muted-dim); letter-spacing:.04em; margin-bottom:2.4rem; }
+.legal-page h2{ font-size:clamp(1.3rem,3vw,1.7rem); color:var(--cream); margin:2.2rem 0 .7rem; }
+.legal-page p, .legal-page li{ color:var(--muted); font-size:1rem; line-height:1.7; max-width:62ch; text-wrap:pretty; }
+.legal-page ul{ margin:.5rem 0 .5rem 1.2rem; display:flex; flex-direction:column; gap:.35rem; }
+.legal-page a{ color:var(--gold); }
+.legal-page .todo{ display:inline-block; background:rgba(78,0,0,.4); border:1px solid var(--oxblood);
+  color:#e9c9c0; font-family:var(--sans); font-size:.82rem; padding:.1rem .45rem; border-radius:2px; }
+.legal-page .back{ display:inline-block; margin-top:2.6rem; font-family:var(--sans); font-size:.8rem;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--bone); text-decoration:none;
+  border-bottom:1px solid rgba(231,231,224,.3); padding-bottom:2px; }
+.legal-page .back:hover{ border-color:var(--gold); }
+
+/* footer legal links row */
+.foot-legal{ width:100%; border-top:1px solid rgba(191,167,115,.14); margin-top:2rem; padding-top:1.4rem;
+  display:flex; flex-wrap:wrap; gap:.4rem 1.4rem; align-items:center; }
+.foot-legal a{ font-family:var(--sans); font-size:.74rem; letter-spacing:.04em; color:var(--muted-dim); text-decoration:none; }
+.foot-legal a:hover{ color:var(--gold-soft); }
+.foot-imprint{ width:100%; font-family:var(--sans); font-size:.72rem; color:var(--muted-dim); margin-top:.8rem; line-height:1.6; }

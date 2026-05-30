@@ -12,12 +12,14 @@ import { SHOP, shopifyCheckoutURL } from './shop-config.js';
 
 const CART_KEY = 'cellark.cart';
 const LANG_KEY = 'cellark.lang';
+const EMAIL = 'cellarkinfo@gmail.com';
 
 const T = {
   gr: {
     title: 'Το καλάθι σου', empty: 'Το καλάθι σου είναι άδειο.',
     checkout: 'Ολοκλήρωση — Πληρωμή με κάρτα',
     soon: 'Το ηλεκτρονικό κατάστημα ανοίγει σύντομα.',
+    enquire: 'Ρωτήστε μας γι’ αυτά τα κρασιά',
     confirm: 'Ασφαλής πληρωμή με κάρτα στο ταμείο· εκεί συμπληρώνετε διεύθυνση & στοιχεία.',
     trade: 'Πελάτης χονδρικής; Σύνδεση',
     clear: 'Άδειασμα', add: 'Προσθήκη στο καλάθι', added: 'Προστέθηκε ✓',
@@ -26,6 +28,7 @@ const T = {
     title: 'Your basket', empty: 'Your basket is empty.',
     checkout: 'Checkout — Pay by card',
     soon: 'The online shop opens soon.',
+    enquire: 'Ask us about these wines',
     confirm: 'Secure card payment at checkout, where you add your address & details.',
     trade: 'Wholesale customer? Sign in',
     clear: 'Empty', add: 'Add to basket', added: 'Added ✓',
@@ -56,6 +59,18 @@ function setQty(slug, qty) {
 }
 function removeItem(slug) { setCart(getCart().filter((i) => i.slug !== slug)); render(); }
 function clearCart() { setCart([]); render(); }
+
+function enquiryHref() {
+  const L = lang(), items = getCart();
+  const lines = [
+    L === 'gr' ? 'Καλησπέρα Cellar·K,' : 'Hello Cellar·K,', '',
+    L === 'gr' ? 'Ενδιαφέρομαι για τα παρακάτω κρασιά:' : "I'm interested in these wines:",
+  ];
+  items.forEach((i) => { const w = wineOf(i.slug); if (w) lines.push(`• ${i.qty}× ${w.name}`); });
+  lines.push('', L === 'gr' ? 'Όνομα:' : 'Name:', L === 'gr' ? 'Τηλέφωνο:' : 'Phone:');
+  const subj = (L === 'gr' ? 'Ενδιαφέρον για κρασιά' : 'Wine enquiry') + ' — Cellar·K';
+  return `mailto:${EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(lines.join('\n'))}`;
+}
 
 function renderItems() {
   const c = getCart();
@@ -90,9 +105,11 @@ function render() {
   const url = shopifyCheckoutURL(getCart());
   if (url) {
     els.checkout.hidden = false; els.checkout.href = url; els.checkout.textContent = t.checkout;
-    els.soon.hidden = true;
+    els.soon.hidden = true; els.enquire.hidden = true;
   } else {
+    // Shop not connected yet — don't dead-end: let visitors send an enquiry with their basket.
     els.checkout.hidden = true; els.soon.hidden = false; els.soon.textContent = t.soon;
+    els.enquire.hidden = false; els.enquire.textContent = t.enquire; els.enquire.href = enquiryHref();
   }
   els.trade.hidden = !SHOP.tradeLoginUrl;
   if (SHOP.tradeLoginUrl) { els.trade.href = SHOP.tradeLoginUrl; els.trade.textContent = t.trade; }
@@ -135,6 +152,7 @@ export function initCart(wines) {
     confirm: document.getElementById('cartConfirm'),
     checkout: document.getElementById('cartCheckout'),
     soon: document.getElementById('cartSoon'),
+    enquire: document.getElementById('cartEnquire'),
     trade: document.getElementById('cartTrade'),
     clear: document.getElementById('cartClear'),
   };

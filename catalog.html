@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..600&family=Inter:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap&subset=greek,latin" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/styles.css?v=2">
+<link rel="stylesheet" href="assets/styles.css?v=3">
 
 <!-- Motion libs hosted locally (no external CDN dependency at runtime) -->
 <script src="assets/vendor/gsap.min.js"></script>
@@ -149,7 +149,12 @@
   .cat-trade .btn-row .btn{ margin:0; }
 
   .cat-tabs{ display:flex; gap:.2rem 1.7rem; flex-wrap:wrap; align-items:center; }
-  @media(max-width:560px){ .cat-nav .wrap{ gap:.7rem; } }
+  @media(max-width:640px){
+    .cat-nav .wrap{ gap:.7rem; }
+    .cat-tabs{ flex-wrap:nowrap; overflow-x:auto; gap:1.3rem; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+    .cat-tabs::-webkit-scrollbar{ display:none; }
+    .cat-nav button[role="tab"]{ flex:0 0 auto; white-space:nowrap; }
+  }
 </style>
 </head>
 <body>
@@ -227,6 +232,7 @@
     <p class="cart-confirm" id="cartConfirm"></p>
     <a class="btn solid cart-checkout" id="cartCheckout" href="#">Ολοκλήρωση — Πληρωμή με κάρτα</a>
     <p class="cart-soon" id="cartSoon" hidden></p>
+    <a class="btn solid cart-checkout cart-enquire" id="cartEnquire" hidden href="#"></a>
     <a class="cart-trade" id="cartTrade" hidden href="#"></a>
     <button class="cart-clear" id="cartClear" type="button">Άδειασμα</button>
   </div>
@@ -250,6 +256,13 @@
       </ul>
     </div>
     <div class="mark">Cellar·K</div>
+    <div class="foot-legal">
+      <a href="privacy.html" data-gr="Απόρρητο" data-en="Privacy">Απόρρητο</a>
+      <a href="terms.html" data-gr="Όροι" data-en="Terms">Όροι</a>
+      <a href="returns.html" data-gr="Επιστροφές & Αποστολές" data-en="Returns & Shipping">Επιστροφές &amp; Αποστολές</a>
+      <a href="mailto:cellarkinfo@gmail.com" data-gr="Επικοινωνία" data-en="Contact">Επικοινωνία</a>
+    </div>
+    <p class="foot-imprint" data-gr="[Νόμιμη επωνυμία] · ΑΦΜ [—] · ΓΕΜΗ [—] · ΔΟΥ [—] · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200" data-en="[Legal entity] · VAT (ΑΦΜ) [—] · ΓΕΜΗ [—] · Tax office [—] · Megalou Alexandrou 27, Chrysoupoli 64200">[Νόμιμη επωνυμία] · ΑΦΜ [—] · ΓΕΜΗ [—] · ΔΟΥ [—] · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200</p>
   </div>
 </footer>
 
