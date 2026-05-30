@@ -99,6 +99,9 @@
   .wine-row{ display:grid; grid-template-columns:0.78fr 1.22fr; gap:clamp(1.6rem,4vw,4rem);
     align-items:center; padding-block:clamp(2rem,4vw,3rem); }
   .wine-row + .wine-row{ border-top:1px solid rgba(191,167,115,.1); }
+  /* flipped rows put the bottle on the right — swap the columns too so the
+     wine-info always gets the WIDE column (same text width on both sides). */
+  .wine-row.flip{ grid-template-columns:1.22fr 0.78fr; }
   .wine-row.flip .wine-shot{ order:2; }
   .wine-shot{ position:relative; display:flex; align-items:flex-end; justify-content:center; min-height:300px; }
   .wine-shot::after{ content:""; position:absolute; left:50%; bottom:6%; transform:translateX(-50%);
