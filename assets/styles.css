@@ -261,8 +261,12 @@ html.age-gating{ overflow:hidden; }
 .qty.mini button{ width:30px; height:30px; font-size:1rem; }
 .qty.mini .qty-val{ min-width:24px; font-size:.82rem; }
 .add-btn{ cursor:pointer; border:none; }
-.card-actions{ display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin-top:1.1rem; }
-.card-actions .add-btn{ flex:1; min-width:140px; }
+/* homepage card actions: qty on top, full-width add button below, pinned to the
+   bottom of the card so every card aligns regardless of text length */
+.card-actions{ display:flex; flex-direction:column; gap:.75rem; align-items:stretch;
+  margin-top:auto; padding-top:1.4rem; }
+.card-actions .qty{ align-self:flex-start; }
+.card-actions .add-btn{ width:100%; margin:0; padding:.85rem 1rem; text-align:center; }
 
 /* overlay + drawer */
 .cart-overlay{ position:fixed; inset:0; z-index:90; background:rgba(8,6,5,.6);
