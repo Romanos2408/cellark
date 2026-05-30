@@ -38,7 +38,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..600&family=Inter:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap&subset=greek,latin" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css?v=2">
 
 <script type="importmap">
 {
@@ -208,6 +208,12 @@
     <a class="lang" href="#" role="button" aria-label="Language">
       <span data-lang="gr">EL</span><span>·</span><span data-lang="en">EN</span>
     </a>
+    <button class="cart-btn" id="cartBtn" type="button" aria-label="Καλάθι">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/>
+      </svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
   </div>
 </nav>
 
@@ -300,6 +306,25 @@
   </div>
 </section>
 
+<!-- ============ BASKET DRAWER ============ -->
+<div class="cart-overlay" id="cartOverlay" hidden></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Καλάθι" aria-hidden="true">
+  <div class="cart-head">
+    <h2 id="cartTitle">Το καλάθι σου</h2>
+    <button class="cart-close" id="cartClose" type="button" aria-label="Κλείσιμο">×</button>
+  </div>
+  <div class="cart-body">
+    <div class="cart-items" id="cartItems"></div>
+  </div>
+  <div class="cart-foot" id="cartFoot" hidden>
+    <p class="cart-confirm" id="cartConfirm"></p>
+    <a class="btn solid cart-checkout" id="cartCheckout" href="#">Ολοκλήρωση — Πληρωμή με κάρτα</a>
+    <p class="cart-soon" id="cartSoon" hidden></p>
+    <a class="cart-trade" id="cartTrade" hidden href="#"></a>
+    <button class="cart-clear" id="cartClear" type="button">Άδειασμα</button>
+  </div>
+</aside>
+
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap foot-grid">
@@ -326,6 +351,7 @@
   import { initMotion } from './assets/motion.js';
   import { initI18n } from './assets/i18n.js';
   import { initAgeGate } from './assets/age-gate.js';
+  import { initCart } from './assets/cart.js';
   import { WINES } from './assets/wines.js';
 
   const cards = document.getElementById('cards');
@@ -343,6 +369,16 @@
           <span><b>${w.abv}</b> vol.</span>
           <span data-gr="${w.serve_gr}" data-en="${w.serve_en}">${w.serve_gr}</span>
         </div>
+        <div class="card-actions">
+          <div class="qty" data-slug="${w.slug}">
+            <button class="qty-dec" type="button" aria-label="−">−</button>
+            <span class="qty-val">1</span>
+            <button class="qty-inc" type="button" aria-label="+">+</button>
+          </div>
+          <button class="btn solid add-btn" type="button" data-slug="${w.slug}">
+            <span class="add-label" data-gr="Προσθήκη στο καλάθι" data-en="Add to basket">Προσθήκη στο καλάθι</span>
+          </button>
+        </div>
       </div>
     </article>`).join('');
 
@@ -350,6 +386,7 @@
   const { gsap, ScrollTrigger, reduce } = initMotion();
   initI18n();
   initAgeGate();
+  initCart(WINES);
 
   /* --- trade-account enquiry: pre-filled email draft --- */
   const TRADE_BODY = [
