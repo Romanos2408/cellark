@@ -38,10 +38,16 @@ export const SHOP = {
 
 /** A Shopify cart permalink that pre-loads the basket and goes to secure checkout. */
 export function shopifyCheckoutURL(items) {
-  if (!SHOP.domain) return null;
-  const parts = items
-    .map((i) => { const v = SHOP.variants[i.slug]; return v ? `${v}:${i.qty}` : null; })
-    .filter(Boolean);
-  if (!parts.length) return null;
+  if (!SHOP.domain || !items.length) return null;
+  // Safety: if ANY item lacks a variant ID, do NOT build a partial checkout
+  // (that would silently drop bottles). Fall back to the "shop opening soon"
+  // state for the whole basket and warn which mappings are missing.
+  const missing = items.filter((i) => !SHOP.variants[i.slug]).map((i) => i.slug);
+  if (missing.length) {
+    console.warn('[Cellar·K] Missing Shopify variant IDs for:', missing.join(', '),
+      '— checkout disabled until added in assets/shop-config.js');
+    return null;
+  }
+  const parts = items.map((i) => `${SHOP.variants[i.slug]}:${i.qty}`);
   return `https://${SHOP.domain}/cart/${parts.join(',')}`;
 }

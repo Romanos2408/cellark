@@ -39,15 +39,10 @@
 
 <link rel="stylesheet" href="assets/styles.css?v=2">
 
-<script type="importmap">
-{
-  "imports": {
-    "gsap": "https://esm.sh/gsap@3.12.5",
-    "gsap/ScrollTrigger": "https://esm.sh/gsap@3.12.5/ScrollTrigger",
-    "lenis": "https://esm.sh/lenis@1.3.18"
-  }
-}
-</script>
+<!-- Motion libs hosted locally (no external CDN dependency at runtime) -->
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
 
 <style>
   /* ---------- CATALOG HERO (compact) ---------- */
@@ -71,15 +66,17 @@
     border-bottom:1px solid rgba(191,167,115,.16); }
   .cat-nav .wrap{ display:flex; gap:.2rem 1.7rem; flex-wrap:wrap; align-items:center;
     padding-top:1.05rem; padding-bottom:1.05rem; }
-  .cat-nav a{ font-family:var(--sans); font-weight:500; font-size:.72rem; letter-spacing:.16em;
-    text-transform:uppercase; color:var(--muted); position:relative; transition:color .3s var(--ease); }
-  .cat-nav a{ cursor:pointer; }
-  .cat-nav a:hover{ color:var(--gold-soft); }
-  .cat-nav a.active{ color:var(--cream); }
-  .cat-nav a::after{ content:""; position:absolute; left:0; bottom:-.4rem; height:1px; width:0;
-    background:var(--gold); transition:width .3s var(--ease); }
-  .cat-nav a:hover::after,
-  .cat-nav a.active::after{ width:100%; }
+  .cat-nav a, .cat-nav button[role="tab"]{ font-family:var(--sans); font-weight:500; font-size:.72rem;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--muted); position:relative;
+    transition:color .3s var(--ease); cursor:pointer;
+    background:none; border:none; padding:0; margin:0; line-height:1; }
+  .cat-nav a:hover, .cat-nav button[role="tab"]:hover{ color:var(--gold-soft); }
+  .cat-nav a.active, .cat-nav button[role="tab"].active{ color:var(--cream); }
+  .cat-nav a::after, .cat-nav button[role="tab"]::after{ content:""; position:absolute; left:0; bottom:-.4rem;
+    height:1px; width:0; background:var(--gold); transition:width .3s var(--ease); }
+  .cat-nav a:hover::after, .cat-nav a.active::after,
+  .cat-nav button[role="tab"]:hover::after, .cat-nav button[role="tab"].active::after{ width:100%; }
+  .cat-section:focus{ outline:none; }
 
   /* ---------- catalog body ---------- */
   .catalog{ position:relative; background:var(--ink); overflow:hidden; }
@@ -194,7 +191,7 @@
 <!-- ============ STICKY CATEGORY NAV ============ -->
 <nav class="cat-nav" aria-label="Κατηγορίες">
   <div class="wrap">
-    <div class="cat-tabs" id="catNav"></div>
+    <div class="cat-tabs" id="catNav" role="tablist" aria-label="Κατηγορίες κρασιών"></div>
   </div>
 </nav>
 
@@ -218,7 +215,7 @@
 
 <!-- ============ BASKET DRAWER ============ -->
 <div class="cart-overlay" id="cartOverlay" hidden></div>
-<aside class="cart-drawer" id="cartDrawer" aria-label="Καλάθι" aria-hidden="true">
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Καλάθι" aria-hidden="true">
   <div class="cart-head">
     <h2 id="cartTitle">Το καλάθι σου</h2>
     <button class="cart-close" id="cartClose" type="button" aria-label="Κλείσιμο">×</button>
@@ -346,9 +343,9 @@
   CATS.forEach((c) => {
     const list = WINES.filter((w) => w.cat === c.key);
     if (!list.length) return;
-    navHtml += `<a data-cat="${c.key}" data-gr="${c.gr}" data-en="${c.en}">${c.gr}</a>`;
+    navHtml += `<button type="button" role="tab" id="tab-${c.key}" data-cat="${c.key}" aria-controls="cat-${c.key}" aria-selected="false" tabindex="-1" data-gr="${c.gr}" data-en="${c.en}">${c.gr}</button>`;
     secHtml += `
-      <section class="cat-section" id="cat-${c.key}">
+      <section class="cat-section" id="cat-${c.key}" role="tabpanel" aria-labelledby="tab-${c.key}" tabindex="0">
         <div class="wrap">
           <div class="sec-head">
             <p class="eyebrow" data-gr="Η Συλλογή" data-en="The Cellar">Η Συλλογή</p>
@@ -362,18 +359,36 @@
   navEl.innerHTML = navHtml;
   secEl.innerHTML = secHtml;
 
-  /* tab filter — show one category at a time */
-  const tabs = [...navEl.querySelectorAll('a[data-cat]')];
+  /* tab filter — show one category at a time (accessible tablist) */
+  const tabs = [...navEl.querySelectorAll('[data-cat]')];
   const sections = [...secEl.querySelectorAll('.cat-section')];
   const activate = (key, scroll) => {
-    tabs.forEach((t) => t.classList.toggle('active', t.dataset.cat === key));
+    tabs.forEach((t) => {
+      const on = t.dataset.cat === key;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;          // roving tabindex
+    });
     sections.forEach((s) => s.classList.toggle('is-active', s.id === `cat-${key}`));
     if (scroll) {
       const navH = document.querySelector('nav').offsetHeight + navEl.parentElement.offsetHeight;
       window.scrollTo({ top: secEl.offsetTop - navH, behavior: 'smooth' });
     }
   };
-  tabs.forEach((t) => t.addEventListener('click', (e) => { e.preventDefault(); activate(t.dataset.cat, true); }));
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => activate(t.dataset.cat, true));
+    t.addEventListener('keydown', (e) => {
+      let j = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') j = 0;
+      else if (e.key === 'End') j = tabs.length - 1;
+      if (j === null) return;
+      e.preventDefault();
+      activate(tabs[j].dataset.cat, false);
+      tabs[j].focus();
+    });
+  });
   if (tabs.length) activate(tabs[0].dataset.cat, false);
 
   /* engines — motion.js handles [data-hero] (hero stagger); catalog rows are

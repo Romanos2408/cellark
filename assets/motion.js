@@ -19,12 +19,24 @@
  * engine init. Page-specific timelines must guard on the returned `reduce`.
  */
 
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
+/* Libraries are loaded locally as classic <script> tags (see each page's <head>),
+   which set these globals. Hosting them on our own origin removes the runtime
+   dependency on an external CDN — if a CDN is slow/down the shop still loads. */
+const gsap = window.gsap;
+const ScrollTrigger = window.ScrollTrigger;
+const Lenis = window.Lenis;
 
 export function initMotion() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // If the vendored libs failed to load, degrade gracefully: reveal everything.
+  if (!gsap || !ScrollTrigger) {
+    document.querySelectorAll('.reveal,[data-hero],[data-up]').forEach((el) => {
+      el.style.opacity = '1'; el.style.transform = 'none';
+    });
+    const yrEl = document.getElementById('yr');
+    if (yrEl) yrEl.textContent = '2026';
+    return { gsap: null, ScrollTrigger: null, reduce: true };
+  }
 
   // Year stamp — harmless if #yr is absent.
   const yr = document.getElementById('yr');
@@ -123,8 +135,16 @@ export function initMotion() {
       });
   });
 
-  // Pin math after fonts load.
-  window.addEventListener('load', () => ScrollTrigger.refresh());
+  // Pin math after fonts load. Then, if we arrived on a deep link (e.g.
+  // index.html#story), sync Lenis to the target — a native hash jump leaves
+  // Lenis at 0 and the page snaps back / lands inside the pinned section.
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
+    if (location.hash && location.hash.length > 1) {
+      const target = document.querySelector(location.hash);
+      if (target) requestAnimationFrame(() => lenis.scrollTo(target, { offset: -80, immediate: true }));
+    }
+  });
 
   return { gsap, ScrollTrigger, lenis, reduce: false };
 }
