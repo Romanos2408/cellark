@@ -238,7 +238,8 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  /* Always 3 wines per row on desktop (drops to 2, then 1 on narrow screens) */
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
