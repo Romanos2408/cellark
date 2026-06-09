@@ -3,8 +3,10 @@
 
   /* ---------- State ---------- */
   const KEY = "cellark.catalogue.lang";
+  const MODE_KEY = "cellark.catalogue.mode";
   const STATE = {
     lang: (() => { try { return localStorage.getItem(KEY) || "gr"; } catch { return "gr"; } })(),
+    mode: (() => { try { return localStorage.getItem(MODE_KEY) || "retail"; } catch { return "retail"; } })(),
     data: null,
     cat: "all",
     query: "",
@@ -18,6 +20,10 @@
       labels: (n) => `${n} ${n === 1 ? "ετικέτα" : "ετικέτες"}`,
       legal: "Απολαύστε υπεύθυνα · 18+",
       followLabel: "Instagram",
+      retail: "Λιανική",
+      wholesale: "Χονδρική",
+      priceTBD: "—",
+      askPrice: "Κατόπιν συνεννόησης",
     },
     en: {
       searchPlaceholder: "Search wine, grape, region…",
@@ -26,12 +32,25 @@
       labels: (n) => `${n} ${n === 1 ? "label" : "labels"}`,
       legal: "Please enjoy responsibly · 18+",
       followLabel: "Instagram",
+      retail: "Retail",
+      wholesale: "Wholesale",
+      priceTBD: "—",
+      askPrice: "On request",
     },
   };
 
   const lkey = () => (STATE.lang === "en" ? "en" : "gr");
   const t = () => LABELS[lkey()];
   const pick = (obj, base) => obj[`${base}_${lkey()}`] ?? obj[`${base}_gr`] ?? "";
+
+  const currency = () => (STATE.data && STATE.data.pricing && STATE.data.pricing.currency) || "EUR";
+  const fmtPrice = (n) =>
+    n == null ? null
+      : new Intl.NumberFormat(lkey() === "en" ? "en-IE" : "el-GR",
+          { style: "currency", currency: currency() }).format(n);
+  const pickPrice = (w) =>
+    (STATE.mode === "wholesale" ? w.price_wholesale : w.price_retail) ?? null;
+  const wholesaleOn = () => !!(STATE.data && STATE.data.pricing && STATE.data.pricing.show_wholesale);
 
   const $ = (s) => document.querySelector(s);
   const el = (tag, cls) => { const n = document.createElement(tag); if (cls) n.className = cls; return n; };
@@ -115,7 +134,21 @@
       specs.appendChild(sp);
     });
 
-    body.append(type, name, grape, note, specs);
+    const price = el("div", "card-price");
+    const tier = el("span", "card-price-tier");
+    tier.textContent = STATE.mode === "wholesale" ? t().wholesale : t().retail;
+    const amount = el("span", "card-price-amount");
+    const formatted = fmtPrice(pickPrice(w));
+    if (formatted) {
+      amount.textContent = formatted;
+    } else {
+      amount.textContent = t().priceTBD;
+      amount.classList.add("is-empty");
+      amount.title = t().askPrice;
+    }
+    price.append(tier, amount);
+
+    body.append(type, name, grape, note, specs, price);
     card.append(photo, body);
     return card;
   }
@@ -176,9 +209,38 @@
     }
 
     const legal = el("span", "foot-legal");
-    legal.textContent = t().legal;
+    const pricing = STATE.data.pricing;
+    const note = pricing && (lkey() === "en" ? pricing.note_en : pricing.note_gr);
+    legal.textContent = note ? `${note}  ·  ${t().legal}` : t().legal;
 
     foot.append(socials, legal);
+  }
+
+  /* ---------- Retail / wholesale toggle ---------- */
+  function buildModeToggle() {
+    const host = $("#pricing-toggle");
+    host.innerHTML = "";
+    if (!wholesaleOn()) { host.hidden = true; return; }
+    host.hidden = false;
+    const seg = el("div", "pm-seg");
+    [["retail", t().retail], ["wholesale", t().wholesale]].forEach(([m, label]) => {
+      const b = el("button", "pm-btn");
+      b.type = "button";
+      b.dataset.mode = m;
+      b.textContent = label;
+      b.setAttribute("aria-pressed", String(STATE.mode === m));
+      b.classList.toggle("on", STATE.mode === m);
+      b.addEventListener("click", () => setMode(m));
+      seg.appendChild(b);
+    });
+    host.appendChild(seg);
+  }
+
+  function setMode(m) {
+    STATE.mode = m;
+    try { localStorage.setItem(MODE_KEY, m); } catch { /* ignore */ }
+    buildModeToggle();
+    renderGrid();
   }
 
   /* ---------- Language toggle ---------- */
@@ -186,6 +248,7 @@
     STATE.lang = lang;
     try { localStorage.setItem(KEY, lang); } catch { /* ignore */ }
     applyStatic();
+    buildModeToggle();
     buildTabs();
     renderGrid();
     renderFooter();
@@ -216,7 +279,9 @@
       $("#app").innerHTML = `<p class="empty">⚠️ Could not load the catalogue. Please refresh.</p>`;
       return;
     }
+    if (!wholesaleOn()) STATE.mode = "retail";
     applyStatic();
+    buildModeToggle();
     buildTabs();
     renderGrid();
     renderFooter();
