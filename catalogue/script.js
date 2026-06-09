@@ -51,11 +51,9 @@
   const t = () => LABELS[lkey()];
   const pick = (obj, base) => obj[`${base}_${lkey()}`] ?? obj[`${base}_gr`] ?? "";
 
-  const currency = () => (STATE.data && STATE.data.pricing && STATE.data.pricing.currency) || "EUR";
-  const fmtPrice = (n) =>
-    n == null ? null
-      : new Intl.NumberFormat(lkey() === "en" ? "en-IE" : "el-GR",
-          { style: "currency", currency: currency() }).format(n);
+  // Always format with a DOT decimal and 2 places, in both languages, for
+  // consistency: €16.50, €11.95, €25.00.
+  const fmtPrice = (n) => (n == null ? null : "€" + Number(n).toFixed(2));
   const pickPrice = (w) =>
     (STATE.mode === "wholesale" ? w.price_wholesale : w.price_retail) ?? null;
   const wholesaleOn = () => !!(STATE.data && STATE.data.pricing && STATE.data.pricing.show_wholesale);

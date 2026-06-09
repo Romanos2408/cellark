@@ -14,7 +14,7 @@
   --muted:      #b3aa9c;
   --muted-dim:  #8d8576;
   --hair:       rgba(191,167,115,.18);
-  --serif: "EB Garamond", Georgia, "Times New Roman", serif;
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
   --sans:  "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --wrap: 1080px;
   --ease: cubic-bezier(.22,.61,.36,1);
@@ -420,15 +420,20 @@ body {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 560px) {
-  .grid { grid-template-columns: repeat(2, 1fr); gap: 11px; }
-  .card-body { padding: 11px 12px 13px; }
-  .card-name { font-size: 1.15rem; }
+  /* Keep THREE columns on phones — compact, bottle-focused tiles
+     (tap a bottle for the full detail card). */
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .card-body { padding: 9px 9px 11px; gap: 4px; }
+  .card-badge { font-size: .52rem; padding: 2px 6px; top: 7px; left: 7px; }
+  .card-type { font-size: .55rem; letter-spacing: .05em; }
+  .card-name { font-size: .85rem; min-height: 2.05em; }
+  .card-grape { display: none; }
   .card-note { display: none; }
+  .card-specs { display: none; }
+  .card-price { padding-top: 7px; }
+  .card-price-tier { font-size: .5rem; }
+  .card-price-amount { font-size: .9rem; }
   .hero-sub { font-size: .95rem; }
-}
-@media (max-width: 360px) {
-  .grid { grid-template-columns: 1fr; }
-  .card-note { display: block; }
 }
 
 /* ---------- Lightbox (full-scale bottle zoom) ---------- */
