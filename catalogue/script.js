@@ -13,7 +13,7 @@
     return TRADE_PARAMS.some((k) => p.has(k));
   };
   const STATE = {
-    lang: (() => { try { return localStorage.getItem(KEY) || "gr"; } catch { return "gr"; } })(),
+    lang: (() => { try { return localStorage.getItem(KEY) || "en"; } catch { return "en"; } })(),
     mode: "retail", // resolved in init() from the URL (and the show_wholesale switch)
     data: null,
     cat: "all",
@@ -120,6 +120,15 @@
       `<source srcset="assets/wines/${esc(w.slug)}.avif" type="image/avif">` +
       `<img src="assets/wines/${esc(w.slug)}.png" alt="${esc(w.name)}" loading="lazy" decoding="async">`;
     photo.append(badge, pic);
+
+    // Tap/click the bottle → full-scale zoom
+    photo.setAttribute("role", "button");
+    photo.setAttribute("tabindex", "0");
+    photo.setAttribute("aria-label", w.name);
+    photo.addEventListener("click", () => openLightbox(w));
+    photo.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLightbox(w); }
+    });
 
     const body = el("div", "card-body");
 
@@ -259,10 +268,45 @@
     });
   }
 
+  /* ---------- Lightbox (full-scale bottle zoom) ---------- */
+  function openLightbox(w) {
+    const lb = $("#lightbox");
+    const img = $("#lightbox-img");
+    const cap = $("#lightbox-cap");
+    img.src = `assets/wines/${w.slug}.png`;
+    img.alt = w.name;
+    const price = fmtPrice(pickPrice(w));
+    const tier = STATE.mode === "wholesale" ? t().wholesale : t().retail;
+    cap.innerHTML =
+      `<span class="lb-meta">${esc(pick(w, "type"))}</span>` +
+      `<span class="lb-name">${esc(w.name)}</span>` +
+      (price ? `<span class="lb-price">${esc(tier)} · ${esc(price)}</span>` : "");
+    lb.setAttribute("aria-label", w.name);
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+    $("#lightbox-close").focus();
+  }
+
+  function closeLightbox() {
+    const lb = $("#lightbox");
+    if (lb.hidden) return;
+    lb.hidden = true;
+    $("#lightbox-img").src = "";
+    document.body.style.overflow = "";
+  }
+
+  function bindLightbox() {
+    const lb = $("#lightbox");
+    $("#lightbox-close").addEventListener("click", closeLightbox);
+    lb.addEventListener("click", (e) => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+  }
+
   /* ---------- Boot ---------- */
   async function init() {
     bindLang();
     bindSearch();
+    bindLightbox();
     try {
       const res = await fetch("wines.json", { cache: "no-cache" });
       if (!res.ok) throw new Error("HTTP " + res.status);
