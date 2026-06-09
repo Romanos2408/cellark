@@ -268,19 +268,38 @@
     });
   }
 
-  /* ---------- Lightbox (full-scale bottle zoom) ---------- */
+  /* ---------- Detail card (zoom + full info) ---------- */
   function openLightbox(w) {
     const lb = $("#lightbox");
-    const img = $("#lightbox-img");
-    const cap = $("#lightbox-cap");
-    img.src = `assets/wines/${w.slug}.png`;
-    img.alt = w.name;
+    const card = $("#detail-card");
     const price = fmtPrice(pickPrice(w));
     const tier = STATE.mode === "wholesale" ? t().wholesale : t().retail;
-    cap.innerHTML =
-      `<span class="lb-meta">${esc(pick(w, "type"))}</span>` +
-      `<span class="lb-name">${esc(w.name)}</span>` +
-      (price ? `<span class="lb-price">${esc(tier)} · ${esc(price)}</span>` : "");
+    const badge = pick(w, "sweet");
+    const specs = [w.abv, pick(w, "serve")]
+      .filter(Boolean)
+      .map((s) => `<span class="spec">${esc(s)}</span>`)
+      .join("");
+
+    card.innerHTML =
+      `<div class="detail-media">` +
+        (badge ? `<span class="card-badge">${esc(badge)}</span>` : "") +
+        `<picture>` +
+          `<source srcset="assets/wines/${esc(w.slug)}.avif" type="image/avif">` +
+          `<img class="detail-img" src="assets/wines/${esc(w.slug)}.png" alt="${esc(w.name)}">` +
+        `</picture>` +
+      `</div>` +
+      `<div class="detail-info">` +
+        `<span class="detail-type">${esc(pick(w, "type"))}</span>` +
+        `<h2 class="detail-name">${esc(w.name)}</h2>` +
+        `<p class="detail-grape">${esc(w.grape)}</p>` +
+        `<p class="detail-note">${esc(pick(w, "note"))}</p>` +
+        `<div class="detail-specs">${specs}</div>` +
+        `<div class="detail-price">` +
+          `<span class="detail-price-tier">${esc(tier)}</span>` +
+          `<span class="detail-price-amount${price ? "" : " is-empty"}">${esc(price || t().priceTBD)}</span>` +
+        `</div>` +
+      `</div>`;
+
     lb.setAttribute("aria-label", w.name);
     lb.hidden = false;
     document.body.style.overflow = "hidden";
@@ -291,7 +310,7 @@
     const lb = $("#lightbox");
     if (lb.hidden) return;
     lb.hidden = true;
-    $("#lightbox-img").src = "";
+    $("#detail-card").innerHTML = "";
     document.body.style.overflow = "";
   }
 

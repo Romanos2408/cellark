@@ -13,7 +13,7 @@
   <!-- EB Garamond covers BOTH Latin and Greek with one harmonised design, so the
        title looks the same in EN and EL (Cormorant Garamond has no Greek glyphs). -->
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=6" />
 </head>
 <body>
   <header class="hero">
@@ -49,17 +49,14 @@
 
   <footer class="foot" id="foot"></footer>
 
-  <!-- Full-scale bottle zoom -->
+  <!-- Bottle zoom + full detail card -->
   <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="">
     <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
-    <figure class="lightbox-fig">
-      <img class="lightbox-img" id="lightbox-img" alt="" />
-      <figcaption class="lightbox-cap" id="lightbox-cap"></figcaption>
-    </figure>
+    <div class="detail-card" id="detail-card"></div>
   </div>
 
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>
