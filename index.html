@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cellar·K — Επιλεγμένα κρασιά της Σικελίας</title>
-<meta name="description" content="Cellar·K. Επιλεγμένα κρασιά από τη Σικελία στην Ελλάδα, σε συνεργασία με το ιστορικό οινοποιείο Cantine Colosi. Κρασιά με χαρακτήρα, καταγωγή και ιστορία." />
+<title data-gr="Cellar·K — Επιλεγμένα κρασιά της Σικελίας" data-en="Cellar·K — Selected wines of Sicily">Cellar·K — Επιλεγμένα κρασιά της Σικελίας</title>
+<meta name="description" data-gr="Cellar·K. Επιλεγμένα κρασιά από τη Σικελία στην Ελλάδα, σε συνεργασία με το ιστορικό οινοποιείο Cantine Colosi. Κρασιά με χαρακτήρα, καταγωγή και ιστορία." data-en="Cellar·K. Selected wines from Sicily, brought to Greece in partnership with the historic Cantine Colosi winery. Wines with character, origin and story." content="Cellar·K. Επιλεγμένα κρασιά από τη Σικελία στην Ελλάδα, σε συνεργασία με το ιστορικό οινοποιείο Cantine Colosi. Κρασιά με χαρακτήρα, καταγωγή και ιστορία." />
 <link rel="canonical" href="https://romanos2408.github.io/cellark/" />
 <meta name="theme-color" content="#141414" />
 
@@ -13,6 +13,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 <link rel="manifest" href="site.webmanifest" />
+
+<!-- Preload the LCP hero (AVIF). `type` lets non-AVIF browsers skip it and fall back to the JPG. -->
+<link rel="preload" as="image" href="assets/photos/hero-vineyard.avif" type="image/avif" fetchpriority="high" />
 
 <!-- Open Graph / social sharing -->
 <meta property="og:type" content="website" />
@@ -63,7 +66,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..600&family=Inter:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap&subset=greek,latin" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/styles.css?v=4">
+<link rel="stylesheet" href="assets/styles.css?v=5">
 
 <!-- Motion libs hosted locally (no external CDN dependency at runtime) -->
 <script src="assets/vendor/gsap.min.js"></script>
@@ -74,7 +77,9 @@
   /* ---------- HERO (left-aligned, editorial) ---------- */
   .hero{ position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; }
   .hero-bg{ position:absolute; inset:-12% 0; z-index:0;
-    background:url("assets/photos/hero-vineyard.jpg") center/cover no-repeat; }
+    background:url("assets/photos/hero-vineyard.jpg") center/cover no-repeat; /* fallback */
+    background-image:image-set(url("assets/photos/hero-vineyard.avif") type("image/avif"),
+                               url("assets/photos/hero-vineyard.jpg")  type("image/jpeg")); }
   /* scrims: dark on the left for text legibility + a foot fade into the page */
   .hero-scrim{ position:absolute; inset:0; z-index:1; pointer-events:none;
     background:
@@ -113,7 +118,11 @@
   .story-bg{ position:absolute; inset:0; z-index:0; pointer-events:none;
     background:
       linear-gradient(180deg, rgba(20,20,18,.92), rgba(27,19,16,.74) 50%, rgba(20,20,18,.95)),
-      url("assets/photos/story-cellar.jpg") center/cover no-repeat;
+      url("assets/photos/story-cellar.jpg") center/cover no-repeat; /* fallback */
+    background-image:
+      linear-gradient(180deg, rgba(20,20,18,.92), rgba(27,19,16,.74) 50%, rgba(20,20,18,.95)),
+      image-set(url("assets/photos/story-cellar.avif") type("image/avif"),
+                url("assets/photos/story-cellar.jpg")  type("image/jpeg"));
     opacity:.5; }
   .story-grid{ position:relative; z-index:1; }
   .story-grid{ width:100%; max-width:1200px; margin:0 auto; padding:0 clamp(1.2rem,5vw,4rem);
@@ -145,7 +154,9 @@
   .interlude{ position:relative; overflow:hidden; padding-block:clamp(8rem,22vh,15rem);
     background:var(--ink); }
   .interlude-bg{ position:absolute; inset:-8% 0; z-index:0;
-    background:url("assets/photos/sunset-glasses.jpg") center 44%/cover no-repeat; }
+    background:url("assets/photos/sunset-glasses.jpg") center 44%/cover no-repeat; /* fallback */
+    background-image:image-set(url("assets/photos/sunset-glasses.avif") type("image/avif"),
+                               url("assets/photos/sunset-glasses.jpg")  type("image/jpeg")); }
   .interlude-scrim{ position:absolute; inset:0; z-index:1; pointer-events:none;
     background:
       linear-gradient(180deg, rgba(20,20,18,.82) 0%, rgba(20,20,18,.16) 22%, rgba(20,20,18,.10) 58%, rgba(28,12,10,.66) 86%, rgba(78,0,0,.92) 100%),
@@ -163,6 +174,8 @@
   /* faint slate texture so the dark isn't flat — heavily knocked back */
   .collection::before{ content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
     background:url("assets/photos/tex-slate.jpg") center/cover no-repeat; opacity:.10;
+    background-image:image-set(url("assets/photos/tex-slate.avif") type("image/avif"),
+                               url("assets/photos/tex-slate.jpg")  type("image/jpeg"));
     -webkit-mask:linear-gradient(180deg,transparent,#000 22%,#000 80%,transparent);
             mask:linear-gradient(180deg,transparent,#000 22%,#000 80%,transparent); }
   .collection .wrap{ position:relative; z-index:1; }
@@ -220,7 +233,7 @@
 <div class="progress" id="progress"></div>
 
 <nav>
-  <a class="brand" href="#top" aria-label="Cellar·K — αρχική">
+  <a class="brand" href="#top" aria-label="Cellar·K — αρχική" data-aria-gr="Cellar·K — αρχική" data-aria-en="Cellar·K — home">
     <i class="brand-mark" aria-hidden="true"></i>
     <span>Cellar·K</span>
   </a>
@@ -231,7 +244,7 @@
     <a class="lang" href="#" role="button" aria-label="Language">
       <span data-lang="gr">EL</span><span>·</span><span data-lang="en">EN</span>
     </a>
-    <button class="cart-btn" id="cartBtn" type="button" aria-label="Καλάθι">
+    <button class="cart-btn" id="cartBtn" type="button" aria-label="Καλάθι" data-aria-gr="Καλάθι" data-aria-en="Basket">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/>
       </svg>
@@ -261,12 +274,24 @@
     <div class="story-bg"></div>
     <div class="story-grid">
       <div class="bottle-stage">
-        <img class="bottle-photo" data-morph src="assets/wines/guardiano-del-faro.png"
-             alt="Guardiano del Faro — Cantine Colosi" />
-        <img class="bottle-photo" data-morph src="assets/wines/salina-bianco.png"
-             alt="Salina Bianco — Cantine Colosi" />
-        <img class="bottle-photo" data-morph src="assets/wines/nero-davola.png"
-             alt="Nero d'Avola — Cantine Colosi" />
+        <picture>
+          <source srcset="assets/wines/guardiano-del-faro.avif" type="image/avif" />
+          <img class="bottle-photo" data-morph src="assets/wines/guardiano-del-faro.png"
+               width="459" height="1536" decoding="async"
+               alt="Guardiano del Faro — Cantine Colosi" />
+        </picture>
+        <picture>
+          <source srcset="assets/wines/salina-bianco.avif" type="image/avif" />
+          <img class="bottle-photo" data-morph src="assets/wines/salina-bianco.png"
+               width="459" height="1536" loading="lazy" decoding="async"
+               alt="Salina Bianco — Cantine Colosi" />
+        </picture>
+        <picture>
+          <source srcset="assets/wines/nero-davola.avif" type="image/avif" />
+          <img class="bottle-photo" data-morph src="assets/wines/nero-davola.png"
+               width="459" height="1536" loading="lazy" decoding="async"
+               alt="Nero d'Avola — Cantine Colosi" />
+        </picture>
       </div>
       <div class="chapters">
         <article class="chapter" data-ch>
@@ -331,10 +356,10 @@
 
 <!-- ============ BASKET DRAWER ============ -->
 <div class="cart-overlay" id="cartOverlay" hidden></div>
-<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Καλάθι" aria-hidden="true">
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Καλάθι" data-aria-gr="Καλάθι" data-aria-en="Basket" aria-hidden="true">
   <div class="cart-head">
     <h2 id="cartTitle">Το καλάθι σου</h2>
-    <button class="cart-close" id="cartClose" type="button" aria-label="Κλείσιμο">×</button>
+    <button class="cart-close" id="cartClose" type="button" aria-label="Κλείσιμο" data-aria-gr="Κλείσιμο" data-aria-en="Close">×</button>
   </div>
   <div class="cart-body">
     <div class="cart-items" id="cartItems"></div>
@@ -380,16 +405,19 @@
 <!-- ============ SCRIPTS ============ -->
 <script type="module">
   import { initMotion } from './assets/motion.js';
-  import { initI18n } from './assets/i18n.js';
+  import { initI18n } from './assets/i18n.js?v=2';
   import { initAgeGate } from './assets/age-gate.js';
-  import { initCart } from './assets/cart.js';
+  import { initCart } from './assets/cart.js?v=2';
   import { WINES } from './assets/wines.js';
 
   const cards = document.getElementById('cards');
   cards.innerHTML = WINES.map((w) => `
     <article class="card reveal" data-card>
       <div class="bottle-wrap">
-        <img loading="lazy" src="assets/wines/${w.slug}.png" alt="${w.name} — Cantine Colosi" />
+        <picture>
+          <source srcset="assets/wines/${w.slug}.avif" type="image/avif" />
+          <img loading="lazy" decoding="async" width="459" height="1536" src="assets/wines/${w.slug}.png" alt="${w.name} — Cantine Colosi" />
+        </picture>
       </div>
       <div class="card-body">
         <div class="vint" data-gr="${w.type_gr}" data-en="${w.type_en}">${w.type_gr}</div>

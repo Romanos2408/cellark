@@ -66,6 +66,9 @@ body{
 }
 
 img{ max-width:100%; display:block; }
+/* <picture> is a layout-transparent wrapper around its <img>, so the existing
+   img selectors (.bottle-photo grid-area, .wine-shot img, etc.) keep working. */
+picture{ display:contents; }
 a{ color:inherit; text-decoration:none; }
 
 h1,h2,h3,.display{

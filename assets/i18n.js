@@ -24,9 +24,20 @@ function write(lang) {
 }
 
 function apply(lang) {
+  // Visible text — including the <head> <title> (setting its textContent
+  // updates document.title), so the browser tab localizes too.
   document.querySelectorAll('[data-gr]').forEach((el) => {
     const txt = el.getAttribute('data-' + lang);
     if (txt != null) el.textContent = txt;
+  });
+  // Attribute-only strings that have no text node: meta description + aria-labels.
+  document.querySelectorAll('meta[data-gr][name="description"]').forEach((m) => {
+    const txt = m.getAttribute('data-' + lang);
+    if (txt != null) m.setAttribute('content', txt);
+  });
+  document.querySelectorAll('[data-aria-gr]').forEach((el) => {
+    const txt = el.getAttribute('data-aria-' + lang);
+    if (txt != null) el.setAttribute('aria-label', txt);
   });
   document.documentElement.lang = (lang === 'gr') ? 'el' : 'en';
   document.querySelectorAll('.lang [data-lang]').forEach((s) => {

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cellar·K — Ο Κατάλογος · Επιλεγμένα κρασιά της Σικελίας</title>
-<meta name="description" content="Ο πλήρης κατάλογος της Cellar·K: δεκατρείς ετικέτες της Cantine Colosi — λευκά, ροζέ, ερυθρά, αφρώδη και γλυκά κρασιά από τη Σαλίνα και τη Σικελία, με αναλυτικά χαρακτηριστικά." />
+<title data-gr="Cellar·K — Ο Κατάλογος · Επιλεγμένα κρασιά της Σικελίας" data-en="Cellar·K — The Catalogue · Selected wines of Sicily">Cellar·K — Ο Κατάλογος · Επιλεγμένα κρασιά της Σικελίας</title>
+<meta name="description" data-gr="Ο πλήρης κατάλογος της Cellar·K: δεκατρείς ετικέτες της Cantine Colosi — λευκά, ροζέ, ερυθρά, αφρώδη και γλυκά κρασιά από τη Σαλίνα και τη Σικελία, με αναλυτικά χαρακτηριστικά." data-en="The full Cellar·K catalogue: thirteen Cantine Colosi labels — whites, rosés, reds, sparkling and sweet wines from Salina and Sicily, with full specifications." content="Ο πλήρης κατάλογος της Cellar·K: δεκατρείς ετικέτες της Cantine Colosi — λευκά, ροζέ, ερυθρά, αφρώδη και γλυκά κρασιά από τη Σαλίνα και τη Σικελία, με αναλυτικά χαρακτηριστικά." />
 <link rel="canonical" href="https://romanos2408.github.io/cellark/catalog.html" />
 <meta name="theme-color" content="#141414" />
 
@@ -13,6 +13,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 <link rel="manifest" href="site.webmanifest" />
+
+<!-- Preload the LCP hero (AVIF). `type` lets non-AVIF browsers skip it and fall back to the JPG. -->
+<link rel="preload" as="image" href="assets/photos/cellar-lantern.avif" type="image/avif" fetchpriority="high" />
 
 <!-- Open Graph / social sharing -->
 <meta property="og:type" content="website" />
@@ -37,7 +40,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..600&family=Inter:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap&subset=greek,latin" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/styles.css?v=4">
+<link rel="stylesheet" href="assets/styles.css?v=5">
 
 <!-- Motion libs hosted locally (no external CDN dependency at runtime) -->
 <script src="assets/vendor/gsap.min.js"></script>
@@ -49,7 +52,9 @@
   .cat-hero{ position:relative; min-height:56vh; display:flex; align-items:flex-end; overflow:hidden;
     padding-bottom:clamp(2.6rem,6vh,4.6rem); }
   .cat-hero-bg{ position:absolute; inset:-8% 0; z-index:0;
-    background:url("assets/photos/cellar-lantern.jpg") center/cover no-repeat; }
+    background:url("assets/photos/cellar-lantern.jpg") center/cover no-repeat; /* fallback */
+    background-image:image-set(url("assets/photos/cellar-lantern.avif") type("image/avif"),
+                               url("assets/photos/cellar-lantern.jpg")  type("image/jpeg")); }
   .cat-hero-scrim{ position:absolute; inset:0; z-index:1; pointer-events:none;
     background:
       linear-gradient(180deg, rgba(12,9,8,.62) 0%, rgba(12,9,8,.30) 36%, rgba(20,20,18,.94) 100%),
@@ -82,6 +87,8 @@
   .catalog{ position:relative; background:var(--ink); overflow:hidden; }
   .catalog::before{ content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
     background:url("assets/photos/tex-slate.jpg") center/cover no-repeat; opacity:.08;
+    background-image:image-set(url("assets/photos/tex-slate.avif") type("image/avif"),
+                               url("assets/photos/tex-slate.jpg")  type("image/jpeg"));
     -webkit-mask:linear-gradient(180deg,transparent,#000 8%,#000 92%,transparent);
             mask:linear-gradient(180deg,transparent,#000 8%,#000 92%,transparent); }
   .catalog .wrap{ position:relative; z-index:1; }
@@ -165,7 +172,7 @@
 <div class="progress" id="progress"></div>
 
 <nav>
-  <a class="brand" href="index.html" aria-label="Cellar·K — αρχική">
+  <a class="brand" href="index.html" aria-label="Cellar·K — αρχική" data-aria-gr="Cellar·K — αρχική" data-aria-en="Cellar·K — home">
     <i class="brand-mark" aria-hidden="true"></i>
     <span>Cellar·K</span>
   </a>
@@ -176,7 +183,7 @@
     <a class="lang" href="#" role="button" aria-label="Language">
       <span data-lang="gr">EL</span><span>·</span><span data-lang="en">EN</span>
     </a>
-    <button class="cart-btn" id="cartBtn" type="button" aria-label="Καλάθι">
+    <button class="cart-btn" id="cartBtn" type="button" aria-label="Καλάθι" data-aria-gr="Καλάθι" data-aria-en="Basket">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/>
       </svg>
@@ -197,9 +204,9 @@
 </header>
 
 <!-- ============ STICKY CATEGORY NAV ============ -->
-<nav class="cat-nav" aria-label="Κατηγορίες">
+<nav class="cat-nav" aria-label="Κατηγορίες" data-aria-gr="Κατηγορίες" data-aria-en="Categories">
   <div class="wrap">
-    <div class="cat-tabs" id="catNav" role="tablist" aria-label="Κατηγορίες κρασιών"></div>
+    <div class="cat-tabs" id="catNav" role="tablist" aria-label="Κατηγορίες κρασιών" data-aria-gr="Κατηγορίες κρασιών" data-aria-en="Wine categories"></div>
   </div>
 </nav>
 
@@ -223,10 +230,10 @@
 
 <!-- ============ BASKET DRAWER ============ -->
 <div class="cart-overlay" id="cartOverlay" hidden></div>
-<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Καλάθι" aria-hidden="true">
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Καλάθι" data-aria-gr="Καλάθι" data-aria-en="Basket" aria-hidden="true">
   <div class="cart-head">
     <h2 id="cartTitle">Το καλάθι σου</h2>
-    <button class="cart-close" id="cartClose" type="button" aria-label="Κλείσιμο">×</button>
+    <button class="cart-close" id="cartClose" type="button" aria-label="Κλείσιμο" data-aria-gr="Κλείσιμο" data-aria-en="Close">×</button>
   </div>
   <div class="cart-body">
     <div class="cart-items" id="cartItems"></div>
@@ -272,9 +279,9 @@
 <!-- ============ SCRIPTS ============ -->
 <script type="module">
   import { initMotion } from './assets/motion.js';
-  import { initI18n } from './assets/i18n.js';
+  import { initI18n } from './assets/i18n.js?v=2';
   import { initAgeGate } from './assets/age-gate.js';
-  import { initCart } from './assets/cart.js';
+  import { initCart } from './assets/cart.js?v=2';
   import { WINES } from './assets/wines.js';
 
   /* category order + bilingual labels */
@@ -328,7 +335,10 @@
     return `
     <article class="wine-row${flip}" id="${w.slug}">
       <div class="wine-shot">
-        <img loading="lazy" src="assets/wines/${w.slug}.png" alt="${w.name} — Cantine Colosi" />
+        <picture>
+          <source srcset="assets/wines/${w.slug}.avif" type="image/avif" />
+          <img loading="lazy" decoding="async" width="459" height="1536" src="assets/wines/${w.slug}.png" alt="${w.name} — Cantine Colosi" />
+        </picture>
       </div>
       <div class="wine-info">
         <p class="appel" data-gr="${w.type_gr}" data-en="${w.type_en}">${w.type_gr}</p>

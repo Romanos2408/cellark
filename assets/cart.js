@@ -78,7 +78,10 @@ function renderItems() {
   els.items.innerHTML = c.map((i) => {
     const w = wineOf(i.slug); if (!w) return '';
     return `<div class="cart-line" data-slug="${i.slug}">
-      <img src="assets/wines/${i.slug}.png" alt="" loading="lazy" />
+      <picture>
+        <source srcset="assets/wines/${i.slug}.avif" type="image/avif" />
+        <img src="assets/wines/${i.slug}.png" alt="" loading="lazy" decoding="async" />
+      </picture>
       <div class="cart-line-info">
         <p class="cart-line-name">${esc(w.name)}</p>
         <div class="qty mini" data-slug="${i.slug}">
