@@ -106,6 +106,26 @@ body {
   font-size: 1.02rem;
 }
 
+/* Which price list this URL shows (retail vs wholesale) — fixed by the URL */
+.hero-mode {
+  display: inline-block;
+  margin: 16px 0 0;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--hair);
+  color: var(--muted-dim);
+}
+.hero-mode[hidden] { display: none; }
+.hero-mode.is-trade {
+  color: var(--ink);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
 /* ---------- Controls (search + tabs) ---------- */
 .controls {
   position: sticky;
@@ -117,43 +137,10 @@ body {
   border-bottom: 1px solid var(--hair);
   margin-top: 26px;
 }
-/* Retail / wholesale segmented toggle */
-.pricing-toggle {
-  max-width: var(--wrap);
-  margin: 0 auto;
-  padding: 12px 20px 0;
-  display: flex;
-  justify-content: flex-end;
-}
-.pricing-toggle[hidden] { display: none; }
-.pm-seg {
-  display: inline-flex;
-  border: 1px solid var(--hair);
-  border-radius: 999px;
-  overflow: hidden;
-  background: var(--ink-soft);
-}
-.pm-btn {
-  appearance: none;
-  background: transparent;
-  border: 0;
-  color: var(--muted);
-  font-family: var(--sans);
-  font-size: .74rem;
-  font-weight: 600;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  padding: 7px 16px;
-  cursor: pointer;
-  transition: background .2s var(--ease), color .2s var(--ease);
-}
-.pm-btn.on { background: var(--gold); color: var(--ink); }
-.pm-btn:not(.on):hover { color: var(--bone); }
-
 .search-wrap {
   max-width: var(--wrap);
   margin: 0 auto;
-  padding: 10px 20px 0;
+  padding: 12px 20px 0;
   position: relative;
   display: flex;
   align-items: center;

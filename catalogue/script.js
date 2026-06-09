@@ -3,10 +3,18 @@
 
   /* ---------- State ---------- */
   const KEY = "cellark.catalogue.lang";
-  const MODE_KEY = "cellark.catalogue.mode";
+  // The price tier (retail vs wholesale) is fixed by the URL — NOT a button —
+  // so each audience gets its own link / QR code and a retail visitor can never
+  // switch to the trade prices. Wholesale URL: add ?trade (also ?wholesale,
+  // ?xondriki, ?b2b). Retail is the plain URL.
+  const TRADE_PARAMS = ["trade", "wholesale", "xondriki", "b2b"];
+  const urlWantsTrade = () => {
+    const p = new URLSearchParams(location.search);
+    return TRADE_PARAMS.some((k) => p.has(k));
+  };
   const STATE = {
     lang: (() => { try { return localStorage.getItem(KEY) || "gr"; } catch { return "gr"; } })(),
-    mode: (() => { try { return localStorage.getItem(MODE_KEY) || "retail"; } catch { return "retail"; } })(),
+    mode: "retail", // resolved in init() from the URL (and the show_wholesale switch)
     data: null,
     cat: "all",
     query: "",
@@ -216,31 +224,16 @@
     foot.append(socials, legal);
   }
 
-  /* ---------- Retail / wholesale toggle ---------- */
-  function buildModeToggle() {
-    const host = $("#pricing-toggle");
-    host.innerHTML = "";
-    if (!wholesaleOn()) { host.hidden = true; return; }
+  /* ---------- Mode badge (which price list this URL is) ---------- */
+  function renderModeBadge() {
+    const host = $("#hero-mode");
+    if (!host) return;
+    const isTrade = STATE.mode === "wholesale";
+    host.textContent = isTrade
+      ? (lkey() === "en" ? "Wholesale price list" : "Τιμοκατάλογος χονδρικής")
+      : (lkey() === "en" ? "Retail price list" : "Τιμοκατάλογος λιανικής");
+    host.classList.toggle("is-trade", isTrade);
     host.hidden = false;
-    const seg = el("div", "pm-seg");
-    [["retail", t().retail], ["wholesale", t().wholesale]].forEach(([m, label]) => {
-      const b = el("button", "pm-btn");
-      b.type = "button";
-      b.dataset.mode = m;
-      b.textContent = label;
-      b.setAttribute("aria-pressed", String(STATE.mode === m));
-      b.classList.toggle("on", STATE.mode === m);
-      b.addEventListener("click", () => setMode(m));
-      seg.appendChild(b);
-    });
-    host.appendChild(seg);
-  }
-
-  function setMode(m) {
-    STATE.mode = m;
-    try { localStorage.setItem(MODE_KEY, m); } catch { /* ignore */ }
-    buildModeToggle();
-    renderGrid();
   }
 
   /* ---------- Language toggle ---------- */
@@ -248,7 +241,7 @@
     STATE.lang = lang;
     try { localStorage.setItem(KEY, lang); } catch { /* ignore */ }
     applyStatic();
-    buildModeToggle();
+    renderModeBadge();
     buildTabs();
     renderGrid();
     renderFooter();
@@ -279,9 +272,9 @@
       $("#app").innerHTML = `<p class="empty">⚠️ Could not load the catalogue. Please refresh.</p>`;
       return;
     }
-    if (!wholesaleOn()) STATE.mode = "retail";
+    STATE.mode = (wholesaleOn() && urlWantsTrade()) ? "wholesale" : "retail";
     applyStatic();
-    buildModeToggle();
+    renderModeBadge();
     buildTabs();
     renderGrid();
     renderFooter();
