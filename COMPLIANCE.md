@@ -67,8 +67,9 @@ Required pages: Privacy (Απορρήτου), Terms of Sale (Όροι), Returns/
   catalogue to keep the preview out of search until launch — **REMOVE the noindex tags when going
   live on `cellark.gr`** (each is marked with a `LAUNCH` HTML comment). Public **wholesale prices
   removed** from `catalogue/wines.json` (see PLAN 4.6).
-- ⚠️ The QR catalogue (`catalogue/`) still loads **Google Fonts** (Playfair + Inter) — the one
-  remaining third-party request; self-host later for full parity (no CSP there yet for that reason).
+- ✅ **2026-06-14:** the QR catalogue (`catalogue/`) fonts are now **self-hosted too** (Playfair +
+  Inter → `catalogue/assets/fonts/`), Google Fonts removed, and a **CSP added** there. The entire
+  site — main pages **and** catalogue — now makes **ZERO third-party requests**.
 
 ## 7. ⚠️ Client / lawyer MUST verify (do NOT mark "done")
 - [ ] Client is **licensed** to sell/ship wine to consumers in Greece.
