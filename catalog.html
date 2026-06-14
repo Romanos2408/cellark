@@ -385,7 +385,8 @@
         </div>
       </section>`;
   });
-  navEl.innerHTML = navHtml;
+  const allTab = `<button type="button" role="tab" id="tab-all" data-cat="all" aria-controls="catSections" aria-selected="false" tabindex="-1" data-gr="Όλα" data-en="All">Όλα</button>`;
+  navEl.innerHTML = allTab + navHtml;
   secEl.innerHTML = secHtml;
 
   /* tab filter — show one category at a time (accessible tablist) */
@@ -398,7 +399,7 @@
       t.setAttribute('aria-selected', on ? 'true' : 'false');
       t.tabIndex = on ? 0 : -1;          // roving tabindex
     });
-    sections.forEach((s) => s.classList.toggle('is-active', s.id === `cat-${key}`));
+    sections.forEach((s) => s.classList.toggle('is-active', key === 'all' || s.id === `cat-${key}`));
     if (scroll) {
       const navH = document.querySelector('nav').offsetHeight + navEl.parentElement.offsetHeight;
       window.scrollTo({ top: secEl.offsetTop - navH, behavior: 'smooth' });
