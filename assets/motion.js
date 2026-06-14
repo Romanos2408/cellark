@@ -1,150 +1,153 @@
 /**
- * Cellar·K — shared motion engine (M1)
+ * Cellar·K — shared motion engine
  *
- * One Lenis instance + GSAP/ScrollTrigger, wired to generic opt-in attributes
- * so every page gets the same buttery scroll without re-implementing it.
+ * MIGRATION IN PROGRESS (Phase 1 → vanilla). Now VANILLA, no libraries:
+ *   • on-scroll reveals  ([data-hero] staggered on load, [data-up] on enter)
+ *   • nav condense-on-scroll + scroll progress bar + scroll-cue fade
+ *     (one rAF-throttled scroll listener)
+ *   • prefers-reduced-motion: everything shown instantly, no observers
  *
- * Opt-in attributes (put them in your HTML):
- *   [data-hero]            staggered fade-and-rise on load (hero title block)
- *   [data-up]              fade-and-rise reveal when it scrolls into view
- *   [data-parallax="0.25"] element drifts; value = strength (background art)
- *   .layer[data-depth]     per-layer parallax inside a .interlude section
+ * Fully vanilla — NO motion libraries. Reveals (incl. collection cards via [data-card]),
+ * nav UI, background parallax, and smooth scroll (native CSS) are all library-free.
+ * GSAP + Lenis have been fully removed (PLAN 1.6).
  *
- * Usage:
- *   import { initMotion } from './assets/motion.js';
- *   const { gsap, ScrollTrigger, reduce } = initMotion();
- *   // build page-specific pinned timelines against the returned gsap.
- *
- * Reduced motion: forces all .reveal/[data-hero]/[data-up] visible and skips
- * engine init. Page-specific timelines must guard on the returned `reduce`.
+ * Opt-in attributes (in the HTML):
+ *   [data-hero]             staggered fade-rise on load (hero block)
+ *   [data-up]               fade-rise reveal when scrolled into view
+ *   [data-parallax="0.18"]  background drifts slower than scroll (vanilla)
+ *   .reveal                 base hidden→shown primitive in styles.css (.is-in plays it)
  */
 
-/* Libraries are loaded locally as classic <script> tags (see each page's <head>),
-   which set these globals. Hosting them on our own origin removes the runtime
-   dependency on an external CDN — if a CDN is slow/down the shop still loads. */
-const gsap = window.gsap;
-const ScrollTrigger = window.ScrollTrigger;
-const Lenis = window.Lenis;
+const prefersReduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-export function initMotion() {
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // If the vendored libs failed to load, degrade gracefully: reveal everything.
-  if (!gsap || !ScrollTrigger) {
-    document.querySelectorAll('.reveal,[data-hero],[data-up]').forEach((el) => {
-      el.style.opacity = '1'; el.style.transform = 'none';
-    });
-    const yrEl = document.getElementById('yr');
-    if (yrEl) yrEl.textContent = '2026';
-    return { gsap: null, ScrollTrigger: null, reduce: true };
-  }
-
-  // Year stamp — harmless if #yr is absent.
+function stampYear() {
   const yr = document.getElementById('yr');
   if (yr) yr.textContent = new Date().getFullYear();
+}
 
-  // Nav turns into a solid bar once past the hero. Native scroll listener so it
-  // works whether or not the Lenis engine is running (e.g. reduced motion).
-  const navEl = document.querySelector('nav');
-  if (navEl) {
-    const syncNav = () => navEl.classList.toggle('scrolled', window.scrollY > 60);
-    syncNav();
-    window.addEventListener('scroll', syncNav, { passive: true });
-  }
-
-  // Reduced motion: show everything statically, no engine.
-  if (reduce) {
-    document.querySelectorAll('.reveal,[data-hero],[data-up]').forEach((el) => {
-      el.classList.add('is-in');
-      gsap.set(el, { clearProps: 'all', opacity: 1, y: 0 });
-    });
-    return { gsap, ScrollTrigger, lenis: null, reduce: true };
-  }
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  // One Lenis instance, synced to GSAP's ticker.
-  const lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1, smoothWheel: true });
-  window.lenis = lenis;
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((t) => lenis.raf(t * 1000));
-  gsap.ticker.lagSmoothing(0);
-
-  // Progress bar — eased fill, hidden at the very top.
+/* Nav condense + scroll progress bar + scroll-cue fade.
+   One rAF-throttled scroll listener — works with or without the smooth engine. */
+function initScrollUI() {
+  const nav = document.querySelector('nav');
   const bar = document.getElementById('progress');
-  if (bar) {
-    lenis.on('scroll', ({ progress }) => {
-      bar.style.width = (progress * 100) + '%';
-      bar.classList.toggle('is-on', progress > 0.01);
-    });
-  }
-
-  // Retire the scroll cue once the reader starts moving.
   const cue = document.querySelector('.scrollcue');
-  if (cue) {
-    lenis.on('scroll', ({ scroll }) => { cue.style.opacity = scroll > 60 ? '0' : '1'; });
+  if (!nav && !bar && !cue) return;
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+    if (nav) nav.classList.toggle('scrolled', y > 60);
+    if (cue) cue.style.opacity = y > 60 ? '0' : '1';
+    if (bar) {
+      const doc = document.documentElement;
+      const max = (doc.scrollHeight - doc.clientHeight) || 1;
+      const p = Math.min(Math.max(y / max, 0), 1);
+      bar.style.width = (p * 100) + '%';
+      bar.classList.toggle('is-on', p > 0.01);
+    }
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
+}
+
+/* Vanilla reveals — fade-and-rise via .is-in (CSS owns the transition).
+   Items crossing in the same frame cascade in document order via --reveal-i. */
+function initReveals() {
+  const els = document.querySelectorAll('[data-hero],[data-up],[data-card]');
+  if (!els.length || !('IntersectionObserver' in window)) {
+    els.forEach((el) => el.classList.add('is-in'));
+    return;
+  }
+  const io = new IntersectionObserver((entries, obs) => {
+    const shown = entries.filter((e) => e.isIntersecting);
+    shown.sort((a, b) =>
+      (a.target.compareDocumentPosition(b.target) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1);
+    shown.forEach((e, i) => {
+      e.target.style.setProperty('--reveal-i', i);
+      e.target.classList.add('is-in');
+      obs.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+  els.forEach((el) => io.observe(el));
+}
+
+function revealAllStatic() {
+  document.querySelectorAll('.reveal,[data-hero],[data-up]').forEach((el) => {
+    el.classList.add('is-in');
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
+}
+
+/* Background parallax — vanilla, transform-only, rAF-throttled. translateY uses %
+   (relative to the element's own height), mirroring the previous GSAP yPercent. Progress
+   runs from 'section top at viewport top' (0) to 'section bottom at viewport top' (1). */
+function initParallax() {
+  const items = [...document.querySelectorAll('[data-parallax]')].map((el) => ({
+    el,
+    strength: parseFloat(el.getAttribute('data-parallax')) || 0.25,
+    ref: el.parentElement || el,
+  }));
+  if (!items.length) return;
+  items.forEach(({ el }) => { el.style.willChange = 'transform'; });
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    for (const { el, strength, ref } of items) {
+      const r = ref.getBoundingClientRect();
+      let p = -r.top / (r.height || 1);
+      p = p < 0 ? 0 : p > 1 ? 1 : p;
+      el.style.transform = `translateY(${(strength * 100 * p).toFixed(3)}%)`;
+    }
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
+}
+
+/* Subtle fade-out before navigating to another page in the site (index <-> catalog).
+   The matching fade-in is pure CSS (body pageIn). */
+function initPageTransition() {
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    let url;
+    try { url = new URL(a.href, location.href); } catch { return; }
+    if (url.origin !== location.origin || url.pathname === location.pathname) return;
+    if (!/\.html?$/.test(url.pathname)) return;
+    e.preventDefault();
+    document.body.classList.add('is-leaving');
+    setTimeout(() => { location.href = a.href; }, 300);
+  });
+}
+
+export function initMotion() {
+  const reduce = prefersReduced();
+  stampYear();
+  initScrollUI();
+
+  // Reduced motion: show everything; skip observers/animation.
+  if (reduce) {
+    revealAllStatic();
+    return { reduce: true };
   }
 
-  // Hero staggered entrance.
-  const heroEls = gsap.utils.toArray('[data-hero]');
-  if (heroEls.length) {
-    gsap.set(heroEls, { opacity: 0, y: 34 });
-    gsap.to(heroEls, {
-      opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', stagger: 0.14, delay: 0.25,
-    });
-  }
+  initReveals();
+  initParallax();
+  initPageTransition();
 
-  // Generic background parallax.
-  gsap.utils.toArray('[data-parallax]').forEach((el) => {
-    const strength = parseFloat(el.getAttribute('data-parallax')) || 0.25;
-    gsap.to(el, {
-      yPercent: strength * 100,
-      ease: 'none',
-      scrollTrigger: { trigger: el.parentElement || el, start: 'top top', end: 'bottom top', scrub: true },
-    });
-  });
-
-  // Interlude layer parallax — each layer tied to its own section.
-  gsap.utils.toArray('.layer[data-depth]').forEach((layer) => {
-    const depth = parseFloat(layer.getAttribute('data-depth')) || 0.2;
-    const sec = layer.closest('section') || layer.parentElement;
-    gsap.to(layer, {
-      yPercent: -depth * 100,
-      ease: 'none',
-      scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: true },
-    });
-  });
-
-  // Generic on-scroll reveals.
-  gsap.utils.toArray('[data-up]').forEach((el) => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1, y: 0, duration: 1, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 85%', once: true },
-      });
-  });
-
-  // Eyebrows "set" into place — letter-spacing tightens to its rest value.
-  // Letter-spacing only; opacity is owned by the hero stagger / [data-up] reveals.
-  gsap.utils.toArray('.eyebrow').forEach((el) => {
-    gsap.fromTo(el,
-      { letterSpacing: '0.5em' },
-      {
-        letterSpacing: '0.3em', duration: 1.2, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 90%', once: true },
-      });
-  });
-
-  // Pin math after fonts load. Then, if we arrived on a deep link (e.g.
-  // index.html#story), sync Lenis to the target — a native hash jump leaves
-  // Lenis at 0 and the page snaps back / lands inside the pinned section.
+  // Honor a deep link on load (native scroll; scroll-padding-top clears the fixed nav).
   window.addEventListener('load', () => {
-    ScrollTrigger.refresh();
     if (location.hash && location.hash.length > 1) {
       const target = document.querySelector(location.hash);
-      if (target) requestAnimationFrame(() => lenis.scrollTo(target, { offset: -80, immediate: true }));
+      if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant' }));
     }
   });
 
-  return { gsap, ScrollTrigger, lenis, reduce: false };
+  return { reduce: false };
 }

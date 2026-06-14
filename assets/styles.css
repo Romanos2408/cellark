@@ -30,8 +30,14 @@
 
   --measure:46ch;
   --ease:cubic-bezier(.22,.61,.36,1);
-  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);  /* canonical reveal / personality ease */
   --wrap:1200px;
+
+  /* ---- motion system (Phase 1 — vanilla reveals via assets/motion.js) ---- */
+  --dur-reveal:.8s;     /* reveal length — calm end of the 400–800ms band */
+  --dur-ui:.4s;         /* hovers / toggles / small state changes */
+  --reveal-rise:18px;   /* fade + short upward translate (8–24px) */
+  --stagger:80ms;       /* grouped items cascade 60–100ms apart */
 
   /* neutral grotesk for labels / nav / specs — the editorial "low" against the serif "high" */
   --sans:"Inter",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
@@ -44,12 +50,9 @@
 
 *{ margin:0; padding:0; box-sizing:border-box; }
 
-html{ -webkit-text-size-adjust:100%; }
-/* Lenis smooth-scroll hooks */
-html.lenis,html.lenis body{ height:auto; }
-.lenis.lenis-smooth{ scroll-behavior:auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent]{ overscroll-behavior:contain; }
-.lenis.lenis-stopped{ overflow:hidden; }
+/* Native smooth scroll + offset so anchor targets clear the fixed nav (replaces Lenis). */
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:80px; }
+@media(prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
 
 body{
   background:var(--ink);
@@ -64,6 +67,12 @@ body{
   font-feature-settings:"kern" 1, "liga" 1, "calt" 1;
   overflow-x:hidden;
 }
+
+/* subtle page-transition fade (index <-> catalog) */
+body{ animation:pageIn .45s var(--ease-out) both; }
+@keyframes pageIn{ from{ opacity:0; } to{ opacity:1; } }
+body.is-leaving{ opacity:0; transition:opacity .3s var(--ease-out); }
+@media(prefers-reduced-motion:reduce){ body{ animation:none; } body.is-leaving{ transition:none; } }
 
 img{ max-width:100%; display:block; }
 /* <picture> is a layout-transparent wrapper around its <img>, so the existing
@@ -151,6 +160,15 @@ nav .links a:hover::after{ width:100%; }
   nav .links a:not(.lang):not(.nav-cta){ display:none; }
   nav .links{ gap:1.1rem; }
 }
+/* very small screens: keep brand + catalogue link + lang + cart from colliding */
+@media(max-width:440px){
+  nav{ padding-left:1rem; padding-right:1rem; }
+  nav .links{ gap:.75rem; }
+  nav .links a{ font-size:.66rem; letter-spacing:.1em; }
+  nav .brand{ font-size:1.02rem; gap:.45rem; }
+  nav .brand .brand-mark{ width:26px; }
+  .lang{ padding:.28rem .55rem; }
+}
 
 /* visible keyboard focus on every interactive control (dark-friendly) */
 a:focus-visible, button:focus-visible, [role="tab"]:focus-visible,
@@ -176,9 +194,20 @@ nav.scrolled .lang:hover{ border-color:var(--gold); color:var(--gold-soft); }
 .lang:active{ transform:scale(.96); }
 @media(prefers-reduced-motion:reduce){ .lang,.lang:active{ transform:none; } }
 
-/* ---------- reveal primitive ---------- */
-.reveal{ opacity:0; transform:translateY(18px); }
-.reveal.is-in{ opacity:1; transform:none; transition:opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+/* ---------- reveal primitive ----------
+   Hidden until revealed; the transition lives on .is-in so adding that class
+   (vanilla IntersectionObserver in Phase 1.2) plays the fade-and-rise. Grouped
+   items cascade via an inline --reveal-i index (0,1,2…). */
+.reveal{ opacity:0; transform:translateY(var(--reveal-rise)); }
+.reveal.is-in{
+  opacity:1; transform:none;
+  transition:opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+  transition-delay:calc(var(--reveal-i, 0) * var(--stagger));
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{ opacity:1; transform:none; }
+  .reveal.is-in{ transition:none; transition-delay:0s; }
+}
 
 /* ---------- buttons ---------- */
 .btn{
@@ -214,9 +243,9 @@ footer .legal a{ color:var(--gold); }
 .foot-contact a{ color:var(--cream); font-size:.95rem; text-decoration:none; border-bottom:1px solid transparent; transition:border-color .3s var(--ease); }
 .foot-contact a:hover{ border-color:var(--gold); }
 .foot-contact .addr{ color:var(--muted-dim); font-size:.88rem; max-width:26ch; margin-top:.2rem; }
-footer .mark{ font-family:"Fraunces",serif; font-size:clamp(2.2rem,6vw,4rem); line-height:.9;
-  color:rgba(231,231,224,.08); letter-spacing:0; align-self:flex-end;
-  font-variation-settings:"opsz" 144, "wght" 380; }
+footer .mark{ font-family:"Fraunces",serif; font-size:clamp(3rem,9vw,6.5rem); line-height:.86;
+  color:rgba(231,231,224,.07); letter-spacing:-.02em; align-self:flex-end;
+  font-variation-settings:"opsz" 144, "wght" 340; }
 @media(max-width:640px){ footer .mark{ font-size:clamp(3rem,18vw,5rem); width:100%; } }
 
 /* ============================================================
@@ -273,7 +302,10 @@ html.age-gating{ overflow:hidden; }
 
 /* overlay + drawer */
 .cart-overlay{ position:fixed; inset:0; z-index:90; background:rgba(8,6,5,.6);
-  -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
+  -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
+  opacity:0; pointer-events:none; transition:opacity .4s var(--ease-out); }
+.cart-overlay.is-open{ opacity:1; pointer-events:auto; }
+@media(prefers-reduced-motion:reduce){ .cart-overlay{ transition:none; } }
 .cart-drawer{ position:fixed; top:0; right:0; z-index:100; height:100%; width:min(92vw,420px);
   display:flex; flex-direction:column; background:var(--ink-soft);
   border-left:1px solid rgba(191,167,115,.18); box-shadow:-30px 0 60px rgba(0,0,0,.5);

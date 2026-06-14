@@ -1,3 +1,7 @@
+> ⚠️ **STALE (2026-06-13).** Superseded by the root canonical docs. Commerce is **Shopify
+> Basic** (not WooCommerce — see `../SHOPIFY.md`); motion is migrating **off** GSAP/Lenis to
+> **vanilla + IntersectionObserver** (see `../DESIGN.md`). Kept for history only.
+
 # Kappas — Tech Stack
 
 ## Front-end (this repo)

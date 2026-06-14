@@ -122,13 +122,13 @@ function render() {
 let lastFocus = null;
 function openCart() {
   lastFocus = document.activeElement;
-  els.drawer.classList.add('open'); els.overlay.hidden = false; els.drawer.setAttribute('aria-hidden', 'false');
+  els.drawer.classList.add('open'); els.overlay.classList.add('is-open'); els.drawer.setAttribute('aria-hidden', 'false');
   render();
   requestAnimationFrame(() => { els.close && els.close.focus(); });
 }
 function closeCart() {
   if (!els.drawer.classList.contains('open')) return;
-  els.drawer.classList.remove('open'); els.overlay.hidden = true; els.drawer.setAttribute('aria-hidden', 'true');
+  els.drawer.classList.remove('open'); els.overlay.classList.remove('is-open'); els.drawer.setAttribute('aria-hidden', 'true');
   if (lastFocus && lastFocus.focus) lastFocus.focus(); else els.btn && els.btn.focus();
 }
 function trapFocus(e) {

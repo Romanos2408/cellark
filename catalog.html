@@ -40,28 +40,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..600&family=Inter:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap&subset=greek,latin" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/styles.css?v=5">
+<link rel="stylesheet" href="assets/styles.css?v=6">
 
-<!-- Motion libs hosted locally (no external CDN dependency at runtime) -->
-<script src="assets/vendor/gsap.min.js"></script>
-<script src="assets/vendor/ScrollTrigger.min.js"></script>
-<script src="assets/vendor/lenis.min.js"></script>
+<!-- Motion is vanilla JS (assets/motion.js) — no runtime libraries -->
+
 
 <style>
   /* ---------- CATALOG HERO (compact) ---------- */
-  .cat-hero{ position:relative; min-height:56vh; display:flex; align-items:flex-end; overflow:hidden;
-    padding-bottom:clamp(2.6rem,6vh,4.6rem); }
-  .cat-hero-bg{ position:absolute; inset:-8% 0; z-index:0;
+  .cat-hero{ position:relative; min-height:66vh; display:flex; align-items:flex-end; overflow:hidden;
+    padding-bottom:clamp(3rem,7vh,5.5rem); }
+  .cat-hero-bg{ position:absolute; inset:0; z-index:0;
     background:url("assets/photos/cellar-lantern.jpg") center/cover no-repeat; /* fallback */
     background-image:image-set(url("assets/photos/cellar-lantern.avif") type("image/avif"),
-                               url("assets/photos/cellar-lantern.jpg")  type("image/jpeg")); }
+                               url("assets/photos/cellar-lantern.jpg")  type("image/jpeg"));
+    transform:scale(1.1); animation:catHeroZoom 16s var(--ease-out) forwards; will-change:transform; }
+  @keyframes catHeroZoom{ to{ transform:scale(1); } }
+  @media(prefers-reduced-motion:reduce){ .cat-hero-bg{ animation:none; transform:none; } }
   .cat-hero-scrim{ position:absolute; inset:0; z-index:1; pointer-events:none;
     background:
-      linear-gradient(180deg, rgba(12,9,8,.62) 0%, rgba(12,9,8,.30) 36%, rgba(20,20,18,.94) 100%),
-      linear-gradient(90deg, rgba(12,9,8,.78), rgba(12,9,8,.18) 70%); }
+      linear-gradient(180deg, rgba(10,8,7,.5) 0%, rgba(10,8,7,.12) 30%, rgba(10,8,7,.5) 66%, rgba(12,9,8,.97) 100%),
+      radial-gradient(85% 70% at 26% 122%, rgba(78,0,0,.45), transparent 60%); }
   .cat-hero .wrap{ position:relative; z-index:2; }
-  .cat-hero h1{ font-size:clamp(2.8rem,8vw,6rem); color:var(--cream); line-height:.96; letter-spacing:-.015em;
-    font-variation-settings:"opsz" 144,"wght" 420; margin-top:.5rem; text-wrap:balance; }
+  .cat-hero h1{ font-size:clamp(3.4rem,11vw,9rem); color:var(--cream); line-height:.88; letter-spacing:-.025em;
+    font-variation-settings:"opsz" 144,"wght" 380; margin-top:.5rem; text-wrap:balance; }
   .cat-hero .lede{ max-width:54ch; margin-top:1.4rem; color:var(--muted); font-size:1.06rem; line-height:1.6; text-wrap:pretty; }
 
   /* ---------- sticky category nav ---------- */
@@ -97,8 +98,8 @@
   .cat-section.is-active{ display:block; animation:catFade .5s var(--ease) both; }
   @keyframes catFade{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
   .cat-section > .wrap > .sec-head{ margin-bottom:clamp(1.6rem,3vw,2.6rem); }
-  .cat-section .sec-head h2{ font-size:clamp(2rem,4.6vw,3.2rem); color:var(--cream); margin-top:.5rem;
-    letter-spacing:-.01em; }
+  .cat-section .sec-head h2{ font-weight:360; font-size:clamp(2.2rem,5vw,3.8rem); color:var(--cream); margin-top:.5rem;
+    letter-spacing:-.02em; font-variation-settings:"opsz" 144; }
   .cat-section .sec-head .count{ font-family:var(--sans); font-weight:500; font-size:.72rem;
     letter-spacing:.14em; text-transform:uppercase; color:var(--muted-dim); }
 
@@ -110,18 +111,18 @@
      wine-info always gets the WIDE column (same text width on both sides). */
   .wine-row.flip{ grid-template-columns:1.22fr 0.78fr; }
   .wine-row.flip .wine-shot{ order:2; }
-  .wine-shot{ position:relative; display:flex; align-items:flex-end; justify-content:center; min-height:300px; }
+  .wine-shot{ position:relative; display:flex; align-items:flex-end; justify-content:center; min-height:380px; }
   .wine-shot::after{ content:""; position:absolute; left:50%; bottom:6%; transform:translateX(-50%);
     width:46%; height:18px; border-radius:50%;
     background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 72%); filter:blur(9px); }
-  .wine-shot img{ position:relative; z-index:1; height:auto; max-height:380px; width:auto; object-fit:contain;
-    filter:drop-shadow(0 24px 26px rgba(0,0,0,.5)); transition:transform .6s var(--ease-out); }
-  .wine-row:hover .wine-shot img{ transform:translateY(-6px); }
+  .wine-shot img{ position:relative; z-index:1; height:auto; max-height:460px; width:auto; object-fit:contain;
+    filter:drop-shadow(0 30px 34px rgba(0,0,0,.55)); transition:transform .6s var(--ease-out); }
+  .wine-row:hover .wine-shot img{ transform:translateY(-8px) scale(1.02); }
 
   .wine-info .appel{ font-family:var(--sans); font-weight:500; font-size:.68rem; letter-spacing:.16em;
     text-transform:uppercase; color:var(--gold); }
-  .wine-info h3{ font-size:clamp(1.7rem,3vw,2.4rem); color:var(--cream); margin:.5rem 0 .2rem;
-    font-variation-settings:"opsz" 40; line-height:1.06; letter-spacing:-.01em; text-wrap:balance; }
+  .wine-info h3{ font-size:clamp(2rem,4vw,3.2rem); color:var(--cream); margin:.5rem 0 .2rem;
+    font-variation-settings:"opsz" 144; line-height:1.02; letter-spacing:-.02em; text-wrap:balance; }
   .wine-info .grape{ font-family:var(--sans); font-weight:500; font-size:.76rem; letter-spacing:.06em;
     text-transform:uppercase; color:var(--muted-dim); }
   .wine-info p{ margin-top:1.1rem; max-width:48ch; color:var(--muted); font-size:1rem; line-height:1.62; text-wrap:pretty; }
@@ -152,8 +153,8 @@
   /* ---------- closing trade strip ---------- */
   .cat-trade{ position:relative; padding-block:clamp(5rem,12vh,8rem);
     background:linear-gradient(180deg,var(--oxblood),var(--oxblood-deep)); }
-  .cat-trade h2{ font-size:clamp(2rem,5vw,3.4rem); color:var(--cream); margin:1rem 0 1.2rem; max-width:18ch;
-    line-height:1.08; letter-spacing:-.01em; text-wrap:balance; }
+  .cat-trade h2{ font-weight:360; font-size:clamp(2.2rem,5.6vw,4.2rem); color:var(--cream); margin:1rem 0 1.2rem; max-width:16ch;
+    line-height:1.02; letter-spacing:-.02em; font-variation-settings:"opsz" 144; text-wrap:balance; }
   .cat-trade p{ max-width:52ch; margin:0 0 2.2rem; color:#ecdcc6; font-size:1.04rem; line-height:1.6; text-wrap:pretty; }
   .cat-trade .btn-row{ display:flex; flex-wrap:wrap; gap:.9rem; }
   .cat-trade .btn-row .btn{ margin:0; }
@@ -194,7 +195,7 @@
 
 <!-- ============ CATALOG HERO ============ -->
 <header class="cat-hero" id="top">
-  <div class="cat-hero-bg" data-parallax="0.16"></div>
+  <div class="cat-hero-bg"></div>
   <div class="cat-hero-scrim"></div>
   <div class="wrap">
     <p class="eyebrow reveal" data-hero data-gr="Cantine Colosi · Σαλίνα & Σικελία" data-en="Cantine Colosi · Salina & Sicily">Cantine Colosi · Σαλίνα &amp; Σικελία</p>
@@ -229,7 +230,7 @@
 </main>
 
 <!-- ============ BASKET DRAWER ============ -->
-<div class="cart-overlay" id="cartOverlay" hidden></div>
+<div class="cart-overlay" id="cartOverlay"></div>
 <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Καλάθι" data-aria-gr="Καλάθι" data-aria-en="Basket" aria-hidden="true">
   <div class="cart-head">
     <h2 id="cartTitle">Το καλάθι σου</h2>
@@ -281,7 +282,7 @@
   import { initMotion } from './assets/motion.js';
   import { initI18n } from './assets/i18n.js?v=2';
   import { initAgeGate } from './assets/age-gate.js';
-  import { initCart } from './assets/cart.js?v=2';
+  import { initCart } from './assets/cart.js?v=3';
   import { WINES } from './assets/wines.js';
 
   /* category order + bilingual labels */
@@ -336,8 +337,8 @@
     <article class="wine-row${flip}" id="${w.slug}">
       <div class="wine-shot">
         <picture>
-          <source srcset="assets/wines/${w.slug}.avif" type="image/avif" />
-          <img loading="lazy" decoding="async" width="459" height="1536" src="assets/wines/${w.slug}.png" alt="${w.name} — Cantine Colosi" />
+          <source srcset="assets/wines/${w.slug}.avif?v=2" type="image/avif" />
+          <img loading="lazy" decoding="async" width="442" height="1536" src="assets/wines/${w.slug}.png?v=2" alt="${w.name} — Cantine Colosi" />
         </picture>
       </div>
       <div class="wine-info">
