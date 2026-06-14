@@ -118,8 +118,8 @@
     badge.textContent = pick(w, "sweet");
     const pic = document.createElement("picture");
     pic.innerHTML =
-      `<source srcset="assets/wines/${esc(w.slug)}.avif" type="image/avif">` +
-      `<img src="assets/wines/${esc(w.slug)}.png" alt="${esc(w.name)}" loading="lazy" decoding="async">`;
+      `<source srcset="assets/wines/${esc(w.slug)}.avif?v=2" type="image/avif">` +
+      `<img src="assets/wines/${esc(w.slug)}.png?v=2" alt="${esc(w.name)}" loading="lazy" decoding="async">`;
     photo.append(badge, pic);
 
     // Tap/click the bottle → full-scale zoom
@@ -285,8 +285,8 @@
       `<div class="detail-media">` +
         (badge ? `<span class="card-badge">${esc(badge)}</span>` : "") +
         `<picture>` +
-          `<source srcset="assets/wines/${esc(w.slug)}.avif" type="image/avif">` +
-          `<img class="detail-img" src="assets/wines/${esc(w.slug)}.png" alt="${esc(w.name)}">` +
+          `<source srcset="assets/wines/${esc(w.slug)}.avif?v=2" type="image/avif">` +
+          `<img class="detail-img" src="assets/wines/${esc(w.slug)}.png?v=2" alt="${esc(w.name)}">` +
         `</picture>` +
       `</div>` +
       `<div class="detail-info">` +
