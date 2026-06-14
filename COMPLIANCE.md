@@ -61,6 +61,14 @@ Required pages: Privacy (Απορρήτου), Terms of Sale (Όροι), Returns/
   in frontend (see SHOPIFY.md). Admin actions → owner does them in admin.
 - Checkout happens on **Shopify (PCI-compliant)** — we never touch raw card data.
 - HTTPS everywhere (GitHub Pages / custom domain). No secrets in client-side code.
+- ✅ **2026-06-14 hardening:** **Content-Security-Policy** meta on all main pages
+  (`default-src 'self'`; no external scripts/styles/fonts/connections — everything self-hosted);
+  browser-verified it doesn't break the site. **`noindex, nofollow`** on all pages + the QR
+  catalogue to keep the preview out of search until launch — **REMOVE the noindex tags when going
+  live on `cellark.gr`** (each is marked with a `LAUNCH` HTML comment). Public **wholesale prices
+  removed** from `catalogue/wines.json` (see PLAN 4.6).
+- ⚠️ The QR catalogue (`catalogue/`) still loads **Google Fonts** (Playfair + Inter) — the one
+  remaining third-party request; self-host later for full parity (no CSP there yet for that reason).
 
 ## 7. ⚠️ Client / lawyer MUST verify (do NOT mark "done")
 - [ ] Client is **licensed** to sell/ship wine to consumers in Greece.

@@ -56,6 +56,9 @@
   const fmtPrice = (n) => (n == null ? null : "€" + Number(n).toFixed(2));
   const pickPrice = (w) =>
     (STATE.mode === "wholesale" ? w.price_wholesale : w.price_retail) ?? null;
+  // Wholesale prices are by arrangement and intentionally NOT published in this public file;
+  // in trade mode show "on request" rather than a bare dash.
+  const emptyPriceText = () => (STATE.mode === "wholesale" ? t().askPrice : t().priceTBD);
   const wholesaleOn = () => !!(STATE.data && STATE.data.pricing && STATE.data.pricing.show_wholesale);
 
   const $ = (s) => document.querySelector(s);
@@ -157,7 +160,7 @@
     if (formatted) {
       amount.textContent = formatted;
     } else {
-      amount.textContent = t().priceTBD;
+      amount.textContent = emptyPriceText();
       amount.classList.add("is-empty");
       amount.title = t().askPrice;
     }
@@ -294,7 +297,7 @@
         `<div class="detail-specs">${specs}</div>` +
         `<div class="detail-price">` +
           `<span class="detail-price-tier">${esc(tier)}</span>` +
-          `<span class="detail-price-amount${price ? "" : " is-empty"}">${esc(price || t().priceTBD)}</span>` +
+          `<span class="detail-price-amount${price ? "" : " is-empty"}">${esc(price || emptyPriceText())}</span>` +
         `</div>` +
       `</div>`;
 

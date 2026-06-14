@@ -126,12 +126,11 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
 - [ ] 4.3 **Approval + customer tagging** in Shopify.
 - [ ] 4.4 Per-case **wholesale pricing** via native B2B catalog — **hidden from public/retail**.
 - [ ] 4.5 Link the static site → Shopify B2B portal cleanly (login / "trade account" entry).
-- [ ] 4.6 **Close the public wholesale-price leak** (owner chose 2026-06-14 to DEFER here):
-      `catalogue/wines.json` currently ships `price_wholesale` for all 13 and is LIVE on
-      origin → `…/cellark/catalogue/wines.json` is publicly fetchable (the `?trade` URL only
-      gates rendering). Fix: strip trade prices from the public JSON; serve wholesale ONLY
-      behind the Shopify B2B login; interim public trade catalogue shows "τιμή κατόπιν
-      συνεννόησης / price on request".
+- [x] 4.6 **Close the public wholesale-price leak** — DONE 2026-06-14 (owner brought it forward).
+      Stripped all 13 `price_wholesale` from `catalogue/wines.json` (raw file no longer exposes
+      them); `catalogue/script.js` now shows **"Κατόπιν συνεννόησης / On request"** in trade mode
+      (`emptyPriceText()`). Browser-verified: `?trade` shows no €, retail still shows real €, raw
+      JSON clean. Real wholesale pricing will live behind the Shopify B2B login (Phase 4 proper).
 
 ## Phase 5 — Compliance & Safety (see COMPLIANCE.md — do not hand-wave)
 - [x] 5.1 **GDPR cookie-consent banner**: accept/reject non-essential, no pre-ticked boxes,
