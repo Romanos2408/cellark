@@ -268,6 +268,40 @@ html.age-gating{ overflow:hidden; }
 .ag-actions{ display:flex; gap:.6rem; justify-content:center; margin-top:1.8rem; flex-wrap:wrap; }
 @media(prefers-reduced-motion:reduce){ .age-gate{ transition:none; } }
 
+/* ---- cookie / storage consent bar (Phase 5.1) — sits below the age-gate (z100) ---- */
+.cc-bar{ position:fixed; left:0; right:0; bottom:0; z-index:90;
+  opacity:0; transform:translateY(100%); pointer-events:none;
+  transition:opacity .4s var(--ease-out), transform .4s var(--ease-out); }
+.cc-bar.is-in{ opacity:1; transform:none; pointer-events:auto; }
+.cc-inner{ max-width:var(--wrap); margin:0 auto; padding:1.1rem 1.4rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1.2rem 2rem; flex-wrap:wrap;
+  background:var(--ink-soft); border-top:1px solid rgba(191,167,115,.3);
+  box-shadow:0 -18px 50px rgba(0,0,0,.5); }
+.cc-text{ flex:1 1 22rem; }
+.cc-title{ font-family:"Fraunces",serif; color:var(--gold-soft); font-size:1.05rem; letter-spacing:.02em; margin:0 0 .25rem; }
+.cc-body{ color:var(--muted); font-size:.9rem; line-height:1.5; max-width:64ch; margin:0; }
+.cc-actions{ display:flex; align-items:center; gap:.7rem; flex-wrap:wrap; }
+.cc-more{ color:var(--muted-dim); font-size:.82rem; text-decoration:underline; text-underline-offset:3px; }
+.cc-more:hover{ color:var(--gold-soft); }
+.cc-bar .btn{ padding:.6rem 1.1rem; font-size:.8rem; }
+@media(max-width:560px){
+  .cc-inner{ padding:1rem 1.1rem; gap:.9rem; }
+  .cc-actions{ width:100%; }
+  .cc-more{ order:3; width:100%; }
+  .cc-bar .btn{ flex:1 1 auto; text-align:center; }
+}
+@media(prefers-reduced-motion:reduce){ .cc-bar{ transition:none; } }
+/* a footer trigger styled to match the legal links */
+.foot-legal button.foot-cookie{ background:none; border:0; padding:0; cursor:pointer;
+  font:inherit; color:inherit; }
+/* "manage consent" control on the privacy page */
+.consent-reopen{ background:none; cursor:pointer; color:var(--gold-soft);
+  font-family:var(--sans); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase;
+  border:1px solid rgba(191,167,115,.4); padding:.7rem 1.4rem; border-radius:2px;
+  transition:border-color var(--dur-ui) var(--ease-out), color var(--dur-ui) var(--ease-out); }
+.consent-reopen:hover{ border-color:var(--gold); color:var(--cream); }
+.consent-reopen:focus-visible{ outline:2px solid var(--gold-soft); outline-offset:2px; }
+
 /* ============================================================
    SHOP / BASKET (shared by homepage + catalog)
    ============================================================ */

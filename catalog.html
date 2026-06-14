@@ -36,11 +36,9 @@
 <meta name="twitter:description" content="Δεκατρείς ετικέτες της Cantine Colosi από τη Σαλίνα και τη Σικελία." />
 <meta name="twitter:image" content="https://romanos2408.github.io/cellark/assets/og-image.jpg" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..600&family=Inter:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap&subset=greek,latin" rel="stylesheet">
+<link rel="stylesheet" href="assets/fonts/fonts.css?v=1">
 
-<link rel="stylesheet" href="assets/styles.css?v=6">
+<link rel="stylesheet" href="assets/styles.css?v=7">
 
 <!-- Motion is vanilla JS (assets/motion.js) — no runtime libraries -->
 
@@ -272,6 +270,7 @@
       <a href="terms.html" data-gr="Όροι" data-en="Terms">Όροι</a>
       <a href="returns.html" data-gr="Επιστροφές & Αποστολές" data-en="Returns & Shipping">Επιστροφές &amp; Αποστολές</a>
       <a href="mailto:cellarkinfo@gmail.com" data-gr="Επικοινωνία" data-en="Contact">Επικοινωνία</a>
+      <button class="foot-cookie" type="button" data-consent-open data-gr="Cookies" data-en="Cookies">Cookies</button>
     </div>
     <p class="foot-imprint" data-gr="[Νόμιμη επωνυμία] · ΑΦΜ [—] · ΓΕΜΗ [—] · ΔΟΥ [—] · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200" data-en="[Legal entity] · VAT (ΑΦΜ) [—] · ΓΕΜΗ [—] · Tax office [—] · Megalou Alexandrou 27, Chrysoupoli 64200">[Νόμιμη επωνυμία] · ΑΦΜ [—] · ΓΕΜΗ [—] · ΔΟΥ [—] · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200</p>
   </div>
@@ -282,6 +281,7 @@
   import { initMotion } from './assets/motion.js';
   import { initI18n } from './assets/i18n.js?v=2';
   import { initAgeGate } from './assets/age-gate.js';
+  import { initConsent } from './assets/consent.js';
   import { initCart } from './assets/cart.js?v=3';
   import { WINES } from './assets/wines.js';
 
@@ -427,6 +427,7 @@
   initMotion();
   initI18n();
   initAgeGate();
+  initConsent();
   initCart(WINES);
 </script>
 </body>

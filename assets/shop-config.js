@@ -17,22 +17,22 @@
  *                   'https://cellark.myshopify.com/account/login'  (leave '' to hide).
  */
 export const SHOP = {
-  domain: '',           // ← e.g. 'cellark.myshopify.com'
+  domain: 'vgzjfb-qu.myshopify.com',  // Shopify store (public checkout domain)
   tradeLoginUrl: '',    // ← e.g. 'https://cellark.myshopify.com/account/login'
   variants: {
-    'salina-bianco': '',
-    'salina-rosso': '',
-    'salina-rosato': '',
-    'secca-del-capo': '',
-    'guardiano-del-faro': '',
-    'malvasia-lipari': '',
-    'passito': '',
-    'mare': '',
-    'cariddi-rosato': '',
-    'giulia-birbante': '',
-    'grillo-acacia': '',
-    'viognier': '',
-    'nero-davola': '',
+    'salina-bianco': '58240781615491',
+    'salina-rosso': '58240781648259',
+    'salina-rosato': '58240781681027',
+    'secca-del-capo': '58240781713795',
+    'guardiano-del-faro': '58240781779331',
+    'malvasia-lipari': '58240781812099',
+    'passito': '58240781844867',
+    'mare': '58240781910403',
+    'cariddi-rosato': '58240781943171',
+    'giulia-birbante': '58240781975939',
+    'grillo-acacia': '58240782205315',
+    'viognier': '58240782270851',
+    'nero-davola': '58240782303619',
   },
 };
 

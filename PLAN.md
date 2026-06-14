@@ -87,18 +87,36 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
       375px: 10px gap, no overlap; bumped styles.css→v6, cart.js→v3 so browsers load updates.)*
 
 ## Phase 2 — Shopify backend (Shopify Basic) — needs owner/admin
+> 📋 **Owner click-by-click guide ready: `OWNER-SETUP.md`** (covers 2.1–2.3 admin steps,
+> products CSV import, token creation, and what to send back for 2.5). Hand it to the owner.
 - [ ] 2.1 Owner confirms Shopify Basic active; enable **native B2B** (company accounts).
-- [ ] 2.2 Create products: **single bottles** (B2C) + **case** variants / B2B catalog pricing.
+- [~] 2.2 Create products: **single bottles** (B2C) + **case** variants / B2B catalog pricing.
+      *(2026-06-14: 13 single bottles imported via `docs/shopify-products.csv`, verified live
+      (retail prices, EUR). Case / B2B-catalog pricing deferred to Phase 4.)*
 - [ ] 2.3 Generate **Storefront API** token (public, scoped) — never admin creds.
+      *(NOTE 2026-06-14: NOT needed for the B2C cart-permalink checkout — permalinks use only
+      domain + variant IDs. Revisit only if we ever move to a Storefront-API / AJAX cart.)*
 - [ ] 2.4 Lock architecture: **Hybrid** (static site = B2C + marketing; Shopify-hosted
       storefront = B2B portal) vs cart-permalink for B2C. See SHOPIFY.md recommendation.
-- [ ] 2.5 Fill `assets/shop-config.js` (store domain + per-bottle variant IDs).
+- [x] 2.5 Fill `assets/shop-config.js` (store domain + per-bottle variant IDs).
+      *(Done 2026-06-14: domain `vgzjfb-qu.myshopify.com` + all 13 variant IDs, each
+      cross-checked against the live `products.json` → 13/13 ✓. Domain + IDs are public, fine
+      in frontend. Uncommitted — commit when asked.)*
 
 ## Phase 3 — B2C checkout (single bottle → Shopify)
-- [ ] 3.1 Wire add-to-cart → Shopify cart permalink / checkout for single bottles.
-- [ ] 3.2 Cart drawer "Ολοκλήρωση — Πληρωμή με κάρτα" → real Shopify checkout. Guard
-      against missing/blank variant IDs (don't silently drop bottles).
-- [ ] 3.3 Test a full retail purchase end-to-end (test mode), EL + EN, mobile + desktop.
+- [x] 3.1 Wire add-to-cart → Shopify cart permalink / checkout for single bottles.
+      *(Done 2026-06-14: `cart.js` already calls `shopifyCheckoutURL()`; with config filled the
+      live "Πληρωμή με κάρτα" button builds `…/cart/{id}:{qty}` permalinks. Verified a permalink
+      302-redirects to a real Shopify checkout `/checkouts/cn/…/el-gr` (auto-Greek); `cart.json`
+      confirmed Salina Bianco ×1 = €16.50 EUR.)*
+- [x] 3.2 Cart drawer "Ολοκλήρωση — Πληρωμή με κάρτα" → real Shopify checkout. Guard
+      against missing/blank variant IDs (don't silently drop bottles). *(Guard verified: any
+      missing slug ⇒ `shopifyCheckoutURL` returns null ⇒ basket falls back to enquiry/"opening
+      soon", never a partial cart. Bad variant ID → Shopify 410, confirmed.)*
+- [~] 3.3 Test a full retail purchase end-to-end (test mode), EL + EN, mobile + desktop.
+      *(Handoff verified — Greek checkout loads at correct price. FULL payment test blocked
+      until owner activates Shopify Payments + an active plan (guide A3), and the storefront
+      password is OFF. Resume here once payments are live.)*
 
 ## Phase 4 — B2B wholesale (gated, per case)
 - [ ] 4.1 Business **registration / application** flow.
@@ -108,18 +126,52 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
 - [ ] 4.3 **Approval + customer tagging** in Shopify.
 - [ ] 4.4 Per-case **wholesale pricing** via native B2B catalog — **hidden from public/retail**.
 - [ ] 4.5 Link the static site → Shopify B2B portal cleanly (login / "trade account" entry).
+- [ ] 4.6 **Close the public wholesale-price leak** (owner chose 2026-06-14 to DEFER here):
+      `catalogue/wines.json` currently ships `price_wholesale` for all 13 and is LIVE on
+      origin → `…/cellark/catalogue/wines.json` is publicly fetchable (the `?trade` URL only
+      gates rendering). Fix: strip trade prices from the public JSON; serve wholesale ONLY
+      behind the Shopify B2B login; interim public trade catalogue shows "τιμή κατόπιν
+      συνεννόησης / price on request".
 
 ## Phase 5 — Compliance & Safety (see COMPLIANCE.md — do not hand-wave)
-- [ ] 5.1 **GDPR cookie-consent banner**: accept/reject non-essential, no pre-ticked boxes,
+- [x] 5.1 **GDPR cookie-consent banner**: accept/reject non-essential, no pre-ticked boxes,
       no non-essential cookies/analytics before consent. EL/EN.
-- [ ] 5.2 **Cookie/script audit** table (Shopify, fonts, analytics, embeds) — keep updated.
-- [ ] 5.3 Age-gate (18+) review on site + "adults only" + responsible-drinking at checkout.
+      *(Done 2026-06-14: `assets/consent.js` — bilingual bottom bar, **Accept / Essential-only**
+      (no pre-ticked boxes, reject equal-prominence), persists `cellark.consent`, exposes
+      `window.CellarkConsent.has(cat)` + a `cellark:consent` event to gate any FUTURE non-essential
+      script, re-open via footer "Cookies" + a manage-control on privacy.html. Wired into
+      index/catalog/privacy/terms/returns (404 is self-contained → skipped). Browser-verified:
+      accept/essential/reopen/EL↔EN all work, gating API correct (`has('analytics')` flips
+      false→true on Accept), no console errors, on-brand. styles.css→v7.)*
+- [x] 5.2 **Cookie/script audit** table (Shopify, fonts, analytics, embeds) — keep updated.
+      *(2026-06-14: audited — NO analytics / tracking / ad pixels; only first-party essential
+      `localStorage` (cart, lang, ageConfirmed, consent). The one third party (Google Fonts) is now
+      **ELIMINATED — fonts self-hosted**: `assets/fonts/` (18 woff2 + `fonts.css`, latin+greek
+      subsets, `font-display:swap`); all 6 pages swapped off `fonts.googleapis`/`gstatic` and the
+      Google **preconnects removed**. Browser-verified: 26 faces load from localhost, render
+      identical to before, no console errors, **ZERO third-party requests now**. Remaining: write
+      the formal audit table doc. NOTE: Fraunces/Spectral have no Greek glyphs (pre-existing → Greek
+      serif falls back to system serif; Inter covers Greek labels). 404 uses an absolute fonts.css
+      URL (matches its favicon convention) — swaps with the domain at launch. **Formal audit table
+      now in COMPLIANCE.md §2** (site sets no cookies, makes zero third-party requests).)*
+- [~] 5.3 Age-gate (18+) review on site + "adults only" + responsible-drinking at checkout.
+      *(2026-06-14: reviewed — age-gate is solid (EL/EN, focus-trap, reduced-motion); site carries
+      "adults only" + "enjoy responsibly" in footer + gate. Remaining = OWNER: 18+ +
+      responsible-drinking note at Shopify checkout, and ship-to-adult / ID-on-delivery with the
+      courier (esp. COD). See COMPLIANCE.md §3.)*
 - [ ] 5.4 VAT/ΦΠΑ shows correctly; confirm Shopify tax config (owner sets rates).
 - [ ] 5.5 Fill legal pages + footer imprint with **real** client details (never invent):
       legal name, ΑΦΜ, ΓΕΜΗ, ΔΟΥ, address. Leave marked placeholders until provided.
-- [ ] 5.6 Security: Storefront-token-only, no secrets, HTTPS, checkout on Shopify (PCI).
-- [ ] 5.7 Write the **"client / lawyer must verify"** checklist (licensing, distance-selling,
+- [x] 5.6 Security: Storefront-token-only, no secrets, HTTPS, checkout on Shopify (PCI).
+      *(2026-06-14: satisfied by design — NO secrets/tokens in the repo (B2C uses cart permalinks,
+      so not even a Storefront token is needed); zero third-party requests; cards/checkout handled
+      on Shopify (PCI); HTTPS via Pages. `shop-config.js` holds only the public store domain +
+      variant IDs. Re-audit if/when any token is introduced.)*
+- [x] 5.7 Write the **"client / lawyer must verify"** checklist (licensing, distance-selling,
       excise/duty, shipping restrictions, validity of privacy/terms).
+      *(2026-06-14: written — COMPLIANCE.md §7 (licensing, distance-selling, excise/ΕΦΚ, shipping &
+      age restrictions, privacy/terms validity, myDATA πάροχος, legal identifiers). The checklist
+      exists; the items themselves stay open for the client/lawyer to action — not ours to tick.)*
 
 ## Phase 6 — Launch
 - [ ] 6.0 **Hero + story motion rework** (deferred from Phase 1 per owner, 2026-06-13): keep the

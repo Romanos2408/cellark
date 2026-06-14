@@ -4,25 +4,40 @@
 **client or a lawyer must verify**. Never invent legal terms or business identifiers.
 Context: alcohol e-commerce, **ships within Greece only**, EL/EN.
 
-## 1. GDPR cookie consent — TODO
-- Implement a proper consent banner: **accept / reject** non-essential, **no pre-ticked
-  boxes**, equally easy to refuse as to accept. EL/EN parity.
-- **Do not load analytics or any non-essential cookies/scripts before consent.** Gate them
-  behind the banner's decision. Store the choice; allow changing it later.
+## 1. GDPR cookie consent — DONE (2026-06-14)
+- ✅ `assets/consent.js` — EL/EN bottom bar, **Accept / Essential-only** (no pre-ticked boxes,
+  reject equal-prominence), persists `cellark.consent`, **re-openable** (footer "Cookies" link +
+  a manage control on privacy.html). On all content pages (index/catalog/privacy/terms/returns;
+  404 is a standalone page).
+- ✅ No non-essential scripts load before consent — there are **none** (no analytics yet). Any
+  future analytics MUST check `window.CellarkConsent.has('analytics')` and re-check on the
+  `cellark:consent` event before loading.
 
-## 2. Cookie / script audit — keep this table current
-| Cookie / script | Purpose | Essential? | Consent needed? |
-|---|---|---|---|
-| Google Fonts (Fraunces/Spectral/Inter) | Typography | Functional | Self-host to avoid 3rd-party? (review) |
-| Shopify checkout / cart | Commerce | Essential | No (essential) |
-| (Analytics — GA4 / Clarity) | Metrics | No | **Yes — gate behind consent** |
-| Age-gate state | 18+ gate | Essential | No |
-> Update this whenever you add a script, embed, pixel, or font.
+## 2. Cookie / script audit — current as of 2026-06-14
+**The static site sets NO cookies and makes ZERO third-party requests.** It uses only
+first-party `localStorage`; web fonts are self-hosted. Cookies appear only on Shopify's own
+checkout domain (governed by Shopify).
 
-## 3. Age verification (18+) — partially done
-- Site age-gate exists (`assets/age-gate.js`) — review copy + EL/EN + reduced-motion.
-- Add "Πώληση μόνο σε ενήλικες / Sold to adults only" + "Απολαμβάνετε υπεύθυνα · 18+"
-  messaging, including at/near checkout. Add the equivalent gate/notice in Shopify too.
+| Item | Where | Purpose | Essential? | Consent needed? |
+|---|---|---|---|---|
+| Fonts (Fraunces/Spectral/Inter) | **self-hosted** `assets/fonts/` | Typography | Essential (1st-party) | No (no 3rd party) |
+| `localStorage` `cellark.cart` | site | Basket contents | Essential | No |
+| `localStorage` `cellark.lang` | site | EL/EN choice | Essential | No |
+| `localStorage` `cellark.ageConfirmed` | site | 18+ gate state | Essential | No |
+| `localStorage` `cellark.consent` | site | Consent record | Essential | No |
+| Cart permalink → checkout | Shopify domain | Commerce / payment | Essential | No (essential) |
+| Shopify checkout cookies | Shopify domain | Checkout/session | Essential | Governed by Shopify |
+| _(future)_ Analytics (GA4/Clarity) | — | Metrics | No | **Yes — gate via `CellarkConsent.has('analytics')`** |
+> Update this whenever you add a script, embed, pixel, or font. No analytics/pixels exist today.
+
+## 3. Age verification (18+) — site DONE; checkout = owner
+- ✅ Reviewed `assets/age-gate.js`: first-visit 18+ modal, EL/EN, focus-trap + roving Tab,
+  reduced-motion aware, "Yes 18+" persists / "No" → farewell card. Solid. (It's a UX gate, not
+  a security control — real verification belongs at checkout / delivery.)
+- ✅ Site messaging present: footer "Πώληση μόνο σε ενήλικες / Sales to adults only" +
+  "Απολαμβάνετε υπεύθυνα"; age-gate states "18+" and "enjoy responsibly".
+- ⬜ **OWNER (in Shopify):** add an 18+ confirmation + responsible-drinking note at checkout, and
+  arrange **ship-to-adult / ID-on-delivery** with the courier (esp. for COD).
 
 ## 4. VAT / ΦΠΑ — owner configures, we display
 - Greek ΦΠΑ **24%** on wine, included in retail prices. Domestic-only ⇒ **no reverse-charge**
