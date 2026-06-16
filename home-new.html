@@ -48,14 +48,14 @@
   .scroll-cue{ position:absolute; left:50%; bottom:1.8rem; z-index:3; transform:translateX(-50%); width:1px; height:54px; background:linear-gradient(to bottom, transparent, var(--gold-soft)); }
 
   /* story */
-  .story{ padding:clamp(6rem,16vh,12rem) 0; background:var(--ink-2); }
+  .story{ position:relative; isolation:isolate; overflow:hidden; padding:clamp(6rem,16vh,12rem) 0; background:var(--ink-2); }
+  .story-bg{ position:absolute; inset:0; z-index:-1; }
+  .story-bg img{ width:100%; height:100%; object-fit:cover; filter:blur(8px) brightness(.42) saturate(.9); transform:scale(1.1); }
+  .story-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(rgba(14,11,9,.5), rgba(14,11,9,.82)); }
   .story .eyebrow{ margin-bottom:1.4rem; }
   .story h2{ font-size:clamp(2rem,5.4vw,4.4rem); line-height:1.08; max-width:18ch; }
   .story .lede{ font-size:clamp(1.05rem,1.7vw,1.3rem); line-height:1.75; color:var(--muted); max-width:60ch; margin:1.8rem 0 0; }
-  .story-main{ display:grid; grid-template-columns:.82fr 1.18fr; gap:clamp(2rem,5vw,4.5rem); align-items:center; margin-top:clamp(2.5rem,6vh,4rem); }
-  .story-photo img{ width:100%; aspect-ratio:3/4; object-fit:cover; display:block; }
-  .story-main .lede{ margin:0; max-width:46ch; }
-  @media(max-width:820px){ .story-main{ grid-template-columns:1fr; gap:1.8rem; } }
+  /* (story side-photo removed — blurred barrel background used instead) */
   .story-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2.4rem; margin-top:clamp(3rem,7vh,5.5rem); }
   .story-grid .num{ font-family:var(--serif); font-size:1.4rem; color:var(--gold); }
   .story-grid h3{ font-size:1.35rem; margin:.7rem 0 .5rem; }
@@ -131,13 +131,11 @@
 
   <!-- STORY -->
   <section class="story" id="story">
+    <div class="story-bg" aria-hidden="true"><img src="assets/photos/barrels.jpg" alt="" /></div>
     <div class="wrap">
       <span class="eyebrow">Η Ιστορία</span>
       <h2 data-split>Από τα ηφαιστειακά εδάφη της Σαλίνα, στο ποτήρι σας.</h2>
-      <div class="story-main">
-        <div class="story-photo" data-fade><img src="assets/photos/story-cellar.jpg" alt="Κελάρι Cantine Colosi" loading="lazy" /></div>
-        <p class="lede" data-fade>Το Cellar · K φέρνει στην Ελλάδα τα κρασιά της Cantine Colosi — μιας οικογένειας που καλλιεργεί αμπέλια στα Αιολικά Νησιά και τη Σικελία εδώ και γενιές. Κάθε ετικέτα κουβαλά τον ήλιο, το αλάτι και το ηφαίστειο του τόπου της.</p>
-      </div>
+      <p class="lede" data-fade>Το Cellar · K φέρνει στην Ελλάδα τα κρασιά της Cantine Colosi — μιας οικογένειας που καλλιεργεί αμπέλια στα Αιολικά Νησιά και τη Σικελία εδώ και γενιές. Κάθε ετικέτα κουβαλά τον ήλιο, το αλάτι και το ηφαίστειο του τόπου της.</p>
       <div class="story-grid">
         <div data-fade><div class="num">I</div><h3>Ο τόπος</h3><p>Ηφαιστειακά εδάφη, θαλασσινός αέρας και ο σικελικός ήλιος — το terroir που δίνει στα κρασιά τον χαρακτήρα τους.</p></div>
         <div data-fade><div class="num">II</div><h3>Η οικογένεια</h3><p>Η Cantine Colosi καλλιεργεί τη Malvasia των Αιολικών και τις σικελικές ποικιλίες με σεβασμό στην παράδοση.</p></div>
