@@ -180,20 +180,27 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
       exists; the items themselves stay open for the client/lawyer to action — not ours to tick.)*
 
 ## Phase 6 — Launch
-- [~] 6.0 **Hero + story motion rework → became a FULL HOMEPAGE REDESIGN** (owner-driven, 2026-06-14).
+- [x] 6.0 **Hero + story motion rework → became a FULL HOMEPAGE REDESIGN** (owner-driven, 2026-06-14).
       Owner reversed the vanilla decision: re-added **GSAP 3.13 + ScrollTrigger + SplitText + Lenis**
       (vendored `assets/vendor/`). Chose hero = **Cinematic** (from a 5-hero chooser) + catalogue =
       **editorial split** (from a 4-variation chooser). **`index.html` IS the new live homepage**
       (`6b5aa68`): cinematic hero (logo + zoom + SplitText) → Η Ιστορία (blurred barrels) → Ο Κατάλογος
       (editorial split) → tagline interlude "Ο ήλιος της Σικελίας…" → ΓΙΑ ΕΣΤΙΑΤΟΡΙΑ & ΚΑΒΕΣ → footer.
       Full EL/EN, age-gate + consent, trade mailto CTAs, CSP+noindex. Spaced wordmark **"Cellar · K"**.
-      Remaining: hero AVIF (sips one won't decode → JPG for now); **redesign catalog.html to match** (Phase 6.0b).
       *(6.0b legal/404 DONE 2026-06-16: rebuilt privacy/terms/returns self-contained in the new homepage
       palette — spaced "Cellar · K" wordmark + logo-mark.png, cinematic dark hero band, imprint card with
       real legal data, "Under review" note, matching footer; 404 reskinned to the new tokens + spaced
       wordmark. Verified all four: EL/EN toggle swaps, no console errors, mobile+desktop fit. Fixed an i18n
       bug — nested `data-gr` inside a `data-gr` parent (returns shipping lines) was wiped by `textContent`;
-      split into sibling leaf spans. catalog.html redesign is the only 6.0b page left.)*
+      split into sibling leaf spans.)*
+      *(6.0b catalog.html DONE 2026-06-16: aligned to the homepage WITHOUT touching cart/checkout —
+      shared `styles.css` tokens → warm `--ink:#0e0b09` (+ink-soft/raise, body→cream), nav logo swapped
+      from masked `<i>` → full-colour `<img logo-mark.png>`, spaced "Cellar · K" across title/nav/footer/OG,
+      `nav.scrolled`+footer-mark colours matched, `styles.css?v=8` / `fonts.css?v=2`. Also spaced the
+      shared **age-gate.js** wordmark (helps homepage too). Browser-verified: 13 rows + ΟΛΑ-default tabs
+      build, bottles load, **cart add → Shopify permalink `…/cart/58240781615491:1` intact**, EL/EN +
+      age-gate + consent work, no console errors. Whole site now visually consistent.)*
+      Remaining (minor, non-blocking): hero AVIF (sips one won't decode → JPG on homepage; catalog hero AVIF fine).
 - [ ] 6.1 Custom domain (`cellark.gr`) + DNS + GitHub Pages config. Decide deploy repo
       (`Romanos2408/cellark` vs `cellar-k/cellar-k.github.io`) and update canonical URLs.
 - [ ] 6.2 Final QA: both languages, mobile + desktop, all flows.

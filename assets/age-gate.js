@@ -31,26 +31,26 @@ function readLang() {
 
 const COPY = {
   gr: {
-    brand: 'Cellar·K',
+    brand: 'Cellar · K',
     eyebrowEnter: 'Πριν συνεχίσετε',
     title: 'Έχετε τη νόμιμη ηλικία κατανάλωσης;',
-    desc: 'Το Cellar·K απευθύνεται σε ενήλικες — 18+ στην Ελλάδα. Συνεχίζοντας, επιβεβαιώνετε ότι έχετε τη νόμιμη ηλικία και θα απολαύσετε υπεύθυνα.',
+    desc: 'Το Cellar · K απευθύνεται σε ενήλικες — 18+ στην Ελλάδα. Συνεχίζοντας, επιβεβαιώνετε ότι έχετε τη νόμιμη ηλικία και θα απολαύσετε υπεύθυνα.',
     yes: 'Ναι, είμαι 18+',
     no: 'Όχι',
     eyebrowBye: 'Επιστρέψτε αργότερα',
     byeTitle: 'Ευχαριστούμε για την επίσκεψη.',
-    byeDesc: 'Το Cellar·K απευθύνεται σε ενήλικες νόμιμης ηλικίας. Απολαύστε υπεύθυνα.',
+    byeDesc: 'Το Cellar · K απευθύνεται σε ενήλικες νόμιμης ηλικίας. Απολαύστε υπεύθυνα.',
   },
   en: {
-    brand: 'Cellar·K',
+    brand: 'Cellar · K',
     eyebrowEnter: 'Before you enter',
     title: 'Are you of legal drinking age?',
-    desc: 'Cellar·K serves adults — 18+ in Greece. By entering, you confirm you are of legal drinking age and will enjoy responsibly.',
+    desc: 'Cellar · K serves adults — 18+ in Greece. By entering, you confirm you are of legal drinking age and will enjoy responsibly.',
     yes: 'Yes, I am 18+',
     no: 'No',
     eyebrowBye: 'Come back later',
     byeTitle: 'Thanks for stopping by.',
-    byeDesc: 'Cellar·K is reserved for adults of legal drinking age. Please enjoy responsibly.',
+    byeDesc: 'Cellar · K is reserved for adults of legal drinking age. Please enjoy responsibly.',
   },
 };
 

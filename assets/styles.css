@@ -15,10 +15,10 @@
    ============================================================ */
 
 :root{
-  /* core palette */
-  --ink:#141414;
-  --ink-soft:#1c1714;
-  --ink-raise:#241c18;
+  /* core palette — aligned to the redesigned homepage (warmer, darker ink) */
+  --ink:#0e0b09;
+  --ink-soft:#141110;
+  --ink-raise:#1c1714;
   --oxblood:#4E0000;
   --oxblood-deep:#2a0000;
   --bone:#E7E7E0;
@@ -56,7 +56,7 @@ html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:
 
 body{
   background:var(--ink);
-  color:var(--bone);
+  color:var(--cream);
   font-family:"Spectral",Georgia,serif;
   font-weight:400;
   font-size:18px;
@@ -130,7 +130,7 @@ nav{
 }
 /* dark glass bar once past the hero (page below stays dark/cinematic) */
 nav.scrolled{
-  background:rgba(16,12,11,.82); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  background:rgba(14,11,9,.9); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
   border-bottom-color:rgba(191,167,115,.16);
   padding-top:.95rem; padding-bottom:.95rem;
 }
@@ -140,8 +140,7 @@ nav .brand{
   transition:color .5s var(--ease-out);
 }
 nav.scrolled .brand{ color:var(--cream); }
-nav .brand .brand-mark{ width:34px; aspect-ratio:348/278; flex:none; background-color:currentColor;
-  -webkit-mask:url("logo-mark.png") center/contain no-repeat; mask:url("logo-mark.png") center/contain no-repeat; }
+nav .brand .brand-mark{ height:30px; width:auto; flex:none; }
 nav .links{ display:flex; align-items:center; gap:1.9rem; }
 nav .links a{
   font-family:var(--sans); font-weight:500;
@@ -166,7 +165,7 @@ nav .links a:hover::after{ width:100%; }
   nav .links{ gap:.75rem; }
   nav .links a{ font-size:.66rem; letter-spacing:.1em; }
   nav .brand{ font-size:1.02rem; gap:.45rem; }
-  nav .brand .brand-mark{ width:26px; }
+  nav .brand .brand-mark{ height:24px; width:auto; }
   .lang{ padding:.28rem .55rem; }
 }
 
@@ -244,7 +243,7 @@ footer .legal a{ color:var(--gold); }
 .foot-contact a:hover{ border-color:var(--gold); }
 .foot-contact .addr{ color:var(--muted-dim); font-size:.88rem; max-width:26ch; margin-top:.2rem; }
 footer .mark{ font-family:"Fraunces",serif; font-size:clamp(3rem,9vw,6.5rem); line-height:.86;
-  color:rgba(231,231,224,.07); letter-spacing:-.02em; align-self:flex-end;
+  color:rgba(244,239,230,.1); letter-spacing:-.02em; align-self:flex-end;
   font-variation-settings:"opsz" 144, "wght" 340; }
 @media(max-width:640px){ footer .mark{ font-size:clamp(3rem,18vw,5rem); width:100%; } }
 
