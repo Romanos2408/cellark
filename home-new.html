@@ -4,71 +4,115 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Cellar·K — homepage (WIP)</title>
+<title>Cellar · K — Σικελικά κρασιά, Cantine Colosi</title>
 <link rel="stylesheet" href="assets/fonts/fonts.css?v=2" />
 <style>
   *{ box-sizing:border-box; margin:0; padding:0; }
   :root{
-    --ink:#0e0b09; --ink-2:#141110; --cream:#f4efe6; --gold:#bfa773;
-    --gold-soft:#d8c79c; --muted:#b3aa9c; --muted-dim:#8d8576; --oxblood:#4E0000;
-    --serif:'Fraunces',Georgia,serif; --body:'Spectral',Georgia,serif;
-    --sans:'Inter',system-ui,sans-serif;
+    --ink:#0e0b09; --ink-2:#141110; --ink-3:#1b1612; --cream:#f4efe6; --gold:#bfa773;
+    --gold-soft:#d8c79c; --muted:#b3aa9c; --muted-dim:#8d8576; --oxblood:#4E0000; --oxblood-deep:#2a0000;
+    --serif:'Fraunces',Georgia,serif; --body:'Spectral',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+    --wrap:1180px;
   }
   html{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
   body{ background:var(--ink); color:var(--cream); font-family:var(--body); overflow-x:hidden; }
-  .eyebrow{ font-family:var(--sans); font-size:.76rem; font-weight:500; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); }
+  h1,h2,h3{ font-family:var(--serif); font-weight:400; font-optical-sizing:auto; letter-spacing:-.01em; color:var(--cream); }
+  h1 .dot,h2 .dot{ color:var(--oxblood); }
+  .eyebrow{ font-family:var(--sans); font-size:.74rem; font-weight:500; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); display:block; }
+  .wrap{ max-width:var(--wrap); margin:0 auto; padding:0 clamp(1.4rem,5vw,4rem); }
+  .btn{ display:inline-block; font-family:var(--sans); font-size:.78rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink); background:var(--gold); padding:1.05rem 2.1rem; border-radius:2px; text-decoration:none; transition:background .3s, transform .3s; }
+  .btn:hover{ background:var(--gold-soft); transform:translateY(-2px); }
+  .btn.ghost{ background:none; color:var(--cream); border:1px solid rgba(216,199,156,.45); }
+  .btn.ghost:hover{ border-color:var(--gold-soft); color:var(--gold-soft); background:none; }
 
-  /* ---- top bar ---- */
-  .topbar{ position:fixed; inset:0 0 auto 0; z-index:20; display:flex; align-items:center; justify-content:space-between;
-    padding:1.6rem clamp(1.4rem,5vw,5rem); }
-  .topbar .brand{ font-family:var(--serif); font-size:1.45rem; font-weight:500; color:var(--cream); text-decoration:none; letter-spacing:.01em; }
-  .topbar nav{ display:flex; gap:2.4rem; }
-  .topbar nav a{ font-family:var(--sans); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--cream); opacity:.82; text-decoration:none; transition:color .3s ease, opacity .3s ease; }
-  .topbar nav a:hover{ color:var(--gold-soft); opacity:1; }
-  @media(max-width:740px){ .topbar nav{ display:none; } }
+  /* nav */
+  .nav{ position:fixed; inset:0 0 auto 0; z-index:30; display:flex; align-items:center; justify-content:space-between;
+    padding:1.5rem clamp(1.4rem,5vw,4rem); transition:background .4s, padding .4s; text-shadow:0 1px 16px rgba(0,0,0,.4); }
+  .nav.solid{ background:rgba(14,11,9,.9); backdrop-filter:blur(10px); padding-top:1rem; padding-bottom:1rem; text-shadow:none; }
+  .nav .brand{ font-family:var(--serif); font-size:1.35rem; font-weight:500; color:var(--cream); text-decoration:none; }
+  .nav ul{ display:flex; gap:2rem; list-style:none; }
+  .nav a{ font-family:var(--sans); font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--cream); opacity:.82; text-decoration:none; transition:color .3s; }
+  .nav a:hover{ color:var(--gold-soft); }
+  @media(max-width:860px){ .nav ul{ display:none; } }
 
-  /* ---- hero ---- */
+  /* hero */
   .hero{ position:relative; height:100svh; min-height:600px; overflow:hidden; display:flex; align-items:flex-end; }
   .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scale(1.16); will-change:transform; }
-  .hero-scrim{ position:absolute; inset:0; z-index:1; pointer-events:none;
-    background:linear-gradient(to top, rgba(8,6,5,.95) 0%, rgba(8,6,5,.5) 34%, rgba(8,6,5,.06) 58%, rgba(8,6,5,.42) 100%); }
+  .hero-scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(to top, rgba(8,6,5,.95) 0%, rgba(8,6,5,.5) 34%, rgba(8,6,5,.06) 58%, rgba(8,6,5,.42) 100%); }
   .hero-content{ position:relative; z-index:2; width:100%; padding:0 clamp(1.4rem,5vw,5rem) clamp(3rem,9vh,7rem); }
-  .hero-content .eyebrow{ display:block; margin:0 0 1.5rem; }
-  .hero h1{ font-family:var(--serif); font-weight:400; font-optical-sizing:auto; font-size:clamp(4.2rem,16vw,14rem);
-    line-height:.9; letter-spacing:-.015em; color:var(--cream); }
-  .hero h1 .dot{ color:var(--oxblood); }
-  .hero .tagline{ font-family:var(--body); font-style:italic; font-size:clamp(1.15rem,2.6vw,1.9rem); color:var(--gold-soft);
-    margin:1.6rem 0 0; max-width:26ch; line-height:1.3; }
-  .scroll-cue{ position:absolute; left:50%; bottom:1.8rem; z-index:3; transform:translateX(-50%);
-    width:1px; height:54px; background:linear-gradient(to bottom, transparent, var(--gold-soft)); }
-  .scroll-cue::after{ content:""; position:absolute; left:50%; top:0; width:4px; height:4px; border-radius:50%;
-    background:var(--gold-soft); transform:translateX(-50%); animation:cue 2.4s var(--ease,ease) infinite; }
-  @keyframes cue{ 0%{ top:0; opacity:0 } 30%{ opacity:1 } 100%{ top:50px; opacity:0 } }
+  .hero-content .eyebrow{ margin:0 0 1.5rem; }
+  .hero h1{ font-size:clamp(4rem,15vw,13rem); line-height:.9; }
+  .hero .tagline{ font-family:var(--body); font-style:italic; font-size:clamp(1.15rem,2.5vw,1.85rem); color:var(--gold-soft); margin:1.5rem 0 0; max-width:26ch; line-height:1.3; }
+  .scroll-cue{ position:absolute; left:50%; bottom:1.8rem; z-index:3; transform:translateX(-50%); width:1px; height:54px; background:linear-gradient(to bottom, transparent, var(--gold-soft)); }
 
-  /* ---- intro / story ---- */
-  .intro{ background:var(--ink-2); padding:clamp(6rem,18vh,13rem) clamp(1.4rem,5vw,5rem); }
-  .intro-wrap{ max-width:980px; margin:0 auto; }
-  .intro .eyebrow{ display:block; margin:0 0 1.4rem; }
-  .intro h2{ font-family:var(--serif); font-weight:400; font-size:clamp(2rem,5.2vw,4.2rem); line-height:1.08;
-    color:var(--cream); max-width:18ch; }
-  .intro .ibody{ font-family:var(--body); font-size:clamp(1.05rem,1.6vw,1.25rem); line-height:1.75; color:var(--muted);
-    max-width:60ch; margin:1.8rem 0 0; }
-  .spacer{ height:60vh; display:grid; place-items:center; color:var(--muted-dim); font-family:var(--sans);
-    font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; }
+  /* story */
+  .story{ padding:clamp(6rem,16vh,12rem) 0; background:var(--ink-2); }
+  .story .eyebrow{ margin-bottom:1.4rem; }
+  .story h2{ font-size:clamp(2rem,5.4vw,4.4rem); line-height:1.08; max-width:18ch; }
+  .story .lede{ font-size:clamp(1.05rem,1.7vw,1.3rem); line-height:1.75; color:var(--muted); max-width:60ch; margin:1.8rem 0 0; }
+  .story-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2.4rem; margin-top:clamp(3rem,7vh,5.5rem); }
+  .story-grid .num{ font-family:var(--serif); font-size:1.4rem; color:var(--gold); }
+  .story-grid h3{ font-size:1.35rem; margin:.7rem 0 .5rem; }
+  .story-grid p{ font-size:.98rem; line-height:1.65; color:var(--muted); }
+  @media(max-width:780px){ .story-grid{ grid-template-columns:1fr; gap:2rem; } }
+
+  /* catalogue feature */
+  .cat{ padding:clamp(6rem,16vh,12rem) 0; }
+  .cat-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; flex-wrap:wrap; margin-bottom:clamp(2.5rem,6vh,4.5rem); }
+  .cat-head h2{ font-size:clamp(2rem,5.4vw,4.4rem); line-height:1; }
+  .cat-head .eyebrow{ margin-bottom:1rem; }
+  .cat-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:clamp(1.2rem,2.5vw,2.2rem); }
+  .cat-card{ text-align:center; }
+  .cat-bottle{ height:clamp(220px,30vh,340px); display:flex; align-items:flex-end; justify-content:center; margin-bottom:1.1rem; }
+  .cat-bottle img{ height:100%; width:auto; filter:drop-shadow(0 18px 26px rgba(0,0,0,.5)); transition:transform .5s cubic-bezier(.16,1,.3,1); }
+  .cat-card:hover .cat-bottle img{ transform:translateY(-8px) scale(1.03); }
+  .cat-card .vint{ font-family:var(--sans); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted-dim); }
+  .cat-card .cname{ font-family:var(--serif); font-size:1.12rem; color:var(--cream); margin-top:.25rem; }
+  .cat-cta{ text-align:center; margin-top:clamp(3rem,7vh,5rem); }
+
+  /* interlude */
+  .interlude{ position:relative; padding:clamp(7rem,20vh,14rem) 0; text-align:center;
+    background:radial-gradient(120% 120% at 50% 0%, rgba(78,0,0,.45), rgba(14,11,9,0) 55%), var(--ink); }
+  .interlude p{ font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(2rem,6vw,5rem); line-height:1.15; color:var(--cream); max-width:16ch; margin:0 auto; }
+  .interlude .src{ font-family:var(--sans); font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin-top:2rem; }
+
+  /* trade */
+  .trade{ background:linear-gradient(160deg, var(--oxblood-deep), #1a0606 70%); padding:clamp(5rem,14vh,10rem) 0; }
+  .trade-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(2rem,5vw,5rem); align-items:center; }
+  .trade .eyebrow{ color:var(--gold-soft); margin-bottom:1.2rem; }
+  .trade h2{ font-size:clamp(2rem,5vw,4rem); line-height:1.05; }
+  .trade p{ font-family:var(--body); font-size:clamp(1.05rem,1.5vw,1.22rem); line-height:1.7; color:#e9d9d0; margin:1.4rem 0 0; max-width:46ch; }
+  .trade-cta{ display:flex; flex-direction:column; gap:1rem; align-items:flex-start; }
+  .trade-cta .note{ font-family:var(--sans); font-size:.8rem; color:#c9a9a0; letter-spacing:.04em; }
+  @media(max-width:780px){ .trade-grid{ grid-template-columns:1fr; gap:2.2rem; } }
+
+  /* footer */
+  footer{ background:var(--ink); padding:clamp(4rem,9vh,7rem) 0 2.5rem; border-top:1px solid rgba(191,167,115,.16); }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2.4rem; }
+  .foot-mark{ font-family:var(--serif); font-size:clamp(2.4rem,5vw,4rem); color:rgba(244,239,230,.1); line-height:1; margin-bottom:1.4rem; }
+  footer .legal{ font-size:.92rem; line-height:1.6; color:var(--muted); max-width:42ch; }
+  footer h4{ font-family:var(--sans); font-size:.72rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; }
+  footer ul{ list-style:none; }
+  footer li{ margin-bottom:.6rem; }
+  footer a{ color:var(--muted); text-decoration:none; font-size:.95rem; transition:color .3s; }
+  footer a:hover{ color:var(--gold-soft); }
+  .foot-imprint{ margin-top:3rem; padding-top:1.6rem; border-top:1px solid rgba(191,167,115,.12); font-family:var(--sans); font-size:.74rem; color:var(--muted-dim); letter-spacing:.02em; }
+  @media(max-width:780px){ .foot-grid{ grid-template-columns:1fr; gap:1.8rem; } }
 </style>
 </head>
 <body>
-  <header class="topbar">
+  <header class="nav" id="nav">
     <a class="brand" href="#">Cellar · K</a>
-    <nav>
-      <a href="#">Αρχική</a>
-      <a href="#">Ο Κατάλογος</a>
-      <a href="#">Η Ιστορία</a>
-      <a href="#">Χονδρική</a>
-    </nav>
-    <span class="eyebrow" style="color:var(--cream);opacity:.8">EL · EN</span>
+    <ul>
+      <li><a href="#story">Η Ιστορία</a></li>
+      <li><a href="#catalogue">Ο Κατάλογος</a></li>
+      <li><a href="#trade">Χονδρική</a></li>
+    </ul>
+    <span class="eyebrow" style="color:var(--cream);opacity:.8;letter-spacing:.18em">EL · EN</span>
   </header>
 
+  <!-- HERO -->
   <section class="hero">
     <img class="hero-bg" src="assets/photos/hero-sicily.jpg" alt="Αμπελώνας στη Σικελία στο χρυσό φως του δειλινού" />
     <div class="hero-scrim"></div>
@@ -80,53 +124,154 @@
     <div class="scroll-cue" aria-hidden="true"></div>
   </section>
 
-  <section class="intro">
-    <div class="intro-wrap">
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="wrap">
       <span class="eyebrow">Η Ιστορία</span>
-      <h2>Από τα ηφαιστειακά εδάφη της Σαλίνα, στο ποτήρι σας.</h2>
-      <p class="ibody">Το Cellar·K φέρνει στην Ελλάδα τα κρασιά της Cantine Colosi — μιας οικογένειας που καλλιεργεί αμπέλια στα Αιολικά Νησιά και τη Σικελία εδώ και γενιές. Κάθε ετικέτα κουβαλά τον ήλιο, το αλάτι και το ηφαίστειο του τόπου της.</p>
+      <h2 data-split>Από τα ηφαιστειακά εδάφη της Σαλίνα, στο ποτήρι σας.</h2>
+      <p class="lede" data-fade>Το Cellar · K φέρνει στην Ελλάδα τα κρασιά της Cantine Colosi — μιας οικογένειας που καλλιεργεί αμπέλια στα Αιολικά Νησιά και τη Σικελία εδώ και γενιές. Κάθε ετικέτα κουβαλά τον ήλιο, το αλάτι και το ηφαίστειο του τόπου της.</p>
+      <div class="story-grid">
+        <div data-fade><div class="num">I</div><h3>Ο τόπος</h3><p>Ηφαιστειακά εδάφη, θαλασσινός αέρας και ο σικελικός ήλιος — το terroir που δίνει στα κρασιά τον χαρακτήρα τους.</p></div>
+        <div data-fade><div class="num">II</div><h3>Η οικογένεια</h3><p>Η Cantine Colosi καλλιεργεί τη Malvasia των Αιολικών και τις σικελικές ποικιλίες με σεβασμό στην παράδοση.</p></div>
+        <div data-fade><div class="num">III</div><h3>Η επιλογή</h3><p>Δεκατρείς ετικέτες, διαλεγμένες μία προς μία για το ελληνικό τραπέζι — λευκά, ροζέ, ερυθρά, αφρώδη και γλυκά.</p></div>
+      </div>
     </div>
   </section>
 
-  <div class="spacer">συνεχίζεται…</div>
+  <!-- CATALOGUE FEATURE -->
+  <section class="cat" id="catalogue">
+    <div class="wrap">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Ο Κατάλογος</span>
+          <h2 data-split>Δεκατρείς ετικέτες.</h2>
+        </div>
+        <p class="lede" data-fade style="max-width:34ch;margin:0">Από τη φρέσκια Malvasia ως το βαθύ Nero d'Avola — όλη η συλλογή της Cantine Colosi.</p>
+      </div>
+      <div class="cat-grid" id="catGrid"></div>
+      <div class="cat-cta" data-fade>
+        <a class="btn" href="catalogue/menu.html">Δείτε ολόκληρο τον κατάλογο</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERLUDE -->
+  <section class="interlude">
+    <div class="wrap">
+      <p data-split>«Ο ήλιος της Σικελίας, φυλαγμένος σε γυαλί.»</p>
+      <div class="src" data-fade>Cellar · K</div>
+    </div>
+  </section>
+
+  <!-- TRADE -->
+  <section class="trade" id="trade">
+    <div class="wrap trade-grid">
+      <div>
+        <span class="eyebrow">Για επαγγελματίες</span>
+        <h2 data-split>Για εστιατόρια &amp; κάβες.</h2>
+        <p data-fade>Χτίστε τη λίστα κρασιών σας με αυθεντικές σικελικές ετικέτες. Τιμές χονδρικής, σταθερή διαθεσιμότητα και προσωπική εξυπηρέτηση — κατόπιν συνεννόησης.</p>
+      </div>
+      <div class="trade-cta" data-fade>
+        <a class="btn" href="#">Άνοιγμα λογαριασμού χονδρικής</a>
+        <a class="btn ghost" href="#">Κατεβάστε τον τιμοκατάλογο</a>
+        <span class="note">Αποκλειστικά για επαγγελματίες · ΑΦΜ απαραίτητο</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <div class="foot-mark">Cellar · K</div>
+          <p class="legal">Επιλεγμένα σικελικά κρασιά, εισαγωγή και διάθεση με φροντίδα. Απολαμβάνετε υπεύθυνα. Πώληση μόνο σε ενήλικες.</p>
+        </div>
+        <div>
+          <h4>Πλοήγηση</h4>
+          <ul>
+            <li><a href="#story">Η Ιστορία</a></li>
+            <li><a href="#catalogue">Ο Κατάλογος</a></li>
+            <li><a href="#trade">Χονδρική</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Επικοινωνία</h4>
+          <ul>
+            <li><a href="mailto:cellarkinfo@gmail.com">cellarkinfo@gmail.com</a></li>
+            <li><a href="tel:+306972845565">+30 697 284 5565</a></li>
+            <li><a href="https://www.instagram.com/cellar.k.selection" target="_blank" rel="noopener">@cellar.k.selection</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="foot-imprint">© <span id="yr"></span> Cellar · K · [Νόμιμη επωνυμία] · ΑΦΜ [—] · ΓΕΜΗ [—] · ΔΟΥ [—] · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200</p>
+    </div>
+  </footer>
 
   <script src="assets/vendor/gsap.min.js"></script>
   <script src="assets/vendor/ScrollTrigger.min.js"></script>
   <script src="assets/vendor/SplitText.min.js"></script>
   <script src="assets/vendor/lenis.min.js"></script>
   <script>
-    (function(){
-      if(!window.gsap){ return; }
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      gsap.registerPlugin(ScrollTrigger, SplitText);
+  (function(){
+    var WINES = [
+      ['salina-bianco','Salina Bianco','IGP Salina · Λευκό'],['salina-rosso','Salina Rosso','IGP Salina · Ερυθρό'],
+      ['salina-rosato','Salina Rosato','IGP Salina · Ροζέ'],['secca-del-capo','Secca del Capo','IGP Salina · Λευκό'],
+      ['guardiano-del-faro','Guardiano del Faro','IGP Salina · Ερυθρό'],['malvasia-lipari','Malvasia delle Lipari','DOC · Γλυκό'],
+      ['passito','Passito','IGT · Γλυκό'],['mare',"Mar'è",'IGP · Λευκό'],['cariddi-rosato','Cariddi Rosato','DOC Sicilia · Ροζέ'],
+      ['giulia-birbante','Giulia Birbante','Frizzante · Brut'],['grillo-acacia','Grillo Acacia','DOC Sicilia · Λευκό'],
+      ['viognier','Viognier','IGP · Λευκό'],['nero-davola',"Nero d'Avola",'DOC Sicilia · Ερυθρό']
+    ];
+    var grid = document.getElementById('catGrid');
+    grid.innerHTML = WINES.map(function(w){
+      return '<article class="cat-card"><div class="cat-bottle"><img src="assets/wines/'+w[0]+'.png?v=2" alt="'+w[1]+'" loading="lazy"></div>'
+        + '<div class="vint">'+w[2]+'</div><div class="cname">'+w[1]+'</div></article>';
+    }).join('');
+    document.getElementById('yr').textContent = '2026';
 
-      var lenis = new Lenis({ lerp:0.1 });
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add(function(t){ lenis.raf(t*1000); });
-      gsap.ticker.lagSmoothing(0);
+    if(!window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      if(reduce){ gsap.set('.hero-bg',{scale:1}); return; }
+    var lenis = new Lenis({ lerp:0.1 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(t){ lenis.raf(t*1000); });
+    gsap.ticker.lagSmoothing(0);
 
-      gsap.fromTo('.hero-bg', {scale:1.16}, {scale:1.0, duration:18, ease:'none'});
+    // anchor smooth-scroll via lenis
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){ var id=a.getAttribute('href'); if(id.length>1){ var t=document.querySelector(id); if(t){ e.preventDefault(); lenis.scrollTo(t, {offset:-70}); } } });
+    });
+    // nav condense
+    ScrollTrigger.create({ start:'top -80', onUpdate:function(self){ document.getElementById('nav').classList.toggle('solid', self.scroll()>80); } });
 
-      var title = new SplitText('.hero h1', {type:'chars'});
-      var tl = gsap.timeline({ delay:0.15, defaults:{ ease:'power3.out' }});
-      tl.from('.hero .eyebrow', {y:24, autoAlpha:0, duration:0.9})
-        .from(title.chars, {yPercent:135, autoAlpha:0, stagger:0.05, duration:1.15, ease:'power4.out'}, '-=0.35')
-        .from('.hero .tagline', {y:30, autoAlpha:0, duration:1.1}, '-=0.6')
-        .from('.scroll-cue', {autoAlpha:0, duration:0.9}, '-=0.3');
+    if(reduce){ return; }
 
-      gsap.to('.hero-bg', { yPercent:13, ease:'none',
-        scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true }});
-      gsap.to('.hero-content', { yPercent:-22, autoAlpha:0, ease:'none',
-        scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:0.6 }});
+    // hero
+    gsap.fromTo('.hero-bg', {scale:1.16}, {scale:1.0, duration:18, ease:'none'});
+    var ht = new SplitText('.hero h1', {type:'chars'});
+    var tl = gsap.timeline({ delay:0.15, defaults:{ ease:'power3.out' }});
+    tl.from('.hero .eyebrow', {y:24, autoAlpha:0, duration:.9})
+      .from(ht.chars, {yPercent:135, autoAlpha:0, stagger:.05, duration:1.15, ease:'power4.out'}, '-=.35')
+      .from('.hero .tagline', {y:30, autoAlpha:0, duration:1.1}, '-=.6')
+      .from('.scroll-cue', {autoAlpha:0, duration:.9}, '-=.3');
+    gsap.to('.hero-bg', { yPercent:13, ease:'none', scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true }});
+    gsap.to('.hero-content', { yPercent:-22, autoAlpha:0, ease:'none', scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:.6 }});
 
-      var iTitle = new SplitText('.intro h2', {type:'lines', mask:'lines'});
-      gsap.from(iTitle.lines, { yPercent:115, duration:1.1, stagger:0.12, ease:'power3.out',
-        scrollTrigger:{ trigger:'.intro', start:'top 72%' }});
-      gsap.from('.intro .ibody', { y:30, autoAlpha:0, duration:1, ease:'power2.out',
-        scrollTrigger:{ trigger:'.intro .ibody', start:'top 86%' }});
-    })();
+    // section heading splits
+    gsap.utils.toArray('[data-split]').forEach(function(el){
+      var sp = new SplitText(el, {type:'lines', mask:'lines'});
+      gsap.from(sp.lines, { yPercent:115, duration:1.05, stagger:.1, ease:'power3.out',
+        scrollTrigger:{ trigger:el, start:'top 82%' }});
+    });
+    // fade-ups
+    gsap.utils.toArray('[data-fade]').forEach(function(el){
+      gsap.from(el, { y:32, autoAlpha:0, duration:1, ease:'power2.out', scrollTrigger:{ trigger:el, start:'top 88%' }});
+    });
+    // catalogue cards stagger
+    gsap.from('#catGrid .cat-card', { y:44, autoAlpha:0, duration:.8, stagger:.05, ease:'power2.out',
+      scrollTrigger:{ trigger:'#catGrid', start:'top 80%' }});
+  })();
   </script>
 </body>
 </html>
