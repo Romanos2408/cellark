@@ -30,7 +30,8 @@
   .nav{ position:fixed; inset:0 0 auto 0; z-index:30; display:flex; align-items:center; justify-content:space-between;
     padding:1.5rem clamp(1.4rem,5vw,4rem); transition:background .4s, padding .4s; text-shadow:0 1px 16px rgba(0,0,0,.4); }
   .nav.solid{ background:rgba(14,11,9,.9); backdrop-filter:blur(10px); padding-top:1rem; padding-bottom:1rem; text-shadow:none; }
-  .nav .brand{ font-family:var(--serif); font-size:1.35rem; font-weight:500; color:var(--cream); text-decoration:none; }
+  .nav .brand{ font-family:var(--serif); font-size:1.35rem; font-weight:500; color:var(--cream); text-decoration:none; display:inline-flex; align-items:center; gap:.65rem; }
+  .nav .brand-mark{ height:30px; width:auto; }
   .nav ul{ display:flex; gap:2rem; list-style:none; }
   .nav a{ font-family:var(--sans); font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--cream); opacity:.82; text-decoration:none; transition:color .3s; }
   .nav a:hover{ color:var(--gold-soft); }
@@ -51,6 +52,10 @@
   .story .eyebrow{ margin-bottom:1.4rem; }
   .story h2{ font-size:clamp(2rem,5.4vw,4.4rem); line-height:1.08; max-width:18ch; }
   .story .lede{ font-size:clamp(1.05rem,1.7vw,1.3rem); line-height:1.75; color:var(--muted); max-width:60ch; margin:1.8rem 0 0; }
+  .story-main{ display:grid; grid-template-columns:.82fr 1.18fr; gap:clamp(2rem,5vw,4.5rem); align-items:center; margin-top:clamp(2.5rem,6vh,4rem); }
+  .story-photo img{ width:100%; aspect-ratio:3/4; object-fit:cover; display:block; }
+  .story-main .lede{ margin:0; max-width:46ch; }
+  @media(max-width:820px){ .story-main{ grid-template-columns:1fr; gap:1.8rem; } }
   .story-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2.4rem; margin-top:clamp(3rem,7vh,5.5rem); }
   .story-grid .num{ font-family:var(--serif); font-size:1.4rem; color:var(--gold); }
   .story-grid h3{ font-size:1.35rem; margin:.7rem 0 .5rem; }
@@ -103,7 +108,7 @@
 </head>
 <body>
   <header class="nav" id="nav">
-    <a class="brand" href="#">Cellar · K</a>
+    <a class="brand" href="#"><img class="brand-mark" src="assets/logo-mark.png" alt="" /><span>Cellar · K</span></a>
     <ul>
       <li><a href="#story">Η Ιστορία</a></li>
       <li><a href="#catalogue">Ο Κατάλογος</a></li>
@@ -129,7 +134,10 @@
     <div class="wrap">
       <span class="eyebrow">Η Ιστορία</span>
       <h2 data-split>Από τα ηφαιστειακά εδάφη της Σαλίνα, στο ποτήρι σας.</h2>
-      <p class="lede" data-fade>Το Cellar · K φέρνει στην Ελλάδα τα κρασιά της Cantine Colosi — μιας οικογένειας που καλλιεργεί αμπέλια στα Αιολικά Νησιά και τη Σικελία εδώ και γενιές. Κάθε ετικέτα κουβαλά τον ήλιο, το αλάτι και το ηφαίστειο του τόπου της.</p>
+      <div class="story-main">
+        <div class="story-photo" data-fade><img src="assets/photos/story-cellar.jpg" alt="Κελάρι Cantine Colosi" loading="lazy" /></div>
+        <p class="lede" data-fade>Το Cellar · K φέρνει στην Ελλάδα τα κρασιά της Cantine Colosi — μιας οικογένειας που καλλιεργεί αμπέλια στα Αιολικά Νησιά και τη Σικελία εδώ και γενιές. Κάθε ετικέτα κουβαλά τον ήλιο, το αλάτι και το ηφαίστειο του τόπου της.</p>
+      </div>
       <div class="story-grid">
         <div data-fade><div class="num">I</div><h3>Ο τόπος</h3><p>Ηφαιστειακά εδάφη, θαλασσινός αέρας και ο σικελικός ήλιος — το terroir που δίνει στα κρασιά τον χαρακτήρα τους.</p></div>
         <div data-fade><div class="num">II</div><h3>Η οικογένεια</h3><p>Η Cantine Colosi καλλιεργεί τη Malvasia των Αιολικών και τις σικελικές ποικιλίες με σεβασμό στην παράδοση.</p></div>
