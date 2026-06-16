@@ -4,48 +4,52 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https://romanos2408.github.io data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
-<title>Cellar·K — Η σελίδα δεν βρέθηκε (404)</title>
+<title>Cellar · K — Η σελίδα δεν βρέθηκε (404)</title>
 <meta name="robots" content="noindex" />
-<meta name="theme-color" content="#141414" />
+<meta name="theme-color" content="#0e0b09" />
 <link rel="icon" type="image/png" sizes="32x32" href="https://romanos2408.github.io/cellark/assets/favicon-32.png" />
 <link rel="apple-touch-icon" href="https://romanos2408.github.io/cellark/assets/apple-touch-icon.png" />
-<link rel="stylesheet" href="https://romanos2408.github.io/cellark/assets/fonts/fonts.css?v=1">
+<link rel="stylesheet" href="https://romanos2408.github.io/cellark/assets/fonts/fonts.css?v=2">
 <style>
   :root{
-    --bone:#E7E7E0; --ink:#141414; --oxblood:#4E0000; --gold:#BFA773;
+    --ink:#0e0b09; --cream:#f4efe6; --oxblood:#4E0000; --gold:#bfa773; --gold-soft:#d8c79c; --muted:#b3aa9c;
     --serif:'Fraunces',Georgia,serif; --body:'Spectral',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
   }
   *{ box-sizing:border-box; margin:0; padding:0; }
   html,body{ height:100%; }
   body{
     background:
-      radial-gradient(120% 90% at 50% -10%, rgba(78,0,0,.42) 0%, rgba(20,20,18,0) 60%),
+      radial-gradient(120% 90% at 50% -10%, rgba(78,0,0,.5) 0%, rgba(14,11,9,0) 60%),
       var(--ink);
-    color:var(--bone); font-family:var(--body);
+    color:var(--cream); font-family:var(--body); -webkit-font-smoothing:antialiased;
     display:grid; place-items:center; text-align:center;
     padding:2rem; min-height:100svh;
   }
   .wrap{ max-width:34rem; }
-  .mark{ width:88px; height:88px; margin:0 auto 2.2rem; display:block; object-fit:cover;
+  .mark{ width:84px; height:84px; margin:0 auto 1.4rem; display:block; object-fit:cover;
     border-radius:18px; border:1px solid rgba(191,167,115,.5);
     box-shadow:0 10px 34px rgba(0,0,0,.55); }
-  .code{ font-family:var(--sans); font-size:.74rem; letter-spacing:.32em; text-transform:uppercase;
+  .wordmark{ font-family:var(--serif); font-size:1.4rem; font-weight:500; letter-spacing:.02em;
+    color:var(--cream); margin-bottom:2.2rem; }
+  .wordmark .dot{ color:var(--oxblood); }
+  .code{ font-family:var(--sans); font-size:.72rem; letter-spacing:.32em; text-transform:uppercase;
     color:var(--gold); margin-bottom:1.1rem; }
   h1{ font-family:var(--serif); font-weight:400; font-optical-sizing:auto;
     font-size:clamp(2rem,6vw,3.1rem); line-height:1.08; margin-bottom:.5rem; }
   h1 .dot{ color:var(--oxblood); }
-  p.gr{ font-size:1.12rem; color:var(--bone); opacity:.92; margin-top:1.3rem; }
-  p.en{ font-family:var(--sans); font-size:.92rem; color:var(--bone); opacity:.55; margin-top:.5rem; font-style:italic; }
-  .btn{ display:inline-block; margin-top:2.4rem; font-family:var(--sans); font-size:.82rem;
-    letter-spacing:.12em; text-transform:uppercase; text-decoration:none;
-    color:var(--bone); border:1px solid rgba(231,231,224,.32);
+  p.gr{ font-size:1.12rem; color:var(--cream); opacity:.92; margin-top:1.3rem; }
+  p.en{ font-family:var(--sans); font-size:.92rem; color:var(--muted); margin-top:.5rem; font-style:italic; }
+  .btn{ display:inline-block; margin-top:2.4rem; font-family:var(--sans); font-size:.8rem;
+    letter-spacing:.14em; text-transform:uppercase; text-decoration:none;
+    color:var(--ink); background:var(--gold);
     padding:.95rem 1.9rem; border-radius:2px; transition:all .35s cubic-bezier(.2,.7,.2,1); }
-  .btn:hover{ background:var(--oxblood); border-color:var(--oxblood); color:var(--bone); }
+  .btn:hover{ background:var(--gold-soft); transform:translateY(-2px); }
 </style>
 </head>
 <body>
   <main class="wrap">
-    <img class="mark" src="https://romanos2408.github.io/cellark/assets/icon-512.png" alt="Cellar·K" />
+    <img class="mark" src="https://romanos2408.github.io/cellark/assets/icon-512.png" alt="Cellar · K" />
+    <div class="wordmark">Cellar <span class="dot">·</span> K</div>
     <p class="code">Error 404</p>
     <h1>Η σελίδα χάθηκε στο κελάρι<span class="dot">.</span></h1>
     <p class="gr">Η σελίδα που ζητήσατε δεν υπάρχει ή μετακινήθηκε.</p>

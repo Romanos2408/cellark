@@ -159,8 +159,15 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
       responsible-drinking note at Shopify checkout, and ship-to-adult / ID-on-delivery with the
       courier (esp. COD). See COMPLIANCE.md §3.)*
 - [ ] 5.4 VAT/ΦΠΑ shows correctly; confirm Shopify tax config (owner sets rates).
-- [ ] 5.5 Fill legal pages + footer imprint with **real** client details (never invent):
-      legal name, ΑΦΜ, ΓΕΜΗ, ΔΟΥ, address. Leave marked placeholders until provided.
+- [x] 5.5 Fill legal pages + footer imprint with **real** client details (never invent):
+      legal name, ΑΦΜ, ΓΕΜΗ, ΔΟΥ, address. *(Done 2026-06-16: owner supplied real identifiers —
+      **ΚΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ · ΑΦΜ 171189566 (passes GR checksum ✓) · ΔΟΥ Καβάλας · ΓΕΜΗ 193081430000 ·
+      Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200**. Filled into the imprint/footer of index, catalog,
+      privacy, terms, returns (EN transliterates name to "Vasileios Kappas"). No more `[—]` legal-ID
+      placeholders site-wide. STILL pending (owner track): shipping/courier/COD details on returns.html
+      (marked "προς οριστικοποίηση"), and the **policy/terms body text** still needs lawyer/accountant
+      sign-off — kept a subtle "Υπό έλεγχο" note. Owner also sent **16/02/2001** — unconfirmed what it is
+      (business-start vs DOB); NOT published pending clarification.)*
 - [x] 5.6 Security: Storefront-token-only, no secrets, HTTPS, checkout on Shopify (PCI).
       *(2026-06-14: satisfied by design — NO secrets/tokens in the repo (B2C uses cart permalinks,
       so not even a Storefront token is needed); zero third-party requests; cards/checkout handled
@@ -173,9 +180,20 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
       exists; the items themselves stay open for the client/lawyer to action — not ours to tick.)*
 
 ## Phase 6 — Launch
-- [ ] 6.0 **Hero + story motion rework** (deferred from Phase 1 per owner, 2026-06-13): keep the
-      CINEMATIC look but change element **positions** + a **fresh animation**. Self-contained;
-      do as a final polish pass once content is settled. See DESIGN.md (story section note).
+- [~] 6.0 **Hero + story motion rework → became a FULL HOMEPAGE REDESIGN** (owner-driven, 2026-06-14).
+      Owner reversed the vanilla decision: re-added **GSAP 3.13 + ScrollTrigger + SplitText + Lenis**
+      (vendored `assets/vendor/`). Chose hero = **Cinematic** (from a 5-hero chooser) + catalogue =
+      **editorial split** (from a 4-variation chooser). **`index.html` IS the new live homepage**
+      (`6b5aa68`): cinematic hero (logo + zoom + SplitText) → Η Ιστορία (blurred barrels) → Ο Κατάλογος
+      (editorial split) → tagline interlude "Ο ήλιος της Σικελίας…" → ΓΙΑ ΕΣΤΙΑΤΟΡΙΑ & ΚΑΒΕΣ → footer.
+      Full EL/EN, age-gate + consent, trade mailto CTAs, CSP+noindex. Spaced wordmark **"Cellar · K"**.
+      Remaining: hero AVIF (sips one won't decode → JPG for now); **redesign catalog.html to match** (Phase 6.0b).
+      *(6.0b legal/404 DONE 2026-06-16: rebuilt privacy/terms/returns self-contained in the new homepage
+      palette — spaced "Cellar · K" wordmark + logo-mark.png, cinematic dark hero band, imprint card with
+      real legal data, "Under review" note, matching footer; 404 reskinned to the new tokens + spaced
+      wordmark. Verified all four: EL/EN toggle swaps, no console errors, mobile+desktop fit. Fixed an i18n
+      bug — nested `data-gr` inside a `data-gr` parent (returns shipping lines) was wiped by `textContent`;
+      split into sibling leaf spans. catalog.html redesign is the only 6.0b page left.)*
 - [ ] 6.1 Custom domain (`cellark.gr`) + DNS + GitHub Pages config. Decide deploy repo
       (`Romanos2408/cellark` vs `cellar-k/cellar-k.github.io`) and update canonical URLs.
 - [ ] 6.2 Final QA: both languages, mobile + desktop, all flows.

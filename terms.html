@@ -5,47 +5,137 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow"><!-- LAUNCH cellark.gr: remove this noindex -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https://romanos2408.github.io data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
-<title data-gr="Cellar·K — Όροι Χρήσης & Πώλησης" data-en="Cellar·K — Terms of Use & Sale">Cellar·K — Όροι Χρήσης & Πώλησης</title>
-<meta name="description" data-gr="Όροι Χρήσης & Πώλησης της Cellar·K." data-en="Cellar·K Terms of Use & Sale." content="Όροι Χρήσης & Πώλησης της Cellar·K." />
-<meta name="robots" content="noindex" />
-<meta name="theme-color" content="#141414" />
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
-<link rel="stylesheet" href="assets/fonts/fonts.css?v=1">
-<link rel="stylesheet" href="assets/styles.css?v=7">
+<meta name="theme-color" content="#0e0b09" />
+<title data-gr="Cellar · K — Όροι Χρήσης & Πώλησης" data-en="Cellar · K — Terms of Use & Sale">Cellar · K — Όροι Χρήσης & Πώλησης</title>
+<meta name="description" data-gr="Όροι Χρήσης & Πώλησης της Cellar · K." data-en="Cellar · K Terms of Use & Sale." content="Όροι Χρήσης & Πώλησης της Cellar · K." />
+<link rel="icon" href="assets/favicon-32.png" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="assets/fonts/fonts.css?v=2" />
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --ink:#0e0b09; --ink-2:#141110; --cream:#f4efe6; --gold:#bfa773; --gold-soft:#d8c79c;
+    --muted:#b3aa9c; --muted-dim:#8d8576; --oxblood:#4E0000;
+    --serif:'Fraunces',Georgia,serif; --body:'Spectral',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --wrap:1180px;
+  }
+  html{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; scroll-behavior:smooth; }
+  body{ background:var(--ink); color:var(--cream); font-family:var(--body); overflow-x:hidden; line-height:1.6; }
+  .wrap{ max-width:var(--wrap); margin:0 auto; padding:0 clamp(1.4rem,5vw,4rem); }
+  a{ color:inherit; }
+  :focus-visible{ outline:2px solid var(--gold-soft); outline-offset:3px; }
+
+  .nav{ position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:1rem clamp(1.4rem,5vw,4rem); background:rgba(14,11,9,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(191,167,115,.14); }
+  .nav .brand{ display:inline-flex; align-items:center; gap:.65rem; font-family:var(--serif); font-size:1.3rem; font-weight:500; color:var(--cream); text-decoration:none; }
+  .nav .brand-mark{ height:28px; width:auto; }
+  .nav-right{ display:flex; align-items:center; gap:1.8rem; }
+  .nav-right .home{ font-family:var(--sans); font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--cream); opacity:.82; text-decoration:none; transition:color .3s; }
+  .nav-right .home:hover{ color:var(--gold-soft); }
+  .lang{ background:none; border:none; cursor:pointer; font-family:var(--sans); font-size:.72rem; letter-spacing:.18em; color:var(--cream); }
+  .lang [data-lang]{ opacity:.5; transition:.3s; }
+  .lang [data-lang].on{ opacity:1; color:var(--gold-soft); }
+
+  .legal-hero{ position:relative; padding:clamp(3.5rem,9vh,6rem) 0 clamp(1.8rem,4vh,2.8rem); background:radial-gradient(120% 130% at 50% -20%, rgba(78,0,0,.42), rgba(14,11,9,0) 60%); border-bottom:1px solid rgba(191,167,115,.12); }
+  .eyebrow{ font-family:var(--sans); font-size:.72rem; font-weight:500; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:1rem; }
+  .legal-hero h1{ font-family:var(--serif); font-weight:400; font-optical-sizing:auto; letter-spacing:-.01em; font-size:clamp(2.4rem,6vw,4.2rem); line-height:1.05; color:var(--cream); }
+  .legal-hero h1 .dot{ color:var(--oxblood); }
+  .updated{ font-family:var(--sans); font-size:.78rem; letter-spacing:.04em; color:var(--muted-dim); margin-top:1.2rem; }
+
+  .legal-body{ padding:clamp(2.8rem,7vh,4.5rem) 0 clamp(3.5rem,9vh,6rem); }
+  .legal-body .col{ max-width:66ch; }
+  .legal-body h2{ font-family:var(--serif); font-weight:400; font-size:clamp(1.4rem,2.6vw,1.95rem); color:var(--cream); margin:2.6rem 0 .8rem; letter-spacing:-.01em; }
+  .legal-body h2:first-of-type{ margin-top:0; }
+  .legal-body p, .legal-body li{ font-size:1.04rem; line-height:1.8; color:var(--muted); }
+  .legal-body p{ margin-bottom:1rem; }
+  .legal-body ul{ list-style:none; margin:0 0 1rem; }
+  .legal-body li{ position:relative; padding-left:1.4rem; margin-bottom:.6rem; }
+  .legal-body li::before{ content:"—"; position:absolute; left:0; color:var(--gold); opacity:.65; }
+
+  .imprint{ border:1px solid rgba(191,167,115,.28); border-radius:4px; padding:1.3rem 1.5rem; margin:.2rem 0 1rem; background:linear-gradient(180deg, rgba(191,167,115,.06), rgba(191,167,115,0)); }
+  .imprint .label{ font-family:var(--sans); font-size:.66rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:.7rem; }
+  .imprint p{ margin:0; color:var(--cream); font-size:.98rem; line-height:1.85; }
+  .imprint .name{ font-family:var(--serif); font-size:1.15rem; color:var(--cream); }
+
+  .note-review{ display:flex; gap:.9rem; align-items:flex-start; border-left:2px solid var(--gold); background:rgba(191,167,115,.06); padding:.9rem 1.1rem; margin:0 0 2.2rem; border-radius:0 3px 3px 0; }
+  .note-review .tag{ font-family:var(--sans); font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); white-space:nowrap; margin-top:.2rem; }
+  .note-review .txt{ font-size:.9rem; color:var(--muted); line-height:1.65; }
+
+  .back{ display:inline-block; margin-top:2.6rem; font-family:var(--sans); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--cream); opacity:.8; text-decoration:none; transition:.3s; }
+  .back:hover{ color:var(--gold-soft); opacity:1; }
+
+  footer{ background:var(--ink-2); border-top:1px solid rgba(191,167,115,.16); padding:clamp(3rem,7vh,5rem) 0 2.4rem; }
+  .foot-mark{ font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); color:rgba(244,239,230,.1); line-height:1; margin-bottom:1.2rem; }
+  .foot-row{ display:flex; gap:1.4rem; flex-wrap:wrap; margin-bottom:1.3rem; align-items:center; }
+  .foot-row a, .foot-row .consent-link{ font-family:var(--sans); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; background:none; border:none; cursor:pointer; transition:.3s; }
+  .foot-row a:hover, .foot-row .consent-link:hover{ color:var(--gold-soft); }
+  .foot-imprint{ font-family:var(--sans); font-size:.72rem; color:var(--muted-dim); letter-spacing:.02em; line-height:1.7; }
+</style>
 </head>
 <body>
-<nav>
-  <a class="brand" href="index.html" aria-label="Cellar·K — αρχική" data-aria-gr="Cellar·K — αρχική" data-aria-en="Cellar·K — home"><i class="brand-mark" aria-hidden="true"></i><span>Cellar·K</span></a>
-  <div class="links">
-    <a class="nav-cta" href="index.html" data-gr="Αρχική" data-en="Home">Αρχική</a>
-    <a class="lang" href="#" role="button" aria-label="Language"><span data-lang="gr">EL</span><span>·</span><span data-lang="en">EN</span></a>
+<nav class="nav">
+  <a class="brand" href="index.html" aria-label="Cellar · K — αρχική" data-aria-gr="Cellar · K — αρχική" data-aria-en="Cellar · K — home"><img class="brand-mark" src="assets/logo-mark.png" alt="" /><span>Cellar · K</span></a>
+  <div class="nav-right">
+    <a class="home" href="index.html" data-gr="Αρχική" data-en="Home">Αρχική</a>
+    <button class="lang" type="button" data-aria-gr="Αλλαγή γλώσσας" data-aria-en="Change language" aria-label="Αλλαγή γλώσσας"><span data-lang="gr">EL</span> · <span data-lang="en">EN</span></button>
   </div>
 </nav>
 
-<main class="legal-page">
-  <p class="eyebrow" data-gr="Νομικά" data-en="Legal">Νομικά</p>
-  <h1 data-gr="Όροι Χρήσης & Πώλησης" data-en="Terms of Use & Sale">Όροι Χρήσης & Πώλησης</h1>
-  <p class="updated" data-gr="Τελευταία ενημέρωση: — (συμπληρώνεται)" data-en="Last updated: — (to be completed)">Τελευταία ενημέρωση: — (συμπληρώνεται)</p>
+<header class="legal-hero">
+  <div class="wrap">
+    <span class="eyebrow" data-gr="Νομικά" data-en="Legal">Νομικά</span>
+    <h1 data-gr="Όροι Χρήσης & Πώλησης" data-en="Terms of Use & Sale">Όροι Χρήσης & Πώλησης</h1>
+    <p class="updated" data-gr="Τελευταία ενημέρωση: 16 Ιουνίου 2026" data-en="Last updated: 16 June 2026">Τελευταία ενημέρωση: 16 Ιουνίου 2026</p>
+  </div>
+</header>
 
-  <p><span class="todo">ΠΡΟΣ ΣΥΜΠΛΗΡΩΣΗ</span> <span data-gr="Έλεγχος/συμπλήρωση από νομικό σύμβουλο ή χρήση των αυτόματων Όρων του Shopify." data-en="Review/complete with a legal advisor, or use Shopify's auto-generated Terms.">Έλεγχος/συμπλήρωση από νομικό σύμβουλο ή χρήση των αυτόματων Όρων του Shopify.</span></p>
+<main class="legal-body">
+  <div class="wrap col">
 
-  <h2 data-gr="Η επιχείρηση" data-en="The business">Η επιχείρηση</h2>
-  <p data-gr="[Νόμιμη επωνυμία] · ΑΦΜ [—] · ΔΟΥ [—] · ΓΕΜΗ [—] · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200." data-en="[Legal entity name] · VAT (ΑΦΜ) [—] · Tax office [—] · ΓΕΜΗ [—] · Megalou Alexandrou 27, Chrysoupoli 64200.">[Νόμιμη επωνυμία] · ΑΦΜ [—] · ΔΟΥ [—] · ΓΕΜΗ [—] · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200.</p>
+    <div class="note-review">
+      <span class="tag" data-gr="Υπό έλεγχο" data-en="Under review">Υπό έλεγχο</span>
+      <span class="txt" data-gr="Οι όροι ελέγχονται/οριστικοποιούνται από νομικό σύμβουλο πριν την έναρξη πωλήσεων. Τα στοιχεία της επιχείρησης είναι πραγματικά." data-en="These terms are being reviewed/finalised with a legal advisor before sales go live. The business details below are real.">Οι όροι ελέγχονται/οριστικοποιούνται από νομικό σύμβουλο πριν την έναρξη πωλήσεων. Τα στοιχεία της επιχείρησης είναι πραγματικά.</span>
+    </div>
 
-  <h2 data-gr="Προϊόντα & τιμές" data-en="Products & prices">Προϊόντα & τιμές</h2>
-  <p data-gr="Όλες οι τιμές σε ευρώ, με ΦΠΑ για λιανική. Πώληση αλκοόλ μόνο σε ενήλικες (18+). Η διαθεσιμότητα επιβεβαιώνεται κατά την παραγγελία." data-en="All prices in euro, incl. VAT for retail. Alcohol sold only to adults (18+). Availability is confirmed at order time.">Όλες οι τιμές σε ευρώ, με ΦΠΑ για λιανική. Πώληση αλκοόλ μόνο σε ενήλικες (18+). Η διαθεσιμότητα επιβεβαιώνεται κατά την παραγγελία.</p>
+    <h2 data-gr="Η επιχείρηση" data-en="The business">Η επιχείρηση</h2>
+    <div class="imprint">
+      <span class="label" data-gr="Στοιχεία επιχείρησης" data-en="Business details">Στοιχεία επιχείρησης</span>
+      <p>
+        <span class="name">Cellar · K</span><br>
+        <span data-gr="ΚΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ · ΑΦΜ 171189566 · ΔΟΥ Καβάλας · ΓΕΜΗ 193081430000" data-en="Vasileios Kappas · VAT (ΑΦΜ) 171189566 · Tax office (ΔΟΥ) Kavala · ΓΕΜΗ 193081430000">ΚΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ · ΑΦΜ 171189566 · ΔΟΥ Καβάλας · ΓΕΜΗ 193081430000</span><br>
+        <span data-gr="Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200" data-en="Megalou Alexandrou 27, Chrysoupoli 64200">Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200</span><br>
+        cellarkinfo@gmail.com · +30 6972845565
+      </p>
+    </div>
 
-  <h2 data-gr="Παραγγελία & πληρωμή" data-en="Ordering & payment">Παραγγελία & πληρωμή</h2>
-  <p data-gr="Η παραγγελία ολοκληρώνεται με ασφαλή πληρωμή κάρτας στο ταμείο. Με την υποβολή αποδέχεστε αυτούς τους όρους. [Λεπτομέρειες παράδοσης/χρόνων: βλ. σελίδα Επιστροφών & Αποστολών.]" data-en="Orders are completed via secure card payment at checkout. By submitting you accept these terms. [Delivery/timing details: see the Returns & Shipping page.]">Η παραγγελία ολοκληρώνεται με ασφαλή πληρωμή κάρτας στο ταμείο. Με την υποβολή αποδέχεστε αυτούς τους όρους. [Λεπτομέρειες παράδοσης/χρόνων: βλ. σελίδα Επιστροφών & Αποστολών.]</p>
+    <h2 data-gr="Προϊόντα & τιμές" data-en="Products & prices">Προϊόντα & τιμές</h2>
+    <p data-gr="Όλες οι τιμές σε ευρώ, με ΦΠΑ για λιανική. Πώληση αλκοόλ μόνο σε ενήλικες (18+). Η διαθεσιμότητα επιβεβαιώνεται κατά την παραγγελία." data-en="All prices in euro, incl. VAT for retail. Alcohol sold only to adults (18+). Availability is confirmed at order time.">Όλες οι τιμές σε ευρώ, με ΦΠΑ για λιανική. Πώληση αλκοόλ μόνο σε ενήλικες (18+). Η διαθεσιμότητα επιβεβαιώνεται κατά την παραγγελία.</p>
 
-  <h2 data-gr="Επιστροφές & υπαναχώρηση" data-en="Returns & withdrawal">Επιστροφές & υπαναχώρηση</h2>
-  <p data-gr="Βλ. τη σελίδα «Επιστροφές & Αποστολές»." data-en="See the “Returns & Shipping” page.">Βλ. τη σελίδα «Επιστροφές & Αποστολές».</p>
+    <h2 data-gr="Παραγγελία & πληρωμή" data-en="Ordering & payment">Παραγγελία & πληρωμή</h2>
+    <p data-gr="Η παραγγελία ολοκληρώνεται με ασφαλή πληρωμή κάρτας στο ταμείο. Με την υποβολή αποδέχεστε αυτούς τους όρους. [Λεπτομέρειες παράδοσης/χρόνων: βλ. σελίδα Επιστροφών & Αποστολών.]" data-en="Orders are completed via secure card payment at checkout. By submitting you accept these terms. [Delivery/timing details: see the Returns & Shipping page.]">Η παραγγελία ολοκληρώνεται με ασφαλή πληρωμή κάρτας στο ταμείο. Με την υποβολή αποδέχεστε αυτούς τους όρους. [Λεπτομέρειες παράδοσης/χρόνων: βλ. σελίδα Επιστροφών & Αποστολών.]</p>
 
-  <h2 data-gr="Εφαρμοστέο δίκαιο" data-en="Governing law">Εφαρμοστέο δίκαιο</h2>
-  <p data-gr="Ελληνικό δίκαιο. Εξωδικαστική επίλυση: πλατφόρμα ΗΕΔ της ΕΕ (ec.europa.eu/consumers/odr)." data-en="Greek law. Online dispute resolution: EU ODR platform (ec.europa.eu/consumers/odr).">Ελληνικό δίκαιο. Εξωδικαστική επίλυση: πλατφόρμα ΗΕΔ της ΕΕ (ec.europa.eu/consumers/odr).</p>
+    <h2 data-gr="Επιστροφές & υπαναχώρηση" data-en="Returns & withdrawal">Επιστροφές & υπαναχώρηση</h2>
+    <p data-gr="Βλ. τη σελίδα «Επιστροφές & Αποστολές»." data-en="See the “Returns & Shipping” page.">Βλ. τη σελίδα «Επιστροφές & Αποστολές».</p>
 
-  <a class="back" href="index.html" data-gr="← Επιστροφή στην αρχική" data-en="← Back home">← Επιστροφή στην αρχική</a>
+    <h2 data-gr="Εφαρμοστέο δίκαιο" data-en="Governing law">Εφαρμοστέο δίκαιο</h2>
+    <p data-gr="Ελληνικό δίκαιο. Εξωδικαστική επίλυση: πλατφόρμα ΗΕΔ της ΕΕ (ec.europa.eu/consumers/odr)." data-en="Greek law. Online dispute resolution: EU ODR platform (ec.europa.eu/consumers/odr).">Ελληνικό δίκαιο. Εξωδικαστική επίλυση: πλατφόρμα ΗΕΔ της ΕΕ (ec.europa.eu/consumers/odr).</p>
+
+    <a class="back" href="index.html" data-gr="← Επιστροφή στην αρχική" data-en="← Back home">← Επιστροφή στην αρχική</a>
+  </div>
 </main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-mark">Cellar · K</div>
+    <div class="foot-row">
+      <a href="index.html" data-gr="Αρχική" data-en="Home">Αρχική</a>
+      <a href="catalog.html" data-gr="Ο Κατάλογος" data-en="The Catalogue">Ο Κατάλογος</a>
+      <a href="privacy.html" data-gr="Απόρρητο" data-en="Privacy">Απόρρητο</a>
+      <a href="terms.html" data-gr="Όροι" data-en="Terms">Όροι</a>
+      <a href="returns.html" data-gr="Επιστροφές" data-en="Returns">Επιστροφές</a>
+      <button class="consent-link" type="button" data-consent-open data-gr="Cookies" data-en="Cookies">Cookies</button>
+    </div>
+    <p class="foot-imprint" data-gr="© 2026 Cellar · K · ΚΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ · ΑΦΜ 171189566 · ΓΕΜΗ 193081430000 · ΔΟΥ Καβάλας · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200" data-en="© 2026 Cellar · K · Vasileios Kappas · VAT (ΑΦΜ) 171189566 · ΓΕΜΗ 193081430000 · Tax office (ΔΟΥ) Kavala · Megalou Alexandrou 27, Chrysoupoli 64200">© 2026 Cellar · K · ΚΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ · ΑΦΜ 171189566 · ΓΕΜΗ 193081430000 · ΔΟΥ Καβάλας · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200</p>
+  </div>
+</footer>
 
 <script type="module">
   import { initI18n } from './assets/i18n.js?v=2';
