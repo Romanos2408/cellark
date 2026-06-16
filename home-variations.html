@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Cellar · K — hero variations</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css?v=2" />
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --ink:#0e0b09; --ink-2:#141110; --cream:#f4efe6; --gold:#bfa773;
+    --gold-soft:#d8c79c; --muted:#b3aa9c; --muted-dim:#8d8576; --oxblood:#4E0000;
+    --serif:'Fraunces',Georgia,serif; --body:'Spectral',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+  }
+  html{ -webkit-font-smoothing:antialiased; }
+  body{ background:var(--ink); color:var(--cream); font-family:var(--body); overflow-x:hidden; }
+  h1{ font-family:var(--serif); font-weight:400; font-optical-sizing:auto; line-height:.9; letter-spacing:-.015em; color:var(--cream); }
+  h1 .dot{ color:var(--oxblood); }
+  .eyebrow{ font-family:var(--sans); font-size:.74rem; font-weight:500; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); display:block; }
+  .tagline{ font-family:var(--body); font-style:italic; color:var(--gold-soft); line-height:1.3; }
+
+  /* nav */
+  .nav{ position:fixed; inset:0 0 auto 0; z-index:30; display:flex; align-items:center; justify-content:space-between;
+    padding:1.5rem clamp(1.4rem,5vw,5rem); text-shadow:0 1px 16px rgba(0,0,0,.45); }
+  .nav .brand{ font-family:var(--serif); font-size:1.35rem; font-weight:500; color:var(--cream); text-decoration:none; }
+  .nav ul{ display:flex; gap:2rem; list-style:none; }
+  .nav a{ font-family:var(--sans); font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--cream); opacity:.82; text-decoration:none; }
+  @media(max-width:820px){ .nav ul{ display:none; } }
+
+  /* chooser */
+  .chooser{ position:fixed; left:50%; bottom:1.4rem; transform:translateX(-50%); z-index:40; display:flex; gap:6px;
+    background:rgba(14,11,9,.7); backdrop-filter:blur(10px); border:.5px solid rgba(191,167,115,.3); border-radius:999px; padding:6px; }
+  .chooser button{ font-family:var(--sans); font-size:.72rem; letter-spacing:.06em; color:var(--cream); background:none; border:none;
+    padding:.55rem .9rem; border-radius:999px; cursor:pointer; opacity:.7; transition:.25s; white-space:nowrap; }
+  .chooser button:hover{ opacity:1; }
+  .chooser button.on{ background:var(--gold); color:var(--ink); opacity:1; font-weight:500; }
+  .chooser .num{ font-weight:600; }
+  @media(max-width:560px){ .chooser button .lbl{ display:none; } }
+
+  /* shared variation shell */
+  .v{ display:none; position:relative; height:100svh; min-height:600px; overflow:hidden; }
+  .v .eyebrow{ margin:0 0 1.4rem; }
+
+  /* V1 — Split Frame */
+  .v1.active{ display:grid; grid-template-columns:46% 54%; }
+  .v1-img{ position:relative; overflow:hidden; }
+  .v1-img img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .v1-panel{ background:var(--ink); display:flex; flex-direction:column; justify-content:center; padding:0 clamp(1.6rem,4vw,4.5rem); }
+  .v1-panel h1{ font-size:clamp(3rem,8vw,7rem); }
+  .v1-panel .tagline{ font-size:clamp(1.1rem,1.7vw,1.55rem); margin:1.5rem 0 0; max-width:24ch; }
+  @media(max-width:780px){ .v1.active{ grid-template-columns:1fr; grid-template-rows:42% 58%; } }
+
+  /* V2 — Full-bleed Cinematic */
+  .v2.active{ display:flex; align-items:flex-end; }
+  .v2-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scale(1.16); }
+  .v2-scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(to top, rgba(8,6,5,.95) 0%, rgba(8,6,5,.5) 34%, rgba(8,6,5,.06) 58%, rgba(8,6,5,.42) 100%); }
+  .v2-content{ position:relative; z-index:2; width:100%; padding:0 clamp(1.4rem,5vw,5rem) clamp(3rem,9vh,7rem); }
+  .v2-content h1{ font-size:clamp(4rem,15vw,13rem); }
+  .v2-content .tagline{ font-size:clamp(1.15rem,2.5vw,1.85rem); margin:1.5rem 0 0; max-width:26ch; }
+
+  /* V3 — Product */
+  .v3{ background:radial-gradient(120% 90% at 80% 20%, rgba(78,0,0,.32), rgba(14,11,9,0) 60%), var(--ink); }
+  .v3.active{ display:grid; grid-template-columns:1fr 42%; align-items:center; }
+  .v3-content{ padding:0 clamp(1.6rem,5vw,5rem); }
+  .v3-content h1{ font-size:clamp(3.2rem,9vw,8rem); }
+  .v3-content .tagline{ font-size:clamp(1.1rem,1.8vw,1.6rem); margin:1.5rem 0 0; max-width:24ch; }
+  .v3-img{ position:relative; height:100%; display:flex; align-items:flex-end; justify-content:center; }
+  .v3-img img{ height:92%; width:auto; filter:drop-shadow(0 30px 50px rgba(0,0,0,.6)); }
+  @media(max-width:780px){ .v3.active{ grid-template-columns:1fr; } .v3-img{ display:none; } }
+
+  /* V4 — Layered Depth */
+  .v4.active{ display:block; }
+  .v4-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scale(1.12); filter:brightness(.62) saturate(.92); }
+  .v4-scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(to top, rgba(8,6,5,.85), rgba(8,6,5,.25) 55%, rgba(8,6,5,.55)); }
+  .v4-bottle{ position:absolute; z-index:2; right:8%; bottom:0; height:90%; width:auto; filter:drop-shadow(0 30px 60px rgba(0,0,0,.7)); }
+  .v4-content{ position:absolute; z-index:3; left:0; bottom:0; padding:0 clamp(1.4rem,5vw,5rem) clamp(3rem,9vh,7rem); }
+  .v4-content h1{ font-size:clamp(3.6rem,12vw,11rem); }
+  .v4-content .tagline{ font-size:clamp(1.1rem,2vw,1.7rem); margin:1.4rem 0 0; max-width:24ch; }
+  @media(max-width:780px){ .v4-bottle{ right:-6%; height:70%; opacity:.6; } }
+
+  /* V5 — Type-first + bottle marquee */
+  .v5.active{ display:flex; flex-direction:column; justify-content:center; }
+  .v5{ background:#0b0908; }
+  .v5-center{ text-align:center; padding:0 1.4rem; margin-top:6vh; }
+  .v5-center h1{ font-size:clamp(4rem,16vw,13rem); }
+  .v5-center .eyebrow{ margin-bottom:1.6rem; }
+  .v5-center .tagline{ font-size:clamp(1.15rem,2.4vw,1.8rem); margin:1.6rem auto 0; max-width:30ch; }
+  .v5-marquee{ position:absolute; left:0; right:0; bottom:4vh; overflow:hidden; -webkit-mask-image:linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); mask-image:linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); }
+  .v5-track{ display:flex; gap:2.4rem; width:max-content; }
+  .v5-track img{ height:clamp(150px,22vh,240px); width:auto; }
+</style>
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#">Cellar · K</a>
+    <ul>
+      <li><a href="#">Αρχική</a></li>
+      <li><a href="#">Ο Κατάλογος</a></li>
+      <li><a href="#">Η Ιστορία</a></li>
+      <li><a href="#">Χονδρική</a></li>
+    </ul>
+    <span class="eyebrow" style="color:var(--cream);opacity:.8;letter-spacing:.18em">EL · EN</span>
+  </header>
+
+  <main>
+    <!-- 1 — Split Frame -->
+    <section class="v v1">
+      <div class="v1-img"><img src="assets/photos/hero-sicily.jpg" alt="Αμπελώνας στη Σικελία" /></div>
+      <div class="v1-panel">
+        <span class="eyebrow">Cantine Colosi · Σαλίνα &amp; Σικελία</span>
+        <h1>Cellar <span class="dot">·</span> K</h1>
+        <p class="tagline">Ο ήλιος της Σικελίας, φυλαγμένος σε γυαλί.</p>
+      </div>
+    </section>
+
+    <!-- 2 — Full-bleed Cinematic -->
+    <section class="v v2">
+      <img class="v2-bg" src="assets/photos/hero-sicily.jpg" alt="Αμπελώνας στη Σικελία" />
+      <div class="v2-scrim"></div>
+      <div class="v2-content">
+        <span class="eyebrow">Cantine Colosi · Σαλίνα &amp; Σικελία</span>
+        <h1>Cellar <span class="dot">·</span> K</h1>
+        <p class="tagline">Ο ήλιος της Σικελίας, φυλαγμένος σε γυαλί.</p>
+      </div>
+    </section>
+
+    <!-- 3 — Product -->
+    <section class="v v3">
+      <div class="v3-content">
+        <span class="eyebrow">Cantine Colosi · Σαλίνα &amp; Σικελία</span>
+        <h1>Cellar <span class="dot">·</span> K</h1>
+        <p class="tagline">Ο ήλιος της Σικελίας, φυλαγμένος σε γυαλί.</p>
+      </div>
+      <div class="v3-img"><img src="assets/wines/salina-bianco.png" alt="Salina Bianco" /></div>
+    </section>
+
+    <!-- 4 — Layered Depth -->
+    <section class="v v4">
+      <img class="v4-bg" src="assets/photos/hero-sicily.jpg" alt="Αμπελώνας στη Σικελία" />
+      <div class="v4-scrim"></div>
+      <img class="v4-bottle" src="assets/wines/nero-davola.png" alt="Nero d'Avola" />
+      <div class="v4-content">
+        <span class="eyebrow">Cantine Colosi · Σαλίνα &amp; Σικελία</span>
+        <h1>Cellar <span class="dot">·</span> K</h1>
+        <p class="tagline">Ο ήλιος της Σικελίας, φυλαγμένος σε γυαλί.</p>
+      </div>
+    </section>
+
+    <!-- 5 — Type-first + marquee -->
+    <section class="v v5">
+      <div class="v5-center">
+        <span class="eyebrow">Cantine Colosi · Σαλίνα &amp; Σικελία</span>
+        <h1>Cellar <span class="dot">·</span> K</h1>
+        <p class="tagline">Ο ήλιος της Σικελίας, φυλαγμένος σε γυαλί.</p>
+      </div>
+      <div class="v5-marquee"><div class="v5-track"></div></div>
+    </section>
+  </main>
+
+  <nav class="chooser" aria-label="Variations">
+    <button data-v="1"><span class="num">1</span> <span class="lbl">Split</span></button>
+    <button data-v="2"><span class="num">2</span> <span class="lbl">Cinematic</span></button>
+    <button data-v="3"><span class="num">3</span> <span class="lbl">Product</span></button>
+    <button data-v="4"><span class="num">4</span> <span class="lbl">Depth</span></button>
+    <button data-v="5"><span class="num">5</span> <span class="lbl">Type</span></button>
+  </nav>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/SplitText.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script>
+  (function(){
+    var BOTTLES = ['salina-bianco','salina-rosso','salina-rosato','secca-del-capo','guardiano-del-faro','malvasia-lipari','passito','mare','cariddi-rosato','giulia-birbante','grillo-acacia','viognier','nero-davola'];
+    var track = document.querySelector('.v5-track');
+    BOTTLES.concat(BOTTLES).forEach(function(s){ var i=document.createElement('img'); i.src='assets/wines/'+s+'.png'; i.alt=''; track.appendChild(i); });
+
+    if(!window.gsap){ document.querySelector('.v1').classList.add('active'); return; }
+    gsap.registerPlugin(SplitText);
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var lenis = new Lenis({ lerp:0.1 });
+    (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })();
+
+    var cleanup = [];
+    function clear(){ cleanup.forEach(function(f){ try{f();}catch(e){} }); cleanup=[]; }
+    function q(s,sel){ return s.querySelector(sel); }
+    function split(s){ return new SplitText(q(s,'h1'), {type:'chars'}); }
+
+    var E = {
+      '1': function(s){ var sp=split(s); var tl=gsap.timeline();
+        tl.fromTo(q(s,'.v1-img img'),{clipPath:'inset(0 100% 0 0)',scale:1.2},{clipPath:'inset(0 0% 0 0)',scale:1,duration:1.3,ease:'power3.inOut'})
+          .from(q(s,'.eyebrow'),{x:30,autoAlpha:0,duration:.8,ease:'power2.out'},'-=.7')
+          .from(sp.chars,{yPercent:120,autoAlpha:0,stagger:.04,duration:1,ease:'power4.out'},'-=.5')
+          .from(q(s,'.tagline'),{x:30,autoAlpha:0,duration:1,ease:'power3.out'},'-=.5');
+        cleanup.push(function(){ tl.kill(); sp.revert(); }); },
+      '2': function(s){ var sp=split(s); var kb=gsap.fromTo(q(s,'.v2-bg'),{scale:1.16},{scale:1,duration:16,ease:'none'}); var tl=gsap.timeline();
+        tl.from(q(s,'.eyebrow'),{y:24,autoAlpha:0,duration:.9,ease:'power2.out'})
+          .from(sp.chars,{yPercent:130,autoAlpha:0,stagger:.05,duration:1.1,ease:'power4.out'},'-=.35')
+          .from(q(s,'.tagline'),{y:28,autoAlpha:0,duration:1.1,ease:'power3.out'},'-=.55');
+        cleanup.push(function(){ tl.kill(); kb.kill(); sp.revert(); }); },
+      '3': function(s){ var sp=split(s); var tl=gsap.timeline();
+        tl.fromTo(q(s,'.v3-img img'),{clipPath:'inset(100% 0 0 0)',yPercent:6},{clipPath:'inset(0% 0 0 0)',yPercent:0,duration:1.3,ease:'power3.out'})
+          .from(q(s,'.eyebrow'),{y:20,autoAlpha:0,duration:.8,ease:'power2.out'},'-=.95')
+          .from(sp.chars,{yPercent:120,autoAlpha:0,stagger:.045,duration:1,ease:'power4.out'},'-=.6')
+          .from(q(s,'.tagline'),{y:24,autoAlpha:0,duration:1,ease:'power3.out'},'-=.5');
+        cleanup.push(function(){ tl.kill(); sp.revert(); }); },
+      '4': function(s){ var sp=split(s); gsap.fromTo(q(s,'.v4-bg'),{scale:1.18},{scale:1.05,duration:18,ease:'none'}); var tl=gsap.timeline();
+        tl.from(q(s,'.v4-bottle'),{yPercent:12,autoAlpha:0,duration:1.4,ease:'power3.out'})
+          .from(q(s,'.eyebrow'),{y:22,autoAlpha:0,duration:.8,ease:'power2.out'},'-=1')
+          .from(sp.chars,{yPercent:120,autoAlpha:0,stagger:.045,duration:1,ease:'power4.out'},'-=.7')
+          .from(q(s,'.tagline'),{y:24,autoAlpha:0,duration:1,ease:'power3.out'},'-=.5');
+        cleanup.push(function(){ tl.kill(); sp.revert(); gsap.killTweensOf(q(s,'.v4-bg')); }); },
+      '5': function(s){ var sp=split(s); var tl=gsap.timeline();
+        tl.from(q(s,'.eyebrow'),{y:20,autoAlpha:0,duration:.8,ease:'power2.out'})
+          .from(sp.chars,{yPercent:130,autoAlpha:0,stagger:.06,duration:1.2,ease:'power4.out'},'-=.4')
+          .from(q(s,'.tagline'),{y:24,autoAlpha:0,duration:1,ease:'power3.out'},'-=.6')
+          .from(q(s,'.v5-marquee'),{autoAlpha:0,duration:1},'-=.5');
+        var mq=gsap.to(q(s,'.v5-track'),{xPercent:-50,duration:34,ease:'none',repeat:-1});
+        cleanup.push(function(){ tl.kill(); sp.revert(); mq.kill(); }); }
+    };
+
+    function show(v){
+      clear();
+      document.querySelectorAll('.v').forEach(function(x){ x.classList.remove('active'); });
+      document.querySelectorAll('.chooser button').forEach(function(b){ b.classList.toggle('on', b.dataset.v===v); });
+      var s=document.querySelector('.v'+v); s.classList.add('active');
+      window.scrollTo(0,0);
+      if(reduce) return;
+      requestAnimationFrame(function(){ E[v](s); });
+    }
+    document.querySelectorAll('.chooser button').forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.v); }); });
+    document.addEventListener('keydown', function(e){ if('12345'.indexOf(e.key)>=0) show(e.key); });
+    show('1');
+  })();
+  </script>
+</body>
+</html>
