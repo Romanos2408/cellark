@@ -1,5 +1,5 @@
 /**
- * Cellar·K — cookie / storage consent (Phase 5.1, GDPR / ePrivacy)
+ * Cellar · K — cookie / storage consent (Phase 5.1, GDPR / ePrivacy)
  *
  * The site stores ONLY strictly-necessary first-party localStorage (basket,
  * language, age confirmation, and this consent choice) and currently loads NO

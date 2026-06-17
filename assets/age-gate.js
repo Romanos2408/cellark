@@ -1,5 +1,5 @@
 /**
- * Cellar·K — age-gate modal (M5)
+ * Cellar · K — age-gate modal (M5)
  *
  * UX-level "are you 18+ ?" gate. Not a security control; real verification
  * lives at checkout via the commerce platform (see docs/SITEMAP.md).

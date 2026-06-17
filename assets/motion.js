@@ -1,5 +1,5 @@
 /**
- * Cellar·K — shared motion engine
+ * Cellar · K — shared motion engine
  *
  * MIGRATION IN PROGRESS (Phase 1 → vanilla). Now VANILLA, no libraries:
  *   • on-scroll reveals  ([data-hero] staggered on load, [data-up] on enter)

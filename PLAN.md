@@ -200,6 +200,20 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
       shared **age-gate.js** wordmark (helps homepage too). Browser-verified: 13 rows + ΟΛΑ-default tabs
       build, bottles load, **cart add → Shopify permalink `…/cart/58240781615491:1` intact**, EL/EN +
       age-gate + consent work, no console errors. Whole site now visually consistent.)*
+      *(6.0c CONSISTENCY CONSOLIDATION DONE 2026-06-17 — owner ran a multi-agent "council" (8-dimension
+      audit → 42 confirmed inconsistencies, 1 HIGH) and chose FULL consolidation. Root-cause fix: **one
+      canonical shared `assets/styles.css?v=9`** now linked by EVERY page (was: homepage+legal self-contained
+      inline, catalog-only on styles.css). Collapsed the 3 nav implementations → 1 (`.nav`/`.nav-links`/`.lang`,
+      `.solid`+`.scrolled` both styled; legal use static `.nav solid`), 3 footers → 1 canonical 3-col grid,
+      unified `.btn` (HIGH: was solid-on-home / outline-on-catalog → now one outline-default + `.solid` +
+      `.ghost`; homepage primaries switched to `.btn solid`), eyebrow .74/.3em, `--wrap` 1180 everywhere,
+      `--ink-2`/`--bone`→cream tokens. **Found & fixed a real bug:** homepage + legal age-gate/consent were
+      rendering UNSTYLED (`position:static`, not a blocking modal) because those pages never linked the sheet
+      with `.age-gate`/`.cc-bar` — now a proper fixed 18+ modal site-wide. Normalised 102 wordmarks → spaced
+      "Cellar · K" (incl. manifest, all email/cart.js templates, age-gate, catalog meta). Added a footer to
+      404; manifest name+theme fixed (#0e0b09); legal in-body imprint order → ΑΦΜ·ΓΕΜΗ·ΔΟΥ. **Verified every
+      page: cart add→Shopify permalink intact, GSAP hero fires, age-gate now a real modal, EL/EN toggle,
+      consent styled+fixed, no console errors.** Site is now ONE design system.)*
       Remaining (minor, non-blocking): hero AVIF (sips one won't decode → JPG on homepage; catalog hero AVIF fine).
 - [ ] 6.1 Custom domain (`cellark.gr`) + DNS + GitHub Pages config. Decide deploy repo
       (`Romanos2408/cellark` vs `cellar-k/cellar-k.github.io`) and update canonical URLs.

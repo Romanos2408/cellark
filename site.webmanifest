@@ -1,12 +1,12 @@
 {
-  "name": "Cellar·K",
-  "short_name": "Cellar·K",
+  "name": "Cellar · K",
+  "short_name": "Cellar · K",
   "description": "Επιλεγμένα κρασιά της Σικελίας — Cantine Colosi, στην Ελλάδα.",
   "lang": "el",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#141414",
-  "theme_color": "#141414",
+  "background_color": "#0e0b09",
+  "theme_color": "#0e0b09",
   "icons": [
     { "src": "assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
     { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }

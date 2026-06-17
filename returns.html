@@ -8,72 +8,21 @@
 <meta name="theme-color" content="#0e0b09" />
 <title data-gr="Cellar · K — Επιστροφές & Αποστολές" data-en="Cellar · K — Returns & Shipping">Cellar · K — Επιστροφές & Αποστολές</title>
 <meta name="description" data-gr="Πολιτική Επιστροφών, Υπαναχώρησης & Αποστολών της Cellar · K." data-en="Cellar · K Returns, Withdrawal & Shipping policy." content="Πολιτική Επιστροφών, Υπαναχώρησης & Αποστολών της Cellar · K." />
-<link rel="icon" href="assets/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
 <link rel="stylesheet" href="assets/fonts/fonts.css?v=2" />
-<style>
-  *{ box-sizing:border-box; margin:0; padding:0; }
-  :root{
-    --ink:#0e0b09; --ink-2:#141110; --cream:#f4efe6; --gold:#bfa773; --gold-soft:#d8c79c;
-    --muted:#b3aa9c; --muted-dim:#8d8576; --oxblood:#4E0000;
-    --serif:'Fraunces',Georgia,serif; --body:'Spectral',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --wrap:1180px;
-  }
-  html{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; scroll-behavior:smooth; }
-  body{ background:var(--ink); color:var(--cream); font-family:var(--body); overflow-x:hidden; line-height:1.6; }
-  .wrap{ max-width:var(--wrap); margin:0 auto; padding:0 clamp(1.4rem,5vw,4rem); }
-  a{ color:inherit; }
-  :focus-visible{ outline:2px solid var(--gold-soft); outline-offset:3px; }
-
-  .nav{ position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:1rem clamp(1.4rem,5vw,4rem); background:rgba(14,11,9,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(191,167,115,.14); }
-  .nav .brand{ display:inline-flex; align-items:center; gap:.65rem; font-family:var(--serif); font-size:1.3rem; font-weight:500; color:var(--cream); text-decoration:none; }
-  .nav .brand-mark{ height:28px; width:auto; }
-  .nav-right{ display:flex; align-items:center; gap:1.8rem; }
-  .nav-right .home{ font-family:var(--sans); font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--cream); opacity:.82; text-decoration:none; transition:color .3s; }
-  .nav-right .home:hover{ color:var(--gold-soft); }
-  .lang{ background:none; border:none; cursor:pointer; font-family:var(--sans); font-size:.72rem; letter-spacing:.18em; color:var(--cream); }
-  .lang [data-lang]{ opacity:.5; transition:.3s; }
-  .lang [data-lang].on{ opacity:1; color:var(--gold-soft); }
-
-  .legal-hero{ position:relative; padding:clamp(3.5rem,9vh,6rem) 0 clamp(1.8rem,4vh,2.8rem); background:radial-gradient(120% 130% at 50% -20%, rgba(78,0,0,.42), rgba(14,11,9,0) 60%); border-bottom:1px solid rgba(191,167,115,.12); }
-  .eyebrow{ font-family:var(--sans); font-size:.72rem; font-weight:500; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:1rem; }
-  .legal-hero h1{ font-family:var(--serif); font-weight:400; font-optical-sizing:auto; letter-spacing:-.01em; font-size:clamp(2.4rem,6vw,4.2rem); line-height:1.05; color:var(--cream); }
-  .legal-hero h1 .dot{ color:var(--oxblood); }
-  .updated{ font-family:var(--sans); font-size:.78rem; letter-spacing:.04em; color:var(--muted-dim); margin-top:1.2rem; }
-
-  .legal-body{ padding:clamp(2.8rem,7vh,4.5rem) 0 clamp(3.5rem,9vh,6rem); }
-  .legal-body .col{ max-width:66ch; }
-  .legal-body h2{ font-family:var(--serif); font-weight:400; font-size:clamp(1.4rem,2.6vw,1.95rem); color:var(--cream); margin:2.6rem 0 .8rem; letter-spacing:-.01em; }
-  .legal-body h2:first-of-type{ margin-top:0; }
-  .legal-body p, .legal-body li{ font-size:1.04rem; line-height:1.8; color:var(--muted); }
-  .legal-body p{ margin-bottom:1rem; }
-  .legal-body ul{ list-style:none; margin:0 0 1rem; }
-  .legal-body li{ position:relative; padding-left:1.4rem; margin-bottom:.6rem; }
-  .legal-body li::before{ content:"—"; position:absolute; left:0; color:var(--gold); opacity:.65; }
-  .tbd{ color:var(--gold-soft); font-style:italic; opacity:.85; }
-
-  .note-review{ display:flex; gap:.9rem; align-items:flex-start; border-left:2px solid var(--gold); background:rgba(191,167,115,.06); padding:.9rem 1.1rem; margin:0 0 2.2rem; border-radius:0 3px 3px 0; }
-  .note-review .tag{ font-family:var(--sans); font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); white-space:nowrap; margin-top:.2rem; }
-  .note-review .txt{ font-size:.9rem; color:var(--muted); line-height:1.65; }
-
-  .back{ display:inline-block; margin-top:2.6rem; font-family:var(--sans); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--cream); opacity:.8; text-decoration:none; transition:.3s; }
-  .back:hover{ color:var(--gold-soft); opacity:1; }
-
-  footer{ background:var(--ink-2); border-top:1px solid rgba(191,167,115,.16); padding:clamp(3rem,7vh,5rem) 0 2.4rem; }
-  .foot-mark{ font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); color:rgba(244,239,230,.1); line-height:1; margin-bottom:1.2rem; }
-  .foot-row{ display:flex; gap:1.4rem; flex-wrap:wrap; margin-bottom:1.3rem; align-items:center; }
-  .foot-row a, .foot-row .consent-link{ font-family:var(--sans); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; background:none; border:none; cursor:pointer; transition:.3s; }
-  .foot-row a:hover, .foot-row .consent-link:hover{ color:var(--gold-soft); }
-  .foot-imprint{ font-family:var(--sans); font-size:.72rem; color:var(--muted-dim); letter-spacing:.02em; line-height:1.7; }
-</style>
+<link rel="stylesheet" href="assets/styles.css?v=9" />
 </head>
 <body>
-<nav class="nav">
+<header class="nav solid">
   <a class="brand" href="index.html" aria-label="Cellar · K — αρχική" data-aria-gr="Cellar · K — αρχική" data-aria-en="Cellar · K — home"><img class="brand-mark" src="assets/logo-mark.png" alt="" /><span>Cellar · K</span></a>
   <div class="nav-right">
-    <a class="home" href="index.html" data-gr="Αρχική" data-en="Home">Αρχική</a>
+    <a class="home-link" href="index.html" data-gr="Αρχική" data-en="Home">Αρχική</a>
     <button class="lang" type="button" data-aria-gr="Αλλαγή γλώσσας" data-aria-en="Change language" aria-label="Αλλαγή γλώσσας"><span data-lang="gr">EL</span> · <span data-lang="en">EN</span></button>
   </div>
-</nav>
+</header>
 
 <header class="legal-hero">
   <div class="wrap">
@@ -108,7 +57,7 @@
     </ul>
 
     <h2 data-gr="Επικοινωνία" data-en="Contact">Επικοινωνία</h2>
-    <p data-gr="cellarkinfo@gmail.com · +30 6972845565. Εξωδικαστική επίλυση: ec.europa.eu/consumers/odr." data-en="cellarkinfo@gmail.com · +30 6972845565. Dispute resolution: ec.europa.eu/consumers/odr.">cellarkinfo@gmail.com · +30 6972845565. Εξωδικαστική επίλυση: ec.europa.eu/consumers/odr.</p>
+    <p data-gr="cellarkinfo@gmail.com · +30 697 284 5565. Εξωδικαστική επίλυση: ec.europa.eu/consumers/odr." data-en="cellarkinfo@gmail.com · +30 697 284 5565. Dispute resolution: ec.europa.eu/consumers/odr.">cellarkinfo@gmail.com · +30 697 284 5565. Εξωδικαστική επίλυση: ec.europa.eu/consumers/odr.</p>
 
     <a class="back" href="index.html" data-gr="← Επιστροφή στην αρχική" data-en="← Back home">← Επιστροφή στην αρχική</a>
   </div>
@@ -116,14 +65,33 @@
 
 <footer>
   <div class="wrap">
-    <div class="foot-mark">Cellar · K</div>
-    <div class="foot-row">
-      <a href="index.html" data-gr="Αρχική" data-en="Home">Αρχική</a>
-      <a href="catalog.html" data-gr="Ο Κατάλογος" data-en="The Catalogue">Ο Κατάλογος</a>
-      <a href="privacy.html" data-gr="Απόρρητο" data-en="Privacy">Απόρρητο</a>
-      <a href="terms.html" data-gr="Όροι" data-en="Terms">Όροι</a>
-      <a href="returns.html" data-gr="Επιστροφές" data-en="Returns">Επιστροφές</a>
-      <button class="consent-link" type="button" data-consent-open data-gr="Cookies" data-en="Cookies">Cookies</button>
+    <div class="foot-grid">
+      <div>
+        <div class="foot-mark">Cellar · K</div>
+        <p class="legal" data-gr="Επιλεγμένα σικελικά κρασιά, εισαγωγή και διάθεση με φροντίδα. Απολαμβάνετε υπεύθυνα. Πώληση μόνο σε ενήλικες." data-en="Selected Sicilian wines, imported and sold with care. Please enjoy responsibly. Sales to adults of legal drinking age only.">Επιλεγμένα σικελικά κρασιά, εισαγωγή και διάθεση με φροντίδα. Απολαμβάνετε υπεύθυνα. Πώληση μόνο σε ενήλικες.</p>
+        <div class="foot-legal-row">
+          <a href="privacy.html" data-gr="Απόρρητο" data-en="Privacy">Απόρρητο</a>
+          <a href="terms.html" data-gr="Όροι" data-en="Terms">Όροι</a>
+          <a href="returns.html" data-gr="Επιστροφές" data-en="Returns">Επιστροφές</a>
+          <button type="button" data-consent-open data-gr="Cookies" data-en="Cookies">Cookies</button>
+        </div>
+      </div>
+      <div>
+        <h4 data-gr="Πλοήγηση" data-en="Navigate">Πλοήγηση</h4>
+        <ul>
+          <li><a href="index.html#story" data-gr="Η Ιστορία" data-en="The Story">Η Ιστορία</a></li>
+          <li><a href="catalog.html" data-gr="Ο Κατάλογος" data-en="The Catalogue">Ο Κατάλογος</a></li>
+          <li><a href="index.html#trade" data-gr="Χονδρική" data-en="Trade">Χονδρική</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-gr="Επικοινωνία" data-en="Contact">Επικοινωνία</h4>
+        <ul>
+          <li><a href="mailto:cellarkinfo@gmail.com">cellarkinfo@gmail.com</a></li>
+          <li><a href="tel:+306972845565">+30 697 284 5565</a></li>
+          <li><a href="https://www.instagram.com/cellar.k.selection" target="_blank" rel="noopener">@cellar.k.selection</a></li>
+        </ul>
+      </div>
     </div>
     <p class="foot-imprint" data-gr="© 2026 Cellar · K · ΚΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ · ΑΦΜ 171189566 · ΓΕΜΗ 193081430000 · ΔΟΥ Καβάλας · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200" data-en="© 2026 Cellar · K · Vasileios Kappas · VAT (ΑΦΜ) 171189566 · ΓΕΜΗ 193081430000 · Tax office (ΔΟΥ) Kavala · Megalou Alexandrou 27, Chrysoupoli 64200">© 2026 Cellar · K · ΚΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ · ΑΦΜ 171189566 · ΓΕΜΗ 193081430000 · ΔΟΥ Καβάλας · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200</p>
   </div>

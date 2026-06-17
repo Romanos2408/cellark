@@ -1,5 +1,5 @@
 /**
- * Cellar·K — shared wine catalogue (single source of truth).
+ * Cellar · K — shared wine catalogue (single source of truth).
  *
  * Imported by index.html (collection preview) and catalog.html (full shop).
  * Names stay identical across languages; only descriptive copy is bilingual.

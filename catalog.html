@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow"><!-- LAUNCH cellark.gr: remove this noindex -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https://romanos2408.github.io data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <title data-gr="Cellar · K — Ο Κατάλογος · Επιλεγμένα κρασιά της Σικελίας" data-en="Cellar · K — The Catalogue · Selected wines of Sicily">Cellar · K — Ο Κατάλογος · Επιλεγμένα κρασιά της Σικελίας</title>
-<meta name="description" data-gr="Ο πλήρης κατάλογος της Cellar·K: δεκατρείς ετικέτες της Cantine Colosi — λευκά, ροζέ, ερυθρά, αφρώδη και γλυκά κρασιά από τη Σαλίνα και τη Σικελία, με αναλυτικά χαρακτηριστικά." data-en="The full Cellar·K catalogue: thirteen Cantine Colosi labels — whites, rosés, reds, sparkling and sweet wines from Salina and Sicily, with full specifications." content="Ο πλήρης κατάλογος της Cellar·K: δεκατρείς ετικέτες της Cantine Colosi — λευκά, ροζέ, ερυθρά, αφρώδη και γλυκά κρασιά από τη Σαλίνα και τη Σικελία, με αναλυτικά χαρακτηριστικά." />
+<meta name="description" data-gr="Ο πλήρης κατάλογος της Cellar · K: δεκατρείς ετικέτες της Cantine Colosi — λευκά, ροζέ, ερυθρά, αφρώδη και γλυκά κρασιά από τη Σαλίνα και τη Σικελία, με αναλυτικά χαρακτηριστικά." data-en="The full Cellar · K catalogue: thirteen Cantine Colosi labels — whites, rosés, reds, sparkling and sweet wines from Salina and Sicily, with full specifications." content="Ο πλήρης κατάλογος της Cellar · K: δεκατρείς ετικέτες της Cantine Colosi — λευκά, ροζέ, ερυθρά, αφρώδη και γλυκά κρασιά από τη Σαλίνα και τη Σικελία, με αναλυτικά χαρακτηριστικά." />
 <link rel="canonical" href="https://romanos2408.github.io/cellark/catalog.html" />
 <meta name="theme-color" content="#0e0b09" />
 
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://romanos2408.github.io/cellark/assets/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Σικελικός αμπελώνας στο ηλιοβασίλεμα — Cellar·K" />
+<meta property="og:image:alt" content="Σικελικός αμπελώνας στο ηλιοβασίλεμα — Cellar · K" />
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -40,7 +40,7 @@
 
 <link rel="stylesheet" href="assets/fonts/fonts.css?v=2">
 
-<link rel="stylesheet" href="assets/styles.css?v=8">
+<link rel="stylesheet" href="assets/styles.css?v=9">
 
 <!-- Motion is vanilla JS (assets/motion.js) — no runtime libraries -->
 
@@ -66,7 +66,7 @@
   .cat-hero .lede{ max-width:54ch; margin-top:1.4rem; color:var(--muted); font-size:1.06rem; line-height:1.6; text-wrap:pretty; }
 
   /* ---------- sticky category nav ---------- */
-  .cat-nav{ position:sticky; top:57px; z-index:30;
+  .cat-nav{ position:sticky; top:62px; z-index:30;
     background:rgba(16,12,11,.86); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
     border-top:1px solid rgba(191,167,115,.16);
     border-bottom:1px solid rgba(191,167,115,.16); }
@@ -172,18 +172,18 @@
 
 <div class="progress" id="progress"></div>
 
-<nav>
+<nav class="nav" id="nav">
   <a class="brand" href="index.html" aria-label="Cellar · K — αρχική" data-aria-gr="Cellar · K — αρχική" data-aria-en="Cellar · K — home">
     <img class="brand-mark" src="assets/logo-mark.png" alt="" />
     <span>Cellar · K</span>
   </a>
-  <div class="links">
-    <a href="index.html" data-gr="Αρχική" data-en="Home">Αρχική</a>
-    <a href="#top" data-gr="Ο Κατάλογος" data-en="Catalogue">Ο Κατάλογος</a>
-    <a href="index.html#story" data-gr="Η Ιστορία" data-en="The Story">Η Ιστορία</a>
-    <a class="lang" href="#" role="button" aria-label="Language">
-      <span data-lang="gr">EL</span><span>·</span><span data-lang="en">EN</span>
-    </a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-gr="Αρχική" data-en="Home">Αρχική</a></li>
+    <li><a href="#top" data-gr="Ο Κατάλογος" data-en="Catalogue">Ο Κατάλογος</a></li>
+    <li><a href="index.html#story" data-gr="Η Ιστορία" data-en="The Story">Η Ιστορία</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang" type="button" data-aria-gr="Αλλαγή γλώσσας" data-aria-en="Change language" aria-label="Αλλαγή γλώσσας"><span data-lang="gr">EL</span> · <span data-lang="en">EN</span></button>
     <button class="cart-btn" id="cartBtn" type="button" aria-label="Καλάθι" data-aria-gr="Καλάθι" data-aria-en="Basket">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/>
@@ -251,28 +251,34 @@
 
 <!-- ============ FOOTER ============ -->
 <footer>
-  <div class="wrap foot-grid">
-    <div>
-      <p class="eyebrow" style="margin-bottom:1rem">Cellar · K — Sicilia &amp; Ελλάδα</p>
-      <p class="legal" data-gr="Επιλεγμένα σικελικά κρασιά, εισαγωγή και διάθεση με φροντίδα. Απολαμβάνετε υπεύθυνα. Πώληση μόνο σε ενήλικες." data-en="Selected Sicilian wines, imported and sold with care. Please enjoy responsibly. Sales to adults of legal drinking age only.">Επιλεγμένα σικελικά κρασιά, εισαγωγή και διάθεση με φροντίδα. Απολαμβάνετε υπεύθυνα. Πώληση μόνο σε ενήλικες.</p>
-      <p class="agegate-note">© <span id="yr"></span> Cellar · K. All rights reserved.</p>
-    </div>
-    <div class="foot-contact">
-      <p class="eyebrow" data-gr="Επικοινωνία" data-en="Contact">Επικοινωνία</p>
-      <ul>
-        <li><a href="mailto:cellarkinfo@gmail.com">cellarkinfo@gmail.com</a></li>
-        <li><a href="tel:+306972845565">+30 6972845565</a></li>
-        <li><a href="https://www.instagram.com/cellar.k.selection" target="_blank" rel="noopener">@cellar.k.selection</a></li>
-        <li class="addr" data-gr="Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200" data-en="Megalou Alexandrou 27, Chrysoupoli 64200">Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200</li>
-      </ul>
-    </div>
-    <div class="mark">Cellar · K</div>
-    <div class="foot-legal">
-      <a href="privacy.html" data-gr="Απόρρητο" data-en="Privacy">Απόρρητο</a>
-      <a href="terms.html" data-gr="Όροι" data-en="Terms">Όροι</a>
-      <a href="returns.html" data-gr="Επιστροφές & Αποστολές" data-en="Returns & Shipping">Επιστροφές &amp; Αποστολές</a>
-      <a href="mailto:cellarkinfo@gmail.com" data-gr="Επικοινωνία" data-en="Contact">Επικοινωνία</a>
-      <button class="foot-cookie" type="button" data-consent-open data-gr="Cookies" data-en="Cookies">Cookies</button>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-mark">Cellar · K</div>
+        <p class="legal" data-gr="Επιλεγμένα σικελικά κρασιά, εισαγωγή και διάθεση με φροντίδα. Απολαμβάνετε υπεύθυνα. Πώληση μόνο σε ενήλικες." data-en="Selected Sicilian wines, imported and sold with care. Please enjoy responsibly. Sales to adults of legal drinking age only.">Επιλεγμένα σικελικά κρασιά, εισαγωγή και διάθεση με φροντίδα. Απολαμβάνετε υπεύθυνα. Πώληση μόνο σε ενήλικες.</p>
+        <div class="foot-legal-row">
+          <a href="privacy.html" data-gr="Απόρρητο" data-en="Privacy">Απόρρητο</a>
+          <a href="terms.html" data-gr="Όροι" data-en="Terms">Όροι</a>
+          <a href="returns.html" data-gr="Επιστροφές" data-en="Returns">Επιστροφές</a>
+          <button type="button" data-consent-open data-gr="Cookies" data-en="Cookies">Cookies</button>
+        </div>
+      </div>
+      <div>
+        <h4 data-gr="Πλοήγηση" data-en="Navigate">Πλοήγηση</h4>
+        <ul>
+          <li><a href="index.html#story" data-gr="Η Ιστορία" data-en="The Story">Η Ιστορία</a></li>
+          <li><a href="index.html" data-gr="Αρχική" data-en="Home">Αρχική</a></li>
+          <li><a href="index.html#trade" data-gr="Χονδρική" data-en="Trade">Χονδρική</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-gr="Επικοινωνία" data-en="Contact">Επικοινωνία</h4>
+        <ul>
+          <li><a href="mailto:cellarkinfo@gmail.com">cellarkinfo@gmail.com</a></li>
+          <li><a href="tel:+306972845565">+30 697 284 5565</a></li>
+          <li><a href="https://www.instagram.com/cellar.k.selection" target="_blank" rel="noopener">@cellar.k.selection</a></li>
+        </ul>
+      </div>
     </div>
     <p class="foot-imprint" data-gr="© 2026 Cellar · K · ΚΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ · ΑΦΜ 171189566 · ΓΕΜΗ 193081430000 · ΔΟΥ Καβάλας · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200" data-en="© 2026 Cellar · K · Vasileios Kappas · VAT (ΑΦΜ) 171189566 · ΓΕΜΗ 193081430000 · Tax office (ΔΟΥ) Kavala · Megalou Alexandrou 27, Chrysoupoli 64200">© 2026 Cellar · K · ΚΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ · ΑΦΜ 171189566 · ΓΕΜΗ 193081430000 · ΔΟΥ Καβάλας · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200</p>
   </div>
@@ -302,8 +308,8 @@
   const EMAIL = 'cellarkinfo@gmail.com';
   const mailto = (subject, body) =>
     `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  const TRADE_HREF = mailto('Άνοιγμα λογαριασμού χονδρικής — Cellar·K', [
-    'Καλησπέρα Cellar·K,', '',
+  const TRADE_HREF = mailto('Άνοιγμα λογαριασμού χονδρικής — Cellar · K', [
+    'Καλησπέρα Cellar · K,', '',
     'Θα ήθελα να ανοίξω λογαριασμό χονδρικής.', '',
     'Επιχείρηση:',
     'ΑΦΜ / ΔΟΥ:',

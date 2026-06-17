@@ -11,38 +11,10 @@
 <link rel="icon" href="assets/favicon-32.png" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 <link rel="stylesheet" href="assets/fonts/fonts.css?v=2" />
+<link rel="stylesheet" href="assets/styles.css?v=9" />
 <style>
-  *{ box-sizing:border-box; margin:0; padding:0; }
-  :root{
-    --ink:#0e0b09; --ink-2:#141110; --cream:#f4efe6; --gold:#bfa773; --gold-soft:#d8c79c;
-    --muted:#b3aa9c; --muted-dim:#8d8576; --oxblood:#4E0000; --oxblood-deep:#2a0000;
-    --serif:'Fraunces',Georgia,serif; --body:'Spectral',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --wrap:1180px;
-  }
-  html{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
-  body{ background:var(--ink); color:var(--cream); font-family:var(--body); overflow-x:hidden; }
-  h1,h2,h3{ font-family:var(--serif); font-weight:400; font-optical-sizing:auto; letter-spacing:-.01em; color:var(--cream); }
-  h1 .dot,h2 .dot{ color:var(--oxblood); }
-  .eyebrow{ font-family:var(--sans); font-size:.74rem; font-weight:500; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); display:block; }
-  .wrap{ max-width:var(--wrap); margin:0 auto; padding:0 clamp(1.4rem,5vw,4rem); }
-  .btn{ display:inline-flex; align-items:center; gap:.5rem; font-family:var(--sans); font-size:.78rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); background:var(--gold); padding:1.05rem 2.1rem; border-radius:2px; text-decoration:none; transition:background .3s, transform .3s; }
-  .btn:hover{ background:var(--gold-soft); transform:translateY(-2px); }
-  .btn.ghost{ background:none; color:var(--cream); border:1px solid rgba(216,199,156,.45); }
-  .btn.ghost:hover{ border-color:var(--gold-soft); color:var(--gold-soft); }
-  a{ color:inherit; }
-  :focus-visible{ outline:2px solid var(--gold-soft); outline-offset:3px; }
-
-  .nav{ position:fixed; inset:0 0 auto 0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:1.5rem clamp(1.4rem,5vw,4rem); transition:background .4s, padding .4s; text-shadow:0 1px 16px rgba(0,0,0,.4); }
-  .nav.solid{ background:rgba(14,11,9,.9); backdrop-filter:blur(10px); padding-top:1rem; padding-bottom:1rem; text-shadow:none; }
-  .nav .brand{ display:inline-flex; align-items:center; gap:.65rem; font-family:var(--serif); font-size:1.35rem; font-weight:500; color:var(--cream); text-decoration:none; }
-  .nav .brand-mark{ height:30px; width:auto; }
-  .nav-links{ display:flex; gap:2rem; list-style:none; }
-  .nav-links a{ font-family:var(--sans); font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--cream); opacity:.82; text-decoration:none; transition:color .3s; }
-  .nav-links a:hover{ color:var(--gold-soft); }
-  .lang{ background:none; border:none; cursor:pointer; font-family:var(--sans); font-size:.72rem; letter-spacing:.18em; color:var(--cream); }
-  .lang [data-lang]{ opacity:.5; transition:.3s; }
-  .lang [data-lang].on{ opacity:1; color:var(--gold-soft); }
-  @media(max-width:860px){ .nav-links{ display:none; } }
-
+  /* homepage section styles only — tokens, reset, nav, buttons, eyebrow
+     and footer live in the shared assets/styles.css */
   .hero{ position:relative; height:100svh; min-height:600px; overflow:hidden; display:flex; align-items:flex-end; }
   .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scale(1.16); will-change:transform; }
   .hero-scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(to top, rgba(8,6,5,.95) 0%, rgba(8,6,5,.5) 34%, rgba(8,6,5,.06) 58%, rgba(8,6,5,.42) 100%); }
@@ -91,25 +63,12 @@
   .trade-cta .note{ font-family:var(--sans); font-size:.8rem; color:#c9a9a0; letter-spacing:.04em; }
   @media(max-width:780px){ .trade-grid{ grid-template-columns:1fr; gap:2.2rem; } }
 
-  footer{ background:var(--ink); padding:clamp(4rem,9vh,7rem) 0 2.5rem; border-top:1px solid rgba(191,167,115,.16); }
-  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2.4rem; }
-  .foot-mark{ font-family:var(--serif); font-size:clamp(2.4rem,5vw,4rem); color:rgba(244,239,230,.1); line-height:1; margin-bottom:1.4rem; }
-  footer .legal{ font-size:.92rem; line-height:1.6; color:var(--muted); max-width:42ch; }
-  footer h4{ font-family:var(--sans); font-size:.72rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; }
-  footer ul{ list-style:none; }
-  footer li{ margin-bottom:.6rem; }
-  footer a{ color:var(--muted); text-decoration:none; font-size:.95rem; transition:color .3s; }
-  footer a:hover{ color:var(--gold-soft); }
-  .foot-legal-row{ display:flex; gap:1.4rem; flex-wrap:wrap; margin-top:1rem; }
-  .foot-legal-row a{ font-family:var(--sans); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; }
-  .foot-imprint{ margin-top:3rem; padding-top:1.6rem; border-top:1px solid rgba(191,167,115,.12); font-family:var(--sans); font-size:.74rem; color:var(--muted-dim); letter-spacing:.02em; }
-  @media(max-width:780px){ .foot-grid{ grid-template-columns:1fr; gap:1.8rem; } }
   @media(prefers-reduced-motion:reduce){ .hero-bg{ transform:none !important; } }
 </style>
 </head>
 <body>
   <header class="nav" id="nav">
-    <a class="brand" href="#"><img class="brand-mark" src="assets/logo-mark.png" alt="Cellar · K" /><span>Cellar · K</span></a>
+    <a class="brand" href="#" aria-label="Cellar · K — αρχική" data-aria-gr="Cellar · K — αρχική" data-aria-en="Cellar · K — home"><img class="brand-mark" src="assets/logo-mark.png" alt="" /><span>Cellar · K</span></a>
     <ul class="nav-links">
       <li><a href="#story" data-gr="Η Ιστορία" data-en="The Story">Η Ιστορία</a></li>
       <li><a href="catalog.html" data-gr="Ο Κατάλογος" data-en="The Catalogue">Ο Κατάλογος</a></li>
@@ -152,7 +111,7 @@
         <span class="eyebrow" data-gr="Ο Κατάλογος" data-en="The Catalogue">Ο Κατάλογος</span>
         <h2 data-fade data-gr="Δεκατρείς ετικέτες, ένας ήλιος." data-en="Thirteen labels, one sun.">Δεκατρείς ετικέτες, ένας ήλιος.</h2>
         <p class="lede" data-fade data-gr="Λευκά, ροζέ, ερυθρά, αφρώδη και γλυκά — διαλεγμένα από τη Σαλίνα και τη Σικελία για το ελληνικό τραπέζι." data-en="White, rosé, red, sparkling and sweet — chosen from Salina and Sicily for the Greek table.">Λευκά, ροζέ, ερυθρά, αφρώδη και γλυκά — διαλεγμένα από τη Σαλίνα και τη Σικελία για το ελληνικό τραπέζι.</p>
-        <a class="btn" data-fade href="catalog.html"><span data-gr="Εξερευνήστε τον κατάλογο" data-en="Explore the catalogue">Εξερευνήστε τον κατάλογο</span> <span>→</span></a>
+        <a class="btn solid" data-fade href="catalog.html"><span data-gr="Εξερευνήστε τον κατάλογο" data-en="Explore the catalogue">Εξερευνήστε τον κατάλογο</span> <span>→</span></a>
       </div>
       <div class="cat-bottles" data-fade>
         <img src="assets/wines/salina-bianco.png?v=2" alt="Salina Bianco" loading="lazy" />
@@ -180,7 +139,7 @@
         <p data-fade data-gr="Χτίστε τη λίστα κρασιών σας με αυθεντικές σικελικές ετικέτες. Τιμές χονδρικής, σταθερή διαθεσιμότητα και προσωπική εξυπηρέτηση — κατόπιν συνεννόησης." data-en="Build your wine list with authentic Sicilian labels. Wholesale prices, steady availability and personal service — by arrangement.">Χτίστε τη λίστα κρασιών σας με αυθεντικές σικελικές ετικέτες. Τιμές χονδρικής, σταθερή διαθεσιμότητα και προσωπική εξυπηρέτηση — κατόπιν συνεννόησης.</p>
       </div>
       <div class="trade-cta" data-fade>
-        <a class="btn" id="ctaAccount" href="#" data-gr="Άνοιγμα λογαριασμού χονδρικής" data-en="Open a trade account">Άνοιγμα λογαριασμού χονδρικής</a>
+        <a class="btn solid" id="ctaAccount" href="#" data-gr="Άνοιγμα λογαριασμού χονδρικής" data-en="Open a trade account">Άνοιγμα λογαριασμού χονδρικής</a>
         <a class="btn ghost" id="ctaPrice" href="#" data-gr="Ζητήστε τον τιμοκατάλογο" data-en="Request the price list">Ζητήστε τον τιμοκατάλογο</a>
         <span class="note" data-gr="Αποκλειστικά για επαγγελματίες · ΑΦΜ απαραίτητο" data-en="Trade only · VAT number required">Αποκλειστικά για επαγγελματίες · ΑΦΜ απαραίτητο</span>
       </div>
@@ -198,7 +157,7 @@
             <a href="privacy.html" data-gr="Απόρρητο" data-en="Privacy">Απόρρητο</a>
             <a href="terms.html" data-gr="Όροι" data-en="Terms">Όροι</a>
             <a href="returns.html" data-gr="Επιστροφές" data-en="Returns">Επιστροφές</a>
-            <button class="lang" type="button" data-consent-open style="letter-spacing:.1em;text-transform:uppercase;font-size:.72rem" data-gr="Cookies" data-en="Cookies">Cookies</button>
+            <button type="button" data-consent-open data-gr="Cookies" data-en="Cookies">Cookies</button>
           </div>
         </div>
         <div>
@@ -231,9 +190,9 @@
   (function(){
     // trade CTAs → pre-filled enquiry emails
     var M='cellarkinfo@gmail.com';
-    var acc=encodeURIComponent('Καλησπέρα Cellar·K,\n\nΘα ήθελα να ανοίξω λογαριασμό χονδρικής.\n\nΕπιχείρηση:\nΑΦΜ / ΔΟΥ:\nΠεριοχή:\nΥπεύθυνος:\nΤηλέφωνο:\n');
-    var a1=document.getElementById('ctaAccount'); if(a1) a1.href='mailto:'+M+'?subject='+encodeURIComponent('Άνοιγμα λογαριασμού χονδρικής — Cellar·K')+'&body='+acc;
-    var a2=document.getElementById('ctaPrice'); if(a2) a2.href='mailto:'+M+'?subject='+encodeURIComponent('Αίτημα τιμοκαταλόγου χονδρικής — Cellar·K')+'&body='+encodeURIComponent('Καλησπέρα Cellar·K,\n\nΘα ήθελα να λάβω τον τιμοκατάλογο χονδρικής.\n\nΕπιχείρηση:\nΑΦΜ:\n');
+    var acc=encodeURIComponent('Καλησπέρα Cellar · K,\n\nΘα ήθελα να ανοίξω λογαριασμό χονδρικής.\n\nΕπιχείρηση:\nΑΦΜ / ΔΟΥ:\nΠεριοχή:\nΥπεύθυνος:\nΤηλέφωνο:\n');
+    var a1=document.getElementById('ctaAccount'); if(a1) a1.href='mailto:'+M+'?subject='+encodeURIComponent('Άνοιγμα λογαριασμού χονδρικής — Cellar · K')+'&body='+acc;
+    var a2=document.getElementById('ctaPrice'); if(a2) a2.href='mailto:'+M+'?subject='+encodeURIComponent('Αίτημα τιμοκαταλόγου χονδρικής — Cellar · K')+'&body='+encodeURIComponent('Καλησπέρα Cellar · K,\n\nΘα ήθελα να λάβω τον τιμοκατάλογο χονδρικής.\n\nΕπιχείρηση:\nΑΦΜ:\n');
 
     if(!window.gsap) return;
     gsap.registerPlugin(ScrollTrigger, SplitText);

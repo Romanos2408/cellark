@@ -1,5 +1,5 @@
 /**
- * Cellar·K — Shopify connection config.
+ * Cellar · K — Shopify connection config.
  *
  * Fill these in ONCE the Shopify store exists, and the basket's "Checkout — pay by card"
  * button will hand the cart straight to Shopify's secure checkout (which collects the
@@ -44,7 +44,7 @@ export function shopifyCheckoutURL(items) {
   // state for the whole basket and warn which mappings are missing.
   const missing = items.filter((i) => !SHOP.variants[i.slug]).map((i) => i.slug);
   if (missing.length) {
-    console.warn('[Cellar·K] Missing Shopify variant IDs for:', missing.join(', '),
+    console.warn('[Cellar · K] Missing Shopify variant IDs for:', missing.join(', '),
       '— checkout disabled until added in assets/shop-config.js');
     return null;
   }

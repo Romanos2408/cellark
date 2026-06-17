@@ -1,5 +1,5 @@
 /**
- * Cellar·K — lightweight bilingual toggle (GR default / EN)
+ * Cellar · K — lightweight bilingual toggle (GR default / EN)
  *
  * Markup contract: any translatable text node carries both languages as
  * data-attributes, with the Greek text also written as the element's

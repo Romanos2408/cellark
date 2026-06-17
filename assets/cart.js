@@ -1,5 +1,5 @@
 /**
- * Cellar·K — basket that hands off to Shopify checkout.
+ * Cellar · K — basket that hands off to Shopify checkout.
  *
  * Browsing + add-to-basket happen on this custom site (homepage + catalog).
  * Checkout, address/ΤΚ, ΑΦΜ/ΑΑΔΕ and the card payment are all handled by Shopify.
@@ -63,12 +63,12 @@ function clearCart() { setCart([]); render(); }
 function enquiryHref() {
   const L = lang(), items = getCart();
   const lines = [
-    L === 'gr' ? 'Καλησπέρα Cellar·K,' : 'Hello Cellar·K,', '',
+    L === 'gr' ? 'Καλησπέρα Cellar · K,' : 'Hello Cellar · K,', '',
     L === 'gr' ? 'Ενδιαφέρομαι για τα παρακάτω κρασιά:' : "I'm interested in these wines:",
   ];
   items.forEach((i) => { const w = wineOf(i.slug); if (w) lines.push(`• ${i.qty}× ${w.name}`); });
   lines.push('', L === 'gr' ? 'Όνομα:' : 'Name:', L === 'gr' ? 'Τηλέφωνο:' : 'Phone:');
-  const subj = (L === 'gr' ? 'Ενδιαφέρον για κρασιά' : 'Wine enquiry') + ' — Cellar·K';
+  const subj = (L === 'gr' ? 'Ενδιαφέρον για κρασιά' : 'Wine enquiry') + ' — Cellar · K';
   return `mailto:${EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(lines.join('\n'))}`;
 }
 

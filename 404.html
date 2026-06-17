@@ -5,27 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https://romanos2408.github.io data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <title>Cellar · K — Η σελίδα δεν βρέθηκε (404)</title>
-<meta name="robots" content="noindex" />
+<meta name="robots" content="noindex, nofollow"><!-- 404 stays noindex at launch (error page) -->
 <meta name="theme-color" content="#0e0b09" />
 <link rel="icon" type="image/png" sizes="32x32" href="https://romanos2408.github.io/cellark/assets/favicon-32.png" />
 <link rel="apple-touch-icon" href="https://romanos2408.github.io/cellark/assets/apple-touch-icon.png" />
 <link rel="stylesheet" href="https://romanos2408.github.io/cellark/assets/fonts/fonts.css?v=2">
 <style>
   :root{
-    --ink:#0e0b09; --cream:#f4efe6; --oxblood:#4E0000; --gold:#bfa773; --gold-soft:#d8c79c; --muted:#b3aa9c;
+    --ink:#0e0b09; --cream:#f4efe6; --oxblood:#4E0000; --gold:#bfa773; --gold-soft:#d8c79c; --muted:#b3aa9c; --muted-dim:#8d8576;
     --serif:'Fraunces',Georgia,serif; --body:'Spectral',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
   }
   *{ box-sizing:border-box; margin:0; padding:0; }
-  html,body{ height:100%; }
+  html,body{ min-height:100%; }
   body{
     background:
       radial-gradient(120% 90% at 50% -10%, rgba(78,0,0,.5) 0%, rgba(14,11,9,0) 60%),
       var(--ink);
     color:var(--cream); font-family:var(--body); -webkit-font-smoothing:antialiased;
-    display:grid; place-items:center; text-align:center;
+    display:flex; flex-direction:column; align-items:center; text-align:center;
     padding:2rem; min-height:100svh;
   }
-  .wrap{ max-width:34rem; }
+  .wrap{ flex:1; display:flex; flex-direction:column; justify-content:center; max-width:34rem; }
   .mark{ width:84px; height:84px; margin:0 auto 1.4rem; display:block; object-fit:cover;
     border-radius:18px; border:1px solid rgba(191,167,115,.5);
     box-shadow:0 10px 34px rgba(0,0,0,.55); }
@@ -44,6 +44,11 @@
     color:var(--ink); background:var(--gold);
     padding:.95rem 1.9rem; border-radius:2px; transition:all .35s cubic-bezier(.2,.7,.2,1); }
   .btn:hover{ background:var(--gold-soft); transform:translateY(-2px); }
+  .foot404{ width:100%; max-width:60rem; margin-top:2.5rem; padding-top:1.6rem; border-top:1px solid rgba(191,167,115,.14); }
+  .foot404-links{ display:flex; gap:1.4rem; justify-content:center; flex-wrap:wrap; margin-bottom:.9rem; }
+  .foot404-links a{ font-family:var(--sans); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .3s; }
+  .foot404-links a:hover{ color:var(--gold-soft); }
+  .foot404-imprint{ font-family:var(--sans); font-size:.7rem; color:var(--muted-dim); letter-spacing:.02em; line-height:1.6; }
 </style>
 </head>
 <body>
@@ -56,5 +61,13 @@
     <p class="en">The page you’re looking for can’t be found.</p>
     <a class="btn" href="https://romanos2408.github.io/cellark/">Επιστροφή στην αρχική · Back home</a>
   </main>
+  <footer class="foot404">
+    <nav class="foot404-links">
+      <a href="https://romanos2408.github.io/cellark/privacy.html">Απόρρητο · Privacy</a>
+      <a href="https://romanos2408.github.io/cellark/terms.html">Όροι · Terms</a>
+      <a href="https://romanos2408.github.io/cellark/returns.html">Επιστροφές · Returns</a>
+    </nav>
+    <p class="foot404-imprint">© 2026 Cellar · K · ΚΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ · ΑΦΜ 171189566 · ΓΕΜΗ 193081430000 · ΔΟΥ Καβάλας · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200</p>
+  </footer>
 </body>
 </html>
