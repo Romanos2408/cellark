@@ -41,7 +41,7 @@
 
 *{ margin:0; padding:0; box-sizing:border-box; }
 
-html{ -webkit-text-size-adjust:100%; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; scroll-behavior:smooth; scroll-padding-top:80px; }
+html{ -webkit-text-size-adjust:100%; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; scroll-behavior:smooth; scroll-padding-top:80px; scrollbar-gutter:stable; }
 @media(prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
 
 body{
@@ -115,12 +115,17 @@ section{ position:relative; }
    ============================================================ */
 .nav{
   position:fixed; top:0; left:0; right:0; z-index:50;
-  display:flex; align-items:center; justify-content:space-between;
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
   padding:1.4rem clamp(1.4rem,5vw,4rem);
   border-bottom:1px solid transparent;
   text-shadow:0 1px 16px rgba(0,0,0,.4);
   transition:background-color .4s var(--ease-out), padding .4s var(--ease-out), border-color .4s var(--ease-out);
 }
+/* fixed 3-track grid so the centre links sit in the SAME spot on every page,
+   regardless of what's on the right (e.g. the catalogue's cart icon) */
+.nav > .brand{ grid-column:1; justify-self:start; }
+.nav > .nav-links{ grid-column:2; justify-self:center; }
+.nav > .lang, .nav > .nav-right{ grid-column:3; justify-self:end; }
 .nav.solid, .nav.scrolled{
   background:rgba(14,11,9,.9); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
   border-bottom-color:rgba(191,167,115,.16);
