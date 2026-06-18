@@ -87,8 +87,21 @@ but to actually **charge customers** the store must be on an **active paid plan*
       reach checkout. *Keep it ON until you're ready; turn it off the moment we go live.*
 
 **⑤ Alcohol compliance at checkout** *(COMPLIANCE.md §3):*
-- [ ] Add an **"18+ / sales to adults only"** + **"please drink responsibly"** note at checkout
-      (**Settings → Checkout → Order-status / additional scripts**, or a checkout notice).
+- [ ] Add an **18+ / drink-responsibly notice** at checkout (and/or on the cart page). Copy-paste:
+
+  > **EL:** «Η πώληση αλκοολούχων ποτών επιτρέπεται μόνο σε ενήλικες άνω των 18 ετών. Με την
+  > ολοκλήρωση της παραγγελίας δηλώνετε ότι είστε άνω των 18 ετών. Ενδέχεται να ζητηθεί ταυτότητα κατά
+  > την παράδοση. Απολαμβάνετε υπεύθυνα.»
+  >
+  > **EN:** "The sale of alcoholic beverages is permitted only to adults aged 18 and over. By completing
+  > your order you confirm that you are over 18. Proof of age may be requested on delivery. Please drink
+  > responsibly."
+
+  *Where:* **Settings → Checkout** (a checkout notice / additional content field), or on the **cart page**,
+  or the **order-confirmation** text. A *hard* age-confirmation checkbox at Shopify checkout needs a **paid
+  app** — **don't install one**; the website already does the 18+ gate before checkout, so this clear notice
+  is enough. *(Short version if space is tight: «Μόνο για ενήλικες 18+. Απολαμβάνετε υπεύθυνα.» / "Adults
+  18+ only. Please drink responsibly.")*
 - [ ] Tell your **courier**: deliver to an **adult / ID on delivery**, especially for COD (αντικαταβολή).
 
 **⑥ Then just message Romanos: _"Payments active + password off."_**
