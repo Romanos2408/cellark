@@ -28,6 +28,12 @@ law uses them.
 
 Work top to bottom. Each step gives the **menu path** in `admin.shopify.com`.
 
+> **📍 Where we are (June 2026):** ✅ products imported, ✅ legal details (name/ΑΦΜ/ΓΕΜΗ/ΔΟΥ/address)
+> received & on the site, ✅ variant IDs wired, ✅ card checkout coded & verified handing off to a real
+> Greek Shopify checkout. **The ONE remaining unlock to take real money is A3 — activate Shopify Payments.**
+> A7 (Storefront token) is **not needed**. So: do **A3**, plus **A5** (ΦΠΑ 24%) and **A6** (shipping) for a
+> complete go-live, then message Romanos.
+
 ### A1. Confirm the plan is active
 **Settings → Plan.** Confirm it shows **Basic** (or higher) and **active** (not "frozen"/trial
 expired). ✅ This is PLAN item 2.1.
@@ -46,13 +52,53 @@ else does — no extra paid app.
 3. Don't build the wholesale catalog yet — we'll set per-case wholesale pricing together in
    **Phase 4**. For now we only need to know B2B is *available*. ✅ PLAN item 2.1.
 
-### A3. Activate Shopify Payments (so cards work, no third-party surcharge)
-**Settings → Payments → Shopify Payments → Complete account setup.** You'll need:
-- **Legal business name**, **ΑΦΜ** (VAT number), business address.
-- **IBAN** (bank account for payouts).
-- **ID** of the business owner (identity verification).
-> Use **Shopify Payments** (not a third-party gateway) — it's live in Greece and avoids the
-> ~2% extra fee. If it asks you to also enable a paid gateway, you don't need to. ✅ Owner-blocker.
+### A3. Activate Shopify Payments — **the launch unlock** ⭐ (click-by-click)
+This is the one thing standing between us and taking real card payments. Use **Shopify Payments**
+(not a third-party gateway) — it's **live in Greece** and avoids the ~2% extra fee. Tick each box.
+
+**① Gather these first** (Shopify runs an identity + business check):
+- [ ] Legal name: **ΚΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ** (ατομική επιχείρηση / sole proprietor)
+- [ ] **ΑΦΜ 171189566** · **ΔΟΥ Καβάλας** · έδρα **Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200**
+- [ ] Owner's full name, **date of birth**, and a photo **ID** (ταυτότητα ή διαβατήριο) — identity
+      check (KYC), stays private inside Shopify. *(This is what the **16/02/2001** you sent is for —
+      it goes here, not on the website.)*
+- [ ] Greek business **IBAN** (in the business name) — for payouts
+- [ ] One-line product description: *"Retail sales of wine"* (category: **Food & drink → Alcohol**)
+
+**② Plan must be active first.** **Settings → Plan** — Shopify Payments can be *set up* on a trial,
+but to actually **charge customers** the store must be on an **active paid plan** (Basic is enough).
+👉 *This is the only money decision here — you fund it. If anything else asks you to pay, STOP and tell Romanos.*
+
+**③ Activate (Shopify admin → `admin.shopify.com`):**
+- [ ] 1. **Settings → Payments.**
+- [ ] 2. Under **Shopify Payments**, click **Activate Shopify Payments** (or **Complete account setup**).
+- [ ] 3. **Business details:** type = **Sole proprietor / ατομική επιχείρηση**; legal name, ΑΦΜ,
+      registered address; product category = **Food & drink → Wine/Alcohol**.
+- [ ] 4. **Personal details:** owner's full name, **date of birth**, home address (KYC).
+- [ ] 5. **Payout bank account:** add the **IBAN**.
+- [ ] 6. **Customer statement descriptor** (what shows on the buyer's card statement): e.g. **`CELLAR K`**.
+- [ ] 7. **Submit.** Shopify verifies — usually quick; it may ask for a document (ID / business proof).
+      When **Settings → Payments** shows Shopify Payments **Active**, cards (Visa/Mastercard) + Apple Pay /
+      Google Pay are live. *If it offers to also enable a paid third-party gateway, you don't need it.*
+
+**④ Two Greece must-dos before going live:**
+- [ ] **ΦΠΑ 24%** set (see **A5**).
+- [ ] **Storefront password OFF** — **Settings → (theme) → password protection** off, so customers can
+      reach checkout. *Keep it ON until you're ready; turn it off the moment we go live.*
+
+**⑤ Alcohol compliance at checkout** *(COMPLIANCE.md §3):*
+- [ ] Add an **"18+ / sales to adults only"** + **"please drink responsibly"** note at checkout
+      (**Settings → Checkout → Order-status / additional scripts**, or a checkout notice).
+- [ ] Tell your **courier**: deliver to an **adult / ID on delivery**, especially for COD (αντικαταβολή).
+
+**⑥ Then just message Romanos: _"Payments active + password off."_**
+Nothing to send — the website's card checkout uses **cart permalinks**, which need only the store
+domain + variant IDs (both already wired). Romanos then runs a **real test purchase** (EL + EN, mobile +
+desktop) to confirm payment, tax, and the age note. ✅ Unblocks **PLAN 3.3**.
+
+> *Optional (your call):* the website already caps **500 bottles per item**. If you also want Shopify to
+> enforce a hard ceiling server-side, set a **maximum purchase quantity** per product (Products → variant
+> → quantity rules). Not required.
 
 ### A4. Import the 13 wines (one click — file is ready)
 The product file is already prepared: **`docs/shopify-products.csv`** (13 bottles, Greek+English
@@ -85,7 +131,12 @@ descriptions, **retail prices**, photos). Ask Romanos to send it to you, then:
 > Decisions to make here (send to Romanos too): courier, rates, COD fee, free-shipping
 > threshold, island handling, breakage policy. ✅ Owner-blocker.
 
-### A7. Create the Storefront API token (this is the one Romanos needs)
+### A7. Create the Storefront API token — ⏭️ **SKIP for now (not needed)**
+> ℹ️ **Not required for the current card checkout.** The website's basket hands off via **cart
+> permalinks**, which need only the store **domain + variant IDs** — both already wired by Romanos.
+> You'd only need this token if we later move to an in-page (AJAX) cart. **Skip this — go do A3 (Payments).**
+> *(Steps kept below for that future case.)*
+
 This token lets the **website's basket** hand the order to your secure Shopify checkout.
 
 1. **Settings → Apps and sales channels → Develop apps.**
