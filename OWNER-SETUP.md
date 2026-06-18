@@ -52,6 +52,28 @@ else does — no extra paid app.
 3. Don't build the wholesale catalog yet — we'll set per-case wholesale pricing together in
    **Phase 4**. For now we only need to know B2B is *available*. ✅ PLAN item 2.1.
 
+### A2b. Wholesale "soft gate" (ΑΦΜ) — what's live now + your one job
+**Live on the site already** (homepage → *Χονδρική / Trade*): a trade-signup form with an **ΑΦΜ
+field that checks the number's format + check digit instantly.** A mistyped or made-up ΑΦΜ is
+rejected on the spot and the "open account" button stays greyed out. A well-formed ΑΦΜ lets the
+buyer send you a pre-filled request with their ΑΦΜ inside.
+- ⚠️ This proves the ΑΦΜ is **well-formed**, *not* that it's real or that it's *theirs*. So:
+
+**Your one job — verify before any money moves:**
+- [ ] When a trade-account email arrives, confirm the ΑΦΜ is a **real, active business** before you
+  supply at wholesale. Quick checks: it matches the business name they gave; look it up on **VIES**
+  (for an `EL` number) or have your **λογιστής** confirm it in **AADE**.
+- [ ] Take the wholesale order as a **Draft order** (*Orders → Create order*) and send the invoice
+  link — **the customer only pays once you've approved them.** Nothing is captured or shipped before
+  you've checked the ΑΦΜ, so there's never anything to claw back.
+- [ ] ❌ **Do NOT flip store-wide "manually capture payments"** (*Settings → Payments*): on this plan
+  that setting hits **every** order including retail self-checkout. Leave retail on **automatic**;
+  use **draft orders** for wholesale instead.
+
+*Later, optional (Phase 4):* we can make this fully automatic — a tiny **free** service checks the
+ΑΦΜ against AADE's registry and auto-approves real businesses with no email and no clicks from you.
+It needs you to register for **free GSIS web-service credentials**. Near-zero cost; just say the word.
+
 ### A3. Activate Shopify Payments — **the launch unlock** ⭐ (click-by-click)
 This is the one thing standing between us and taking real card payments. Use **Shopify Payments**
 (not a third-party gateway) — it's **live in Greece** and avoids the ~2% extra fee. Tick each box.

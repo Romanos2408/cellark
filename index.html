@@ -61,6 +61,17 @@
   .trade p{ font-family:var(--body); font-size:clamp(1.05rem,1.5vw,1.22rem); line-height:1.7; color:#e9d9d0; margin:1.4rem 0 0; max-width:46ch; }
   .trade-cta{ display:flex; flex-direction:column; gap:1rem; align-items:flex-start; }
   .trade-cta .note{ font-family:var(--sans); font-size:.8rem; color:#c9a9a0; letter-spacing:.04em; }
+  .trade-form{ display:flex; flex-direction:column; gap:.9rem; width:100%; max-width:24rem; }
+  .trade-form .field{ display:flex; flex-direction:column; gap:.4rem; }
+  .trade-form .field-label{ font-family:var(--sans); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-soft); }
+  .trade-form input{ width:100%; padding:.8rem .95rem; border-radius:2px; background:rgba(0,0,0,.28); border:1px solid rgba(216,199,156,.34); color:var(--cream); font-family:var(--body); font-size:1rem; transition:border-color .3s var(--ease), background .3s var(--ease); }
+  .trade-form input:focus{ outline:none; border-color:var(--gold); background:rgba(0,0,0,.4); }
+  .trade-form #trAfm{ letter-spacing:.28em; font-variant-numeric:tabular-nums; }
+  .trade-form .field-msg{ min-height:1.1em; margin:-.25rem 0 .15rem; font-family:var(--sans); font-size:.74rem; color:transparent; }
+  .trade-form .field-msg.ok{ color:var(--gold-soft); }
+  .trade-form .field-msg.bad{ color:#e7a79c; }
+  .trade-form .btn{ width:100%; justify-content:center; }
+  .trade-form .btn[disabled]{ opacity:.42; cursor:not-allowed; pointer-events:none; }
   @media(max-width:780px){ .trade-grid{ grid-template-columns:1fr; gap:2.2rem; } }
 
   @media(prefers-reduced-motion:reduce){ .hero-bg{ transform:none !important; } }
@@ -139,7 +150,18 @@
         <p data-fade data-gr="Χτίστε τη λίστα κρασιών σας με αυθεντικές σικελικές ετικέτες. Τιμές χονδρικής, σταθερή διαθεσιμότητα και προσωπική εξυπηρέτηση — κατόπιν συνεννόησης." data-en="Build your wine list with authentic Sicilian labels. Wholesale prices, steady availability and personal service — by arrangement.">Χτίστε τη λίστα κρασιών σας με αυθεντικές σικελικές ετικέτες. Τιμές χονδρικής, σταθερή διαθεσιμότητα και προσωπική εξυπηρέτηση — κατόπιν συνεννόησης.</p>
       </div>
       <div class="trade-cta" data-fade>
-        <a class="btn solid" id="ctaAccount" href="#" data-gr="Άνοιγμα λογαριασμού χονδρικής" data-en="Open a trade account">Άνοιγμα λογαριασμού χονδρικής</a>
+        <form class="trade-form" id="tradeForm" novalidate>
+          <label class="field">
+            <span class="field-label" data-gr="Επωνυμία επιχείρησης" data-en="Business name">Επωνυμία επιχείρησης</span>
+            <input type="text" id="trBiz" name="biz" autocomplete="organization" />
+          </label>
+          <label class="field">
+            <span class="field-label" data-gr="ΑΦΜ" data-en="VAT number (ΑΦΜ)">ΑΦΜ</span>
+            <input type="text" id="trAfm" name="afm" inputmode="numeric" autocomplete="off" maxlength="9" aria-describedby="trAfmMsg" />
+          </label>
+          <p class="field-msg" id="trAfmMsg" role="status" aria-live="polite"></p>
+          <button class="btn solid" type="submit" id="ctaAccount" data-gr="Άνοιγμα λογαριασμού χονδρικής" data-en="Open a trade account" disabled>Άνοιγμα λογαριασμού χονδρικής</button>
+        </form>
         <a class="btn ghost" id="ctaPrice" href="#" data-gr="Ζητήστε τον τιμοκατάλογο" data-en="Request the price list">Ζητήστε τον τιμοκατάλογο</a>
         <span class="note" data-gr="Αποκλειστικά για επαγγελματίες · ΑΦΜ απαραίτητο" data-en="Trade only · VAT number required">Αποκλειστικά για επαγγελματίες · ΑΦΜ απαραίτητο</span>
       </div>
@@ -188,10 +210,8 @@
   <script src="assets/vendor/lenis.min.js"></script>
   <script>
   (function(){
-    // trade CTAs → pre-filled enquiry emails
+    // price-list CTA → pre-filled enquiry email (account signup is wired in trade-signup.js)
     var M='cellarkinfo@gmail.com';
-    var acc=encodeURIComponent('Καλησπέρα Cellar · K,\n\nΘα ήθελα να ανοίξω λογαριασμό χονδρικής.\n\nΕπιχείρηση:\nΑΦΜ / ΔΟΥ:\nΠεριοχή:\nΥπεύθυνος:\nΤηλέφωνο:\n');
-    var a1=document.getElementById('ctaAccount'); if(a1) a1.href='mailto:'+M+'?subject='+encodeURIComponent('Άνοιγμα λογαριασμού χονδρικής — Cellar · K')+'&body='+acc;
     var a2=document.getElementById('ctaPrice'); if(a2) a2.href='mailto:'+M+'?subject='+encodeURIComponent('Αίτημα τιμοκαταλόγου χονδρικής — Cellar · K')+'&body='+encodeURIComponent('Καλησπέρα Cellar · K,\n\nΘα ήθελα να λάβω τον τιμοκατάλογο χονδρικής.\n\nΕπιχείρηση:\nΑΦΜ:\n');
 
     if(!window.gsap) return;
@@ -222,9 +242,11 @@
     import { initI18n } from './assets/i18n.js?v=2';
     import { initAgeGate } from './assets/age-gate.js';
     import { initConsent } from './assets/consent.js';
+    import { initTradeSignup } from './assets/trade-signup.js';
     initI18n();
     initAgeGate();
     initConsent();
+    initTradeSignup();
   </script>
 </body>
 </html>

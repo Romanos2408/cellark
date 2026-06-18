@@ -119,10 +119,16 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
       password is OFF. Resume here once payments are live.)*
 
 ## Phase 4 — B2B wholesale (gated, per case)
-- [ ] 4.1 Business **registration / application** flow.
-- [ ] 4.2 **VAT (ΑΦΜ) validation** at registration: format check + manual ΑΑΔΕ check
-      (VIES for format only; Greece-only ⇒ not for tax). Cheapest reliable method; respect
-      "ask before paid app".
+- [~] 4.1 Business **registration / application** flow. *(Done 2026-06-18: trade-signup form on
+      homepage `#trade` — business name + ΑΦΜ → pre-filled enquiry email. Self-serve B2B portal
+      still Phase-4-proper.)*
+- [~] 4.2 **VAT (ΑΦΜ) validation** at registration: **format + mod-11 checksum DONE 2026-06-18**
+      — `assets/afm.js` (`isValidAFM`, reusable client-side + future Shopify Function), wired via
+      `assets/trade-signup.js`: live red/green, gates the "open account" button, browser-verified
+      (owner's `171189566` passes; bad-checksum/short/long rejected). **Still TODO:** the real
+      "is it active & theirs" check = AADE registry lookup (server-side, free GSIS creds — see
+      OWNER-SETUP A2b). VIES is wrong tool for GR-only domestic. Owner verifies + uses **draft
+      orders** so nothing's captured before approval.
 - [ ] 4.3 **Approval + customer tagging** in Shopify.
 - [ ] 4.4 Per-case **wholesale pricing** via native B2B catalog — **hidden from public/retail**.
 - [ ] 4.5 Link the static site → Shopify B2B portal cleanly (login / "trade account" entry).
@@ -131,6 +137,14 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
       them); `catalogue/script.js` now shows **"Κατόπιν συνεννόησης / On request"** in trade mode
       (`emptyPriceText()`). Browser-verified: `?trade` shows no €, retail still shows real €, raw
       JSON clean. Real wholesale pricing will live behind the Shopify B2B login (Phase 4 proper).
+- [ ] 4.7 **AADE auto-verify endpoint** — ✅ APPROVED by owner 2026-06-18, **scheduled for AFTER
+      domain (6.1)** at owner's request. Tiny serverless fn (Cloudflare Worker, free tier) calls
+      AADE's registry web service to auto-confirm an ΑΦΜ is a real, active business → auto-approve
+      with no manual step. Cost ≈ **€0** (free service + free GSIS web creds + free serverless);
+      "cost" is bureaucracy + one secret-bearing server. To live at `api.cellark.gr` once the
+      domain exists. **Secret = GSIS creds → server-side ONLY, never in this public repo.**
+      ↳ **Parallel prep (start now, slow):** owner registers for **GSIS special web-service
+      credentials** (ειδικοί κωδικοί) on the AADE portal — see OWNER-SETUP A2b.
 
 ## Phase 5 — Compliance & Safety (see COMPLIANCE.md — do not hand-wave)
 - [x] 5.1 **GDPR cookie-consent banner**: accept/reject non-essential, no pre-ticked boxes,
