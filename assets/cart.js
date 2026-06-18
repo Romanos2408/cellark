@@ -13,6 +13,7 @@ import { SHOP, shopifyCheckoutURL } from './shop-config.js';
 const CART_KEY = 'cellark.cart';
 const LANG_KEY = 'cellark.lang';
 const EMAIL = 'cellarkinfo@gmail.com';
+const MAX_QTY = 500; // hard cap: at most 500 of any single bottle per order
 
 const T = {
   gr: {
@@ -48,13 +49,13 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').repl
 function addItem(slug, qty) {
   const c = getCart();
   const ex = c.find((i) => i.slug === slug);
-  if (ex) ex.qty += qty; else c.push({ slug, qty });
+  if (ex) ex.qty = Math.min(MAX_QTY, ex.qty + qty); else c.push({ slug, qty: Math.min(MAX_QTY, qty) });
   setCart(c); render();
 }
 function setQty(slug, qty) {
   let c = getCart();
   if (qty <= 0) c = c.filter((i) => i.slug !== slug);
-  else { const ex = c.find((i) => i.slug === slug); if (ex) ex.qty = qty; }
+  else { const ex = c.find((i) => i.slug === slug); if (ex) ex.qty = Math.min(MAX_QTY, qty); }
   setCart(c); render();
 }
 function removeItem(slug) { setCart(getCart().filter((i) => i.slug !== slug)); render(); }
@@ -183,7 +184,7 @@ export function initCart(wines) {
       } else {
         const q = (inc || dec).closest('.qty');
         const val = q && q.querySelector('.qty-val');
-        if (val) { let m = parseInt(val.textContent, 10) || 1; m = Math.max(1, m + stepN); val.textContent = m; }
+        if (val) { let m = parseInt(val.textContent, 10) || 1; m = Math.max(1, Math.min(MAX_QTY, m + stepN)); val.textContent = m; }
       }
       return;
     }
