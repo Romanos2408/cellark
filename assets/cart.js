@@ -86,18 +86,18 @@ function renderItems() {
         <source srcset="assets/wines/${i.slug}.avif" type="image/avif" />
         <img src="assets/wines/${i.slug}.png" alt="" loading="lazy" decoding="async" />
       </picture>
-      <p class="cart-line-name">${esc(w.name)}</p>
-      <div class="cart-line-end">
-        ${lineP ? `<span class="cart-line-price">${lineP}</span>` : ''}
-        <div class="cart-line-controls">
+      <div class="cart-line-info">
+        <p class="cart-line-name">${esc(w.name)}</p>
+        <div class="cart-line-row">
           <div class="qty mini" data-slug="${i.slug}">
             <button class="qty-dec" type="button" aria-label="−">−</button>
             <span class="qty-val">${i.qty}</span>
             <button class="qty-inc" type="button" aria-label="+">+</button>
           </div>
-          <button class="cart-rm" type="button" data-slug="${i.slug}" aria-label="Remove" data-aria-gr="Αφαίρεση" data-aria-en="Remove">×</button>
+          ${lineP ? `<span class="cart-line-price">${lineP}</span>` : ''}
         </div>
       </div>
+      <button class="cart-rm" type="button" data-slug="${i.slug}" aria-label="Remove" data-aria-gr="Αφαίρεση" data-aria-en="Remove">×</button>
     </div>`;
   }).join('');
 }
