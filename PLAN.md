@@ -117,6 +117,23 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
       *(Handoff verified — Greek checkout loads at correct price. FULL payment test blocked
       until owner activates Shopify Payments + an active plan (guide A3), and the storefront
       password is OFF. Resume here once payments are live.)*
+- [x] 3.4 **Show retail prices** on catalogue cards + basket — DONE 2026-06-18. Until now the
+      site showed prices only at Shopify checkout (poor UX). Added hardcoded retail € to each wine
+      in `wines.js` (VAT-inclusive, matches the Shopify import) + `assets/prices.js`: formats
+      EL `16,50 €` / EN `€16.50`, paints `[data-price-slug]` cards, and a **live override** from
+      Shopify's public `products.json` gated behind `SHOP.livePrices` (OFF until launch — needs
+      password-off + `connect-src` CSP entry). `cart.js` now shows line totals + a **subtotal** and
+      a "τιμές με ΦΠΑ / prices incl. VAT, shipping at checkout" note. Browser-verified: 13/13 card
+      prices, basket subtotal 16,50+28,50→**61,50 €**, qty updates, EL↔EN format swap, no errors.
+      *(Fixed a module-duplication bug: versioned import URLs created separate module instances →
+      empty price map; prices now passed into `initPrices(WINES)` and both importers share `prices.js?v=1`.)*
+- [x] 3.5 **Basket line redesign** — DONE 2026-06-18 (owner feedback: misaligned, × ugly, too tall).
+      Compact row: bottle thumb left · name centred (one line) · **price + qty stepper stacked right** ·
+      **red trash-bin icon** for delete (replaced the ×). Entry height ~166px→**63px**. Fixed a real
+      bug behind the misalignment: global `picture{display:contents}` collapsed the thumbnail's grid
+      cell → `.cart-line picture{display:block}`. Browser-verified at 1280px: thumbs show, long name
+      ("Malvasia delle Lipari · Nurah") stays one line, bin-icon delete works via event delegation
+      (subtotal + badge recompute), no console errors.
 
 ## Phase 4 — B2B wholesale (gated, per case)
 - [~] 4.1 Business **registration / application** flow. *(Done 2026-06-18: trade-signup form on

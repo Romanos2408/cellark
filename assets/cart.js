@@ -9,6 +9,7 @@
  */
 
 import { SHOP, shopifyCheckoutURL } from './shop-config.js';
+import { getPrice, formatPrice } from './prices.js?v=1';
 
 const CART_KEY = 'cellark.cart';
 const LANG_KEY = 'cellark.lang';
@@ -21,7 +22,7 @@ const T = {
     checkout: 'Ολοκλήρωση — Πληρωμή με κάρτα',
     soon: 'Το ηλεκτρονικό κατάστημα ανοίγει σύντομα.',
     enquire: 'Ρωτήστε μας γι’ αυτά τα κρασιά',
-    confirm: 'Ασφαλής πληρωμή με κάρτα στο ταμείο· εκεί συμπληρώνετε διεύθυνση & στοιχεία.',
+    confirm: 'Οι τιμές περιλαμβάνουν ΦΠΑ. Μεταφορικά & ασφαλής πληρωμή με κάρτα στο ταμείο.',
     trade: 'Πελάτης χονδρικής; Σύνδεση',
     clear: 'Άδειασμα', add: 'Προσθήκη στο καλάθι', added: 'Προστέθηκε ✓',
   },
@@ -30,7 +31,7 @@ const T = {
     checkout: 'Checkout — Pay by card',
     soon: 'The online shop opens soon.',
     enquire: 'Ask us about these wines',
-    confirm: 'Secure card payment at checkout, where you add your address & details.',
+    confirm: 'Prices include VAT. Shipping & secure card payment at checkout.',
     trade: 'Wholesale customer? Sign in',
     clear: 'Empty', add: 'Add to basket', added: 'Added ✓',
   },
@@ -78,20 +79,27 @@ function renderItems() {
   if (!c.length) { els.items.innerHTML = `<p class="cart-empty">${T[lang()].empty}</p>`; return; }
   els.items.innerHTML = c.map((i) => {
     const w = wineOf(i.slug); if (!w) return '';
+    const p = getPrice(i.slug);
+    const lineP = (p != null) ? formatPrice(p * i.qty) : '';
     return `<div class="cart-line" data-slug="${i.slug}">
       <picture>
         <source srcset="assets/wines/${i.slug}.avif" type="image/avif" />
         <img src="assets/wines/${i.slug}.png" alt="" loading="lazy" decoding="async" />
       </picture>
-      <div class="cart-line-info">
-        <p class="cart-line-name">${esc(w.name)}</p>
-        <div class="qty mini" data-slug="${i.slug}">
-          <button class="qty-dec" type="button" aria-label="−">−</button>
-          <span class="qty-val">${i.qty}</span>
-          <button class="qty-inc" type="button" aria-label="+">+</button>
+      <p class="cart-line-name">${esc(w.name)}</p>
+      <div class="cart-line-end">
+        ${lineP ? `<span class="cart-line-price">${lineP}</span>` : ''}
+        <div class="cart-line-controls">
+          <div class="qty mini" data-slug="${i.slug}">
+            <button class="qty-dec" type="button" aria-label="−">−</button>
+            <span class="qty-val">${i.qty}</span>
+            <button class="qty-inc" type="button" aria-label="+">+</button>
+          </div>
+          <button class="cart-rm" type="button" data-slug="${i.slug}" aria-label="Remove" data-aria-gr="Αφαίρεση" data-aria-en="Remove" title="Αφαίρεση" data-title-gr="Αφαίρεση" data-title-en="Remove">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+          </button>
         </div>
       </div>
-      <button class="cart-rm" type="button" data-slug="${i.slug}" aria-label="remove">×</button>
     </div>`;
   }).join('');
 }
@@ -104,6 +112,11 @@ function render() {
 
   renderItems();
   els.foot.hidden = (n === 0);
+
+  if (els.subtotalVal) {
+    const sub = getCart().reduce((s, i) => { const p = getPrice(i.slug); return s + (p != null ? p * i.qty : 0); }, 0);
+    els.subtotalVal.textContent = formatPrice(sub);
+  }
 
   els.confirm.textContent = t.confirm;
   const url = shopifyCheckoutURL(getCart());
@@ -159,6 +172,7 @@ export function initCart(wines) {
     enquire: document.getElementById('cartEnquire'),
     trade: document.getElementById('cartTrade'),
     clear: document.getElementById('cartClear'),
+    subtotalVal: document.getElementById('cartSubtotalVal'),
   };
   if (!els.drawer) return;
 

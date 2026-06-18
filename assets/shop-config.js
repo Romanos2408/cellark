@@ -18,6 +18,12 @@
  */
 export const SHOP = {
   domain: 'vgzjfb-qu.myshopify.com',  // Shopify store (public checkout domain)
+  // Live prices from Shopify's public products.json. Keep FALSE until launch. To enable:
+  //   1) storefront password must be OFF (products.json is only public then),
+  //   2) add  https://<this-domain>  to `connect-src` in catalog.html's CSP (else the
+  //      fetch is blocked), and 3) confirm the products.json CORS response.
+  // While false, the site shows the hardcoded wines.js prices (which match Shopify).
+  livePrices: false,
   tradeLoginUrl: '',    // ← e.g. 'https://cellark.myshopify.com/account/login'
   variants: {
     'salina-bianco': '58240781615491',
