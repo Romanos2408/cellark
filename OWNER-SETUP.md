@@ -214,6 +214,40 @@ not needed.)* Enter these exact brand values:
 
 ---
 
+## Part A2 — Owner tasks OUTSIDE Shopify (domain + AADE)
+*These two have nothing to do with Shopify and can be done in parallel with everything above.*
+
+### D1. Buy the domain — **`cellark.gr`** at Papaki
+- **Why Papaki:** Greek registrar, Greek support, cheap (~**€10–15**), not GoDaddy. *(`.com` is parked.)*
+- [ ] 1. Go to **papaki.gr** → search **`cellark.gr`** → it should show **available**.
+- [ ] 2. Add to cart (`.gr` is usually a **2-year** minimum; total ~€10–15) and **register it in the
+      BUSINESS's name + ΑΦΜ** — it's a company asset, not personal.
+- [ ] 3. Create a Papaki account / log in, then **pay.** That's it.
+- [ ] ⛔ **Do NOT change any DNS / nameserver settings.** Just buy it and tell Romanos — he points it
+      at GitHub Pages + Shopify + the API subdomain together. Wrong DNS now = the site goes down.
+- [ ] 4. Tell Romanos it's bought (and either add him to the Papaki account, or be ready to paste the
+      DNS records he sends you).
+
+### D2. Get the **AADE web-service credentials** (for the future ΑΦΜ auto-checker — free)
+This is the slow, bureaucratic bit, so **start it now in parallel**. It's a special username+password —
+**separate from your TAXISnet codes** — that lets our little checker ask AADE *"is this ΑΦΜ a real,
+active business?"* so wholesale signups can be **auto-approved**. Read-only; no money/tax access.
+> 👉 Easiest if your **λογιστής** does it — they have the TAXISnet codes and know the portal.
+
+- [ ] 1. Open the **Special Access Codes** console (*Ειδικοί Κωδικοί Πρόσβασης ΑΑΔΕ*) and log in with the
+      **business TAXISnet** codes: `https://www1.aade.gr/sgsisapps/tokenservices/protected/displayConsole.htm`
+      *(info page: aade.gr → search "Ειδικοί Κωδικοί Πρόσβασης").*
+- [ ] 2. Create a **new special username + password** *(this is a separate pair, NOT your main TAXISnet
+      login).*
+- [ ] 3. **Subscribe** to the service **"Αναζήτηση Βασικών Στοιχείων Μητρώου Επιχειρήσεων"** (the registry
+      lookup, a.k.a. **RgWsPublic2**) and **accept the Terms of Use** — it activates **immediately**, no
+      waiting for AADE approval.
+- [ ] 4. 🔒 **Send Romanos that special username + password SECURELY** — *not* in a public place, *not* in
+      any file that gets committed. It lives **only** as an encrypted secret on the server. Treat it like
+      a password. *(This is the one credential the auto-checker needs.)*
+
+---
+
 ## Part B — What the OWNER sends back to Romanos
 
 Send these (the Storefront token is publishable, so email/chat is fine; still, don't post it
