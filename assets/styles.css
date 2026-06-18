@@ -333,7 +333,9 @@ html.age-gating{ overflow:hidden; }
 .cart-line-info{ min-width:0; padding-right:1.5rem; }
 .cart-line-name{ color:var(--cream); font-size:.92rem; line-height:1.25; margin:0 0 .65rem; }
 .cart-line-row{ display:flex; align-items:center; justify-content:space-between; gap:.8rem; }
-.cart-line-price{ color:var(--gold-soft); font-family:var(--sans); font-size:.92rem; letter-spacing:.02em; white-space:nowrap; }
+.cart-line-price{ display:flex; flex-direction:column; align-items:flex-end; gap:.1rem; white-space:nowrap; text-align:right; }
+.cart-line-total{ color:var(--gold-soft); font-family:var(--sans); font-size:.92rem; letter-spacing:.02em; }
+.cart-line-unit{ font-family:var(--sans); font-size:.7rem; color:var(--muted-dim); letter-spacing:.02em; }
 .cart-rm{ position:absolute; top:-.15rem; right:0; background:none; border:none; color:var(--muted-dim);
   font-size:1.15rem; line-height:1; cursor:pointer; padding:.2rem .25rem; transition:color .25s var(--ease); }
 .cart-rm:hover{ color:var(--gold); }

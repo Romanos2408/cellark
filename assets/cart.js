@@ -24,7 +24,7 @@ const T = {
     enquire: 'Ρωτήστε μας γι’ αυτά τα κρασιά',
     confirm: 'Οι τιμές περιλαμβάνουν ΦΠΑ. Μεταφορικά & ασφαλής πληρωμή με κάρτα στο ταμείο.',
     trade: 'Πελάτης χονδρικής; Σύνδεση',
-    clear: 'Άδειασμα', add: 'Προσθήκη στο καλάθι', added: 'Προστέθηκε ✓',
+    clear: 'Άδειασμα', add: 'Προσθήκη στο καλάθι', added: 'Προστέθηκε ✓', perBottle: '/ φιάλη',
   },
   en: {
     title: 'Your basket', empty: 'Your basket is empty.',
@@ -33,7 +33,7 @@ const T = {
     enquire: 'Ask us about these wines',
     confirm: 'Prices include VAT. Shipping & secure card payment at checkout.',
     trade: 'Wholesale customer? Sign in',
-    clear: 'Empty', add: 'Add to basket', added: 'Added ✓',
+    clear: 'Empty', add: 'Add to basket', added: 'Added ✓', perBottle: '/ bottle',
   },
 };
 
@@ -80,7 +80,8 @@ function renderItems() {
   els.items.innerHTML = c.map((i) => {
     const w = wineOf(i.slug); if (!w) return '';
     const p = getPrice(i.slug);
-    const lineP = (p != null) ? formatPrice(p * i.qty) : '';
+    const lineTotal = (p != null) ? formatPrice(p * i.qty) : '';
+    const unitHint = (p != null && i.qty > 1) ? `${formatPrice(p)} ${T[lang()].perBottle}` : '';
     return `<div class="cart-line" data-slug="${i.slug}">
       <picture>
         <source srcset="assets/wines/${i.slug}.avif" type="image/avif" />
@@ -94,7 +95,10 @@ function renderItems() {
             <span class="qty-val">${i.qty}</span>
             <button class="qty-inc" type="button" aria-label="+">+</button>
           </div>
-          ${lineP ? `<span class="cart-line-price">${lineP}</span>` : ''}
+          ${lineTotal ? `<div class="cart-line-price">
+            <span class="cart-line-total">${lineTotal}</span>
+            ${unitHint ? `<span class="cart-line-unit">${unitHint}</span>` : ''}
+          </div>` : ''}
         </div>
       </div>
       <button class="cart-rm" type="button" data-slug="${i.slug}" aria-label="Remove" data-aria-gr="Αφαίρεση" data-aria-en="Remove">×</button>
