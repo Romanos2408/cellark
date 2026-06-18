@@ -81,7 +81,7 @@ function renderItems() {
     const w = wineOf(i.slug); if (!w) return '';
     const p = getPrice(i.slug);
     const lineTotal = (p != null) ? formatPrice(p * i.qty) : '';
-    const unitHint = (p != null && i.qty > 1) ? `${formatPrice(p)} ${T[lang()].perBottle}` : '';
+    const unitHint = (p != null) ? `${formatPrice(p)} ${T[lang()].perBottle}` : '';
     return `<div class="cart-line" data-slug="${i.slug}">
       <picture>
         <source srcset="assets/wines/${i.slug}.avif" type="image/avif" />
