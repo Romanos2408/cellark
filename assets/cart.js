@@ -43,7 +43,7 @@ const lang = () => { try { return localStorage.getItem(LANG_KEY) || 'gr'; } catc
 const getCart = () => { try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch { return []; } };
 const setCart = (c) => { try { localStorage.setItem(CART_KEY, JSON.stringify(c)); } catch {} };
 const wineOf = (slug) => WINES.find((w) => w.slug === slug);
-const count = () => getCart().reduce((n, i) => n + i.qty, 0);
+const count = () => getCart().length; // badge: number of DIFFERENT bottles, not total quantity
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 function addItem(slug, qty) {
