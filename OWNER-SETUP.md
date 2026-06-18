@@ -167,6 +167,29 @@ This token lets the **website's basket** hand the order to your secure Shopify c
      the *Admin API access token* / *API secret key*; those stay private.
 ✅ PLAN item 2.3.
 
+### A8. Brand the Shopify checkout so it matches the website (optional — can do anytime)
+The card-payment page is **hosted by Shopify**, but you can style it so it feels like Cellar · K.
+**Settings → Checkout → Customize** (or the **Branding** controls on that page). On **Basic** you can set
+the **logo, colours, fonts and corner-radius** — that's plenty. *(Full custom CSS/layout needs Shopify Plus —
+not needed.)* Enter these exact brand values:
+
+| Control | Value | Notes |
+|---|---|---|
+| **Logo** | `assets/logo-mark.png` (the crest) | Ask Romanos for the file. Size **medium**, on the dark header. *(Want the full "Cellar · K" lockup instead of just the crest? Romanos can export one.)* |
+| **Header background** | `#0E0B09` | dark band behind the logo |
+| **Page / body background** | `#F4EFE6` | warm off-white — keep the **body light** for readability & trust |
+| **Main text** | `#141110` | |
+| **Accent** (links, selected, focus) | `#BFA773` | brand gold |
+| **Primary "Pay now" button** | background `#4E0000`, label `#F4EFE6` | oxblood — high-contrast premium CTA. *(Alt: gold `#BFA773` bg + `#0E0B09` text, to match the site's buttons.)* |
+| **Headings font** | **Fraunces** | in Shopify's Google-Fonts picker |
+| **Body font** | **Inter** | (or **Spectral** if you prefer) |
+| **Corner radius** | Small / minimal | the site uses sharp ~2px corners |
+| **Favicon** | `assets/favicon-32.png` | |
+
+> 💡 **Recommended look:** dark header + **light body** + gold accents + oxblood "Pay now". It reads as
+> premium *and* trustworthy. A fully-dark checkout is possible but tends to lower trust/conversion — not advised.
+> This is independent of Payments, so you can set it whenever (even before Payments is active).
+
 ---
 
 ## Part B — What the OWNER sends back to Romanos
