@@ -427,6 +427,25 @@
   });
   if (tabs.length) activate(tabs[0].dataset.cat, false);
 
+  /* deep-link from the QR catalogue "Buy" button (catalog.html#<slug>): show ΟΛΑ so the
+     wine is visible, then scroll to it. Instant + re-corrected a few times because the
+     lazy-loaded bottle images shift the layout (and would interrupt a smooth scroll). */
+  (function deepLinkToWine(){
+    const slug = decodeURIComponent(location.hash.replace(/^#/, ''));
+    if (!slug || !document.getElementById(slug)) return;
+    activate('all', false);
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    let tries = 0;
+    (function settle(){
+      const target = document.getElementById(slug);
+      if (target) target.scrollIntoView({ block:'center' });
+      if (++tries < 5) setTimeout(settle, 180);
+      else html.style.scrollBehavior = prev;
+    })();
+  })();
+
   /* engines — motion.js handles [data-hero] (hero stagger); catalog rows are
      always visible within the active tab, so they don't use scroll reveals. */
   /* wire the closing trade-strip enquiry button */
