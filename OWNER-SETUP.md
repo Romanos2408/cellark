@@ -217,9 +217,9 @@ not needed.)* Enter these exact brand values:
 ## Part A2 — Owner tasks OUTSIDE Shopify (domain + AADE)
 *These two have nothing to do with Shopify and can be done in parallel with everything above.*
 
-### D1. Buy the domain — **`cellark.gr`** at Papaki
+### D1. Buy the domain — **`cellar-k.com`** at Papaki
 - **Why Papaki:** Greek registrar, Greek support, cheap (~**€10–15**), not GoDaddy. *(`.com` is parked.)*
-- [ ] 1. Go to **papaki.gr** → search **`cellark.gr`** → it should show **available**.
+- [ ] 1. Go to **papaki.gr** → search **`cellar-k.com`** → it should show **available**.
 - [ ] 2. Add to cart (`.gr` is usually a **2-year** minimum; total ~€10–15) and **register it in the
       BUSINESS's name + ΑΦΜ** — it's a company asset, not personal.
 - [ ] 3. Create a Papaki account / log in, then **pay.** That's it.
@@ -282,7 +282,7 @@ publicly):
 ## Architecture we're building toward (for context — recommended in SHOPIFY.md)
 **Hybrid:** this static site stays the **B2C + marketing** front door (single-bottle checkout
 hands off to Shopify's secure, PCI-compliant checkout); the **wholesale/B2B portal runs on
-Shopify's own hosted storefront** (e.g. `shop.cellark.gr`) where native B2B + ΑΦΜ approval +
+Shopify's own hosted storefront** (e.g. `shop.cellar-k.com`) where native B2B + ΑΦΜ approval +
 price-hiding all work natively. Retail buyers never see wholesale prices. *(If the owner
 prefers a different split, raise it before Phase 4.)*
 

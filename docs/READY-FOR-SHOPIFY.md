@@ -36,7 +36,7 @@ The moment `domain` + variant IDs are set, the "Checkout — pay by card" button
 - [ ] **Legal pages**: Όροι Χρήσης, Πολιτική Απορρήτου (GDPR), **Πολιτική Επιστροφών/Υπαναχώρησης**, Cookies.
 - [ ] **Business/tax**: registered επιχείρηση, ΓΕΜΗ, correct ΚΑΔ, any **alcohol-trade** licensing — confirm with accountant.
 - [ ] **myDATA** invoicing wired through the accountant's πάροχος.
-- [ ] **Domain** (cellark.gr): buy it, connect to Shopify, and link the "Shop" button from this site.
+- [ ] **Domain** (cellar-k.com): buy it, connect to Shopify, and link the "Shop" button from this site.
 - [ ] **Store notification email** so you hear about orders.
 
 ## What I'll do once the store + domain exist

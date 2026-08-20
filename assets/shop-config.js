@@ -9,7 +9,7 @@
  *
  * HOW TO FILL:
  *   domain        → your store domain, e.g. 'cellark.myshopify.com' (or the custom domain
- *                   once connected, e.g. 'shop.cellark.gr').
+ *                   once connected, e.g. 'shop.cellar-k.com').
  *   variants      → each wine's Shopify *variant ID* (a long number). After importing
  *                   docs/shopify-products.csv, get them from Shopify → Products → Export,
  *                   or just send me the store and I'll read them in.

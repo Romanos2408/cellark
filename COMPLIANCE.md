@@ -65,7 +65,7 @@ Required pages: Privacy (Απορρήτου), Terms of Sale (Όροι), Returns/
   (`default-src 'self'`; no external scripts/styles/fonts/connections — everything self-hosted);
   browser-verified it doesn't break the site. **`noindex, nofollow`** on all pages + the QR
   catalogue to keep the preview out of search until launch — **REMOVE the noindex tags when going
-  live on `cellark.gr`** (each is marked with a `LAUNCH` HTML comment). Public **wholesale prices
+  live on `cellar-k.com`** (each is marked with a `LAUNCH` HTML comment). Public **wholesale prices
   removed** from `catalogue/wines.json` (see PLAN 4.6).
 - ✅ **2026-06-14:** the QR catalogue (`catalogue/`) fonts are now **self-hosted too** (Playfair +
   Inter → `catalogue/assets/fonts/`), Google Fonts removed, and a **CSP added** there. The entire

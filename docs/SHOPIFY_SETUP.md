@@ -58,7 +58,7 @@ site, set up the B2B catalog structure, and walk you through every screen.
   issue invoices from order exports). May cost **€0** extra if they already handle it.
 
 ### 6. Domain + connect to this site
-- Point a domain (e.g. cellark.gr) per the integration choice below.
+- Point a domain (e.g. cellar-k.com) per the integration choice below.
 
 ---
 
@@ -66,7 +66,7 @@ site, set up the B2B catalog structure, and walk you through every screen.
 
 **A) Keep this site as the brand front + Shopify for the actual shop (recommended).**
    This bespoke site stays the landing/story/catalog showcase; a "Shop / Κατάλογος" button
-   links to the Shopify store (e.g. shop.cellark.gr) which handles retail checkout AND the
+   links to the Shopify store (e.g. shop.cellar-k.com) which handles retail checkout AND the
    wholesale login/approval/pricing. Optionally embed **Buy Buttons** here for quick retail adds.
    ✅ Keeps the custom design, ✅ full B2B, ➖ two surfaces to manage.
 

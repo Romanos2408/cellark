@@ -27,7 +27,7 @@ Storefront API is significant, fragile custom work:
 
 - **(A) Hybrid — recommended.** Keep this static GitHub Pages site for **B2C + marketing**.
   Run the **B2B / wholesale portal on the Shopify-hosted storefront** (e.g.
-  `shop.cellark.gr`) where native B2B + ΑΦΜ-approval + gating all work natively. Retail
+  `shop.cellar-k.com`) where native B2B + ΑΦΜ-approval + gating all work natively. Retail
   buyers stay on the static site; business buyers log in on Shopify; link the two cleanly.
 - **(B) Full headless.** Everything on the static site via Storefront API + customer auth +
   B2B company context. More control, much more work, easy to get wrong on money/tax.
@@ -55,7 +55,7 @@ static site's "Λογαριασμός χονδρικής / Open a trade account"
 2. Activate **Shopify Payments** (legal name, ΑΦΜ, IBAN, ID).
 3. Create products: single bottles + case variants; set retail + wholesale (catalog) prices.
 4. Configure **tax** (Greek ΦΠΑ 24%) and **shipping** zones/rates (incl. COD, islands).
-5. Buy / connect domain; set up `shop.cellark.gr` (or chosen subdomain) for the B2B portal.
+5. Buy / connect domain; set up `shop.cellar-k.com` (or chosen subdomain) for the B2B portal.
 6. Generate a **Storefront API access token** and send it to Romanos (public/scoped only).
 
 **Romanos (in code):**

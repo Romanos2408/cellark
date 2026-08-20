@@ -21,7 +21,7 @@ product import, domain DNS, and wiring it all together.
 - Add **Αντικαταβολή (cash on delivery)** as a manual payment method.
 
 ## 3. Buy the domain (recommended before public launch)
-- Buy **cellark.gr** (~€10–20/year) — easiest **through Shopify**, or a Greek registrar (papaki.gr).
+- Buy **cellar-k.com** (~€10–20/year) — easiest **through Shopify**, or a Greek registrar (papaki.gr).
 - That's it — **Romanos configures the rest** (pointing it to the site + the shop).
 
 ## 4. Hand these details to Romanos (for the legal pages + site)

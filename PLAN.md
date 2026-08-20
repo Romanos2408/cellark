@@ -158,7 +158,7 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
       domain (6.1)** at owner's request. Tiny serverless fn (Cloudflare Worker, free tier) calls
       AADE's registry web service to auto-confirm an ΑΦΜ is a real, active business → auto-approve
       with no manual step. Cost ≈ **€0** (free service + free GSIS web creds + free serverless);
-      "cost" is bureaucracy + one secret-bearing server. To live at `api.cellark.gr` once the
+      "cost" is bureaucracy + one secret-bearing server. To live at `api.cellar-k.com` once the
       domain exists. **Secret = GSIS creds → server-side ONLY, never in this public repo.**
       ↳ **Parallel prep (start now, slow):** owner registers for **GSIS special web-service
       credentials** (ειδικοί κωδικοί) on the AADE portal — see OWNER-SETUP A2b.
@@ -246,8 +246,27 @@ them while keeping (and refining) the look. See DESIGN.md for the spec.
       page: cart add→Shopify permalink intact, GSAP hero fires, age-gate now a real modal, EL/EN toggle,
       consent styled+fixed, no console errors.** Site is now ONE design system.)*
       Remaining (minor, non-blocking): hero AVIF (sips one won't decode → JPG on homepage; catalog hero AVIF fine).
-- [ ] 6.1 Custom domain (`cellark.gr`) + DNS + GitHub Pages config. Decide deploy repo
-      (`Romanos2408/cellark` vs `cellar-k/cellar-k.github.io`) and update canonical URLs.
+- [~] 6.1 Custom domain + DNS + GitHub Pages config.
+      **DOMAINS BOUGHT 2026-06-19 (Papaki): `cellar-k.com` + `cellar-k.gr`** — note the HYPHEN;
+      the old plan said `cellark.gr`. (`cellark.com` is NOT buyable — owned since 2021, parked on
+      Afternic/GoDaddy as a broker "request a price" listing → skipped, see notes.)
+      **Decisions:** (a) **`cellar-k.com` is PRIMARY** (owner's choice) — all canonicals/OG/sitemap
+      point there; `cellar-k.gr` 301-forwards to `https://cellar-k.com/?lang=el`.
+      (b) **Deploy repo stays `Romanos2408/cellark`** (lower risk; `cellar-k/cellar-k.github.io`
+      remains the separate trade QR catalogue).
+      (c) **Language by domain** — `.gr` ⇒ Greek; `.com` ⇒ browser-detected (Greek browser ⇒ Greek,
+      else English). Implemented in `assets/i18n.js` `resolveLang()`, priority:
+      `?lang=` → stored choice → `.gr` hostname → `navigator.languages` → English.
+      *(Done 2026-06-19: repo-wide URL migration — 21 files, `romanos2408.github.io/cellark` →
+      `https://cellar-k.com`; added missing **canonical** tags to index/privacy/terms/returns
+      (only catalog.html had one); sitemap + robots updated. Browser-verified: `?lang=en` → English
+      title, `?lang=el` → Greek and it overrides a stored EN, canonical resolves to cellar-k.com,
+      no console errors.)*
+      **STILL TO DO:** ⛔ DNS at Papaki (A records → Pages) must be set BEFORE committing `CNAME`,
+      otherwise Pages 301s github.io → a domain that still shows Papaki's parking page. Then:
+      commit `CNAME`, set the custom domain in repo Settings → Pages, enable **Enforce HTTPS**,
+      set the `.com` → `.gr` forward, update `cellar-k.github.io`'s `script.js` SHOP_URL, and
+      finally drop the `noindex` tags (6.3).
 - [ ] 6.2 Final QA: both languages, mobile + desktop, all flows.
 - [ ] 6.3 Go live.
 

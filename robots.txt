@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /docs/
 
-Sitemap: https://romanos2408.github.io/cellark/sitemap.xml
+Sitemap: https://cellar-k.com/sitemap.xml

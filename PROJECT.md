@@ -4,7 +4,7 @@
 A bilingual (Greek / English) website for **Cellar·K**, a Sicilian-wine importer in
 Greece, partnered with the historic winery **Cantine Colosi** (Salina / Aeolian Islands).
 Dark, minimal, editorial wine-house character (near-black `#141414`). Static site on
-GitHub Pages, moving to its own custom domain (`cellark.gr`, TBD).
+GitHub Pages, moving to its own custom domain (`cellar-k.com`, TBD).
 
 Contact (public, in site + JSON-LD): cellarkinfo@gmail.com · +30 6972845565 ·
 @cellar.k.selection · Μεγάλου Αλεξάνδρου 27, Χρυσούπολη 64200.
